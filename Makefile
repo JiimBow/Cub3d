@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/10 11:01:08 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/10 11:43:30 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ NAME		= cub3D
 HEADER		= -Iincludes \
 				-IGreat_Libft/Libft \
 				-IGreat_Libft/ft_printf \
-				-IGreat_Libft/GNL
+				-IGreat_Libft/GNL \
+				-I$(MLX_DIR)includes
 
 SRC			= $(DIR)main.c
 
@@ -38,7 +39,7 @@ LIBFT		= ./Great_Libft/g_libft.a
 all :		$(NAME)
 
 $(NAME): $(MLX_DIR)libmlx.so $(OBJ) $(LIBFT)
-			@$(CC) $(CFLAGS) $(HEADER) $(OBJ) $(MLX_DIR)libmlx.so -lSDL2 -o $(NAME)
+			@$(CC) $(CFLAGS) $(HEADER) $(OBJ) $(LIBFT) $(MLX_DIR)libmlx.so -lSDL2 -o $(NAME)
 			@printf "${GREEN}\r[▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬] SUCCESS 100%%${RESET}\n"
 
 $(LIBFT):
@@ -66,7 +67,7 @@ $(OBJ_DIR)%.o: %.c
 			printf "] LOADING %3d%%\033[0m" $$PERCENT
 
 $(MLX_DIR)libmlx.so:
-			@git clone https://github.com/seekrs/MacroLibX.git -b v2.2.6 mlx
+			@git clone https://github.com/seekrs/MacroLibX.git -b v2.2.2 mlx
 			@$(MAKE) -C mlx -j8 --no-print-directory
 
 clean:
