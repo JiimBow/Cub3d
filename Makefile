@@ -6,7 +6,7 @@
 #    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/10 11:43:30 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/10 14:00:24 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ RESET   := \033[0m
 DIR			= sources/
 OBJ_DIR		= objects/
 MLX_DIR		= mlx/
+UTILS		= $(DIR)utils/
 
 # MINISHELL
 NAME		= cub3D
@@ -30,7 +31,8 @@ HEADER		= -Iincludes \
 				-IGreat_Libft/GNL \
 				-I$(MLX_DIR)includes
 
-SRC			= $(DIR)main.c
+SRC			= $(DIR)main.c \
+				$(UTILS)error_management.c
 
 OBJ			= $(SRC:%.c=$(OBJ_DIR)%.o)
 
@@ -67,7 +69,7 @@ $(OBJ_DIR)%.o: %.c
 			printf "] LOADING %3d%%\033[0m" $$PERCENT
 
 $(MLX_DIR)libmlx.so:
-			@git clone https://github.com/seekrs/MacroLibX.git -b v2.2.2 mlx
+			@git clone https://github.com/seekrs/MacroLibX.git -b v2.2.6 mlx
 			@$(MAKE) -C mlx -j8 --no-print-directory
 
 clean:

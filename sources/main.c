@@ -6,11 +6,11 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/10 11:54:16 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/10 13:59:56 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "cub3d.h"
 
 void	key_hook(int key, void *param)
 {
@@ -32,8 +32,9 @@ int main(int ac, char **av)
 	t_mlx					mlx;
 	mlx_window_create_info	info;
 
-	(void)ac;
 	(void)av;
+	if (ac != 2)
+		return (error_message(0));
 	ft_bzero(&mlx, sizeof(mlx));
 	ft_bzero(&info, sizeof(info));
 	info.height = 963;
