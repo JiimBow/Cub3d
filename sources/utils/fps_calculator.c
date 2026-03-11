@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:02:47 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/11 15:09:25 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/11 15:30:41 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ void	update_frame(void *param)
 
 	mlx = param;
 	get_delta_time(mlx);
-
 	mlx->fps_timer += mlx->delta;
 	mlx->frame_count++;
-
 	if (mlx->fps_timer >= 1.0)
 	{
 		mlx->fps = mlx->frame_count;

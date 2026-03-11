@@ -6,20 +6,20 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/11 15:16:00 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/11 15:20:46 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-# include "mlx.h"
-# include "mlx_extended.h"
-# include "get_next_line.h"
-# include "ft_printf.h"
-# include "libft.h"
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/time.h>
+#include "mlx.h"
+#include "mlx_extended.h"
+#include "get_next_line.h"
+#include "ft_printf.h"
+#include "libft.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/time.h>
 
 typedef struct s_mlx
 {
