@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/11 16:57:51 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/11 16:58:55 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		is_element(char *map_line, t_list **elem_lst);
 int		map_is_valid(char *map_name);
 t_list	*element_init_lst(void);
 int		is_space(char c);
+int		check_map(char **map);
 
 void		update_frame(void *param);
 void		window_hook(int event, void *par);
