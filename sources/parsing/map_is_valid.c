@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/11 11:09:54 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/11 16:49:35 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,16 @@ static char	**copy_map(char *map_name)
 int	map_is_valid(char *map_name)
 {
 	char	**map_copy;
-	
+
 	map_copy = copy_map(map_name);
 	if (!map_copy)
 		return (0);
 	if (!check_element(map_copy))
+	{
+		free_double_ptr(map_copy);
+		return (0);
+	}
+	if (!check_map(map_copy))
 	{
 		free_double_ptr(map_copy);
 		return (0);

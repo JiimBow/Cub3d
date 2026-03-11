@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:09:29 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/11 16:12:05 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/11 16:45:24 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	check_row(char **map, int map_line, int map_col)
 int	check_map(char **map)
 {
 	int	map_line;
-	int	map_col;
+	// int	map_col;
 
 	map_line = 0;
 	if (!first_row_is_valid(map, &map_line, 0))

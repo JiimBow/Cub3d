@@ -6,7 +6,7 @@
 #    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/11 16:57:16 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/11 17:01:27 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC			= $(DIR)main.c \
 				$(UTILS)init_struct.c \
 				$(PARSING)map_is_valid.c \
 				$(PARSING)check_element.c \
-				$(PARSING)parse_element.c 
+				$(PARSING)parse_element.c \
+				$(PARSING)check_map.c 
 
 OBJ			= $(SRC:%.c=$(OBJ_DIR)%.o)
 

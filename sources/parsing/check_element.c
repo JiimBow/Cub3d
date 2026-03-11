@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:45:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/11 14:28:36 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/11 16:47:46 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	check_element(char **map)
 				else
 					return (0);
 			}
+			tab_char++;
 		}
 		tab_line++;
 	}
