@@ -3,48 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/10 13:59:56 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/11 15:15:47 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	key_hook(int key, void *param)
-{
-	t_mlx		*mlx;
-
-	mlx = (t_mlx *)param;
-	if (key == 41)
-		mlx_loop_end(mlx->context);
-}
-
-void	window_hook(int event, void *par)
-{
-	if (event == 0)
-		mlx_loop_end((mlx_context)par);
-}
-
 int main(int ac, char **av)
 {
 	t_mlx					mlx;
-	mlx_window_create_info	info;
+	mlx_image				background;
 
 	(void)av;
 	if (ac != 2)
 		return (error_message(0));
-	ft_bzero(&mlx, sizeof(mlx));
-	ft_bzero(&info, sizeof(info));
-	info.height = 963;
-	info.width = 1920;
-	info.title = "cub3D";
-	mlx.context = mlx_init();
-	mlx.window = mlx_new_window(mlx.context, &info);
+	init_mlx_struct(&mlx);
+	background = set_background(mlx);
+	mlx_put_image_to_window(mlx.context, mlx.window, background, 0, 0);
 	mlx_on_event(mlx.context, mlx.window, MLX_KEYDOWN, key_hook, &mlx);
 	mlx_on_event(mlx.context, mlx.window, MLX_WINDOW_EVENT, window_hook, mlx.context);
+	mlx_add_loop_hook(mlx.context, update_frame, &mlx);
 	mlx_loop(mlx.context);
+	mlx_destroy_image(mlx.context, background);
 	mlx_destroy_window(mlx.context, mlx.window);
 	mlx_destroy_context(mlx.context);
 	return (0);
