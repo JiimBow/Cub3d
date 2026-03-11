@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/11 15:16:20 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/11 16:57:16 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ DIR			= sources/
 OBJ_DIR		= objects/
 MLX_DIR		= mlx/
 UTILS		= $(DIR)utils/
+PARSING		= $(DIR)parsing/
 
 # MINISHELL
 NAME		= cub3D
@@ -33,10 +34,14 @@ HEADER		= -Iincludes \
 
 SRC			= $(DIR)main.c \
 				$(UTILS)error_management.c \
+				$(UTILS)free_memory.c \
 				$(UTILS)fps_calculator.c \
 				$(UTILS)events.c \
 				$(UTILS)set_background.c \
-				$(UTILS)init_struct.c
+				$(UTILS)init_struct.c \
+				$(PARSING)map_is_valid.c \
+				$(PARSING)check_element.c \
+				$(PARSING)parse_element.c 
 
 OBJ			= $(SRC:%.c=$(OBJ_DIR)%.o)
 

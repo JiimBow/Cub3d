@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/11 15:20:46 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/11 16:57:51 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,23 @@ typedef struct s_mlx
 	double					frame_count;
 }	t_mlx;
 
-int			error_message(int code);
+// ERROR
+int		error_message(int code);
+
+// Memory Management
+void	free_double_ptr(char **ptr);
+
+// PARSING
+int		check_element(char **map);
+int		is_element(char *map_line, t_list **elem_lst);
+int		map_is_valid(char *map_name);
+t_list	*element_init_lst(void);
+int		is_space(char c);
+
 void		update_frame(void *param);
 void		window_hook(int event, void *par);
 void		key_hook(int key, void *param);
 mlx_image	set_background(t_mlx mlx);
 void		init_mlx_struct(t_mlx *mlx);
+
+int	main();

@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_management.c                                 :+:      :+:    :+:   */
+/*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 13:37:55 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/10 16:42:29 by jodone           ###   ########.fr       */
+/*   Created: 2026/03/11 11:05:01 by jodone            #+#    #+#             */
+/*   Updated: 2026/03/11 11:07:08 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	error_message(int code)
+void	free_double_ptr(char **ptr)
 {
-	if (code == 0)
-		ft_putstr_fd("Error\nProgram must have only one argument\n", 2);
-	else if (code == 1)
-		ft_putstr_fd("Error\nMap is not valid\n", 2);
-	return (1);
+	int	i;
+
+	i = 0;
+	while (ptr && ptr[i])
+	{
+		free(ptr[i]);
+		i++;
+	}
+	free(ptr);
 }
