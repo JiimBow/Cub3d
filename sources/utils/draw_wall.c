@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/13 11:14:55 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/13 17:52:55 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	draw_wall(t_mlx *mlx)
 {
 	int			x;
-	int			hit;
-	int			side;
-	int			map_x;
-	int			map_y;
-	int			step_x;
-	int			step_y;
-	int			draw_start;
-	int			draw_end;
-	int			line_height;
-	double		camera_x;
+	int			hit; // passe a 1 quand le rayon touche un wall
+	int			side; // verif si on est sur un side wall
+	int			map_x; // recup la position x du joueur
+	int			map_y; // recup la position y du joueur
+	int			step_x; // sert a decaler le point de depart du rayon de 1 ou -1
+	int			step_y; // sert a decaler le point de depart du rayon de 1 ou -1
+	int			draw_start; // debut de la ligne a dessiner
+	int			draw_end; // fin de la ligne a dessiner
+	int			line_height; // hauteur de la ligne en fonction de sa distance du joueur
+	double		camera_x; // 
 	double		ray_dir_x;
 	double		ray_dir_y;
 	double		side_dist_x;
@@ -116,7 +116,12 @@ void	draw_wall(t_mlx *mlx)
 			color.b = (uint8_t)(color.b * 0.7);
 		}
 		while (draw_start < draw_end)
-			mlx_pixel_put(mlx->cont, mlx->win, x, draw_start++, color);
+		{
+			if (mlx->dir_x == -1)
+				mlx_pixel_put(mlx->cont, mlx->win, x, draw_start++, color);
+			else
+				mlx_pixel_put(mlx->cont, mlx->win, SCREEN_WIDTH - x, draw_start++, color);
+		}
 		x++;
 	}
 }
