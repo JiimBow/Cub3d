@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:09:29 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/11 16:45:24 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/13 15:32:18 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,28 @@
 
 static int	is_game_char(char c)
 {
-	if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
+}
+
+static int	zero_check(char **map, int map_line, int map_col)
+{
+	if (map[map_line - 1][0])
+	{
+		if (map[map_line - 1][map_col - 1] == ' ' || map[map_line - 1][map_col] == ' ' || map[map_line - 1][map_col + 1] == ' ')
+			return (0);
+	}
+	if (map[map_line][map_col - 1] == ' ' || map[map_line][map_col + 1] == ' ')
+			return (0);
+	if (map[map_line + 1])
+	{
+		if (map[map_line + 1][map_col - 1] == ' ' || map[map_line + 1][map_col] == ' ' || map[map_line + 1][map_col + 1] == ' ')
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
 }
 
 static int	first_row_is_valid(char **map, int *map_line, int map_col)
@@ -44,7 +63,7 @@ static int	first_row_is_valid(char **map, int *map_line, int map_col)
 			return (1);
 		(*map_line)++;
 	}
-	return (1);
+	return (0);
 }
 
 static int	check_row(char **map, int map_line, int map_col)
@@ -58,8 +77,16 @@ static int	check_row(char **map, int map_line, int map_col)
 			map_col++;
 		else if (map[map_line][map_col] == '1' && f_wall == 0)
 			f_wall = 1;
-		else if ((is_game_char(map[map_line][map_col])
-			|| map[map_line][map_col] == '\n') && f_wall == 1)
+		else if ((is_game_char(map[map_line][map_col]) && f_wall == 1))
+			map_col++;
+		else if (map[map_line][map_col] == '0' && f_wall == 1)
+		{
+			if (zero_check(map, map_line, map_col))
+				map_col++;
+			else
+				return (0);
+		}
+		else if (map[map_line][map_col] == '\n' && map[map_line][map_col - 1] == '1')
 			map_col++;
 		else
 			return (0);
@@ -70,7 +97,6 @@ static int	check_row(char **map, int map_line, int map_col)
 int	check_map(char **map)
 {
 	int	map_line;
-	// int	map_col;
 
 	map_line = 0;
 	if (!first_row_is_valid(map, &map_line, 0))
