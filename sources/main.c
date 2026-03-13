@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/13 11:13:16 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/13 15:38:38 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int	main(int ac, char **av)
 {
 	t_mlx		mlx;
 
-	(void)av;
 	if (ac != 2)
 		return (error_message(0));
+	if (!map_is_valid(av[1]))
+		return (error_message(1));
 	init_mlx_struct(&mlx);
 	mlx.background = set_background(mlx);
 	mlx.wall = mlx_new_image(mlx.cont, SCREEN_WIDTH, SCREEN_HEIGHT);
