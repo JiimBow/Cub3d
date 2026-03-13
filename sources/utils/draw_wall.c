@@ -1,0 +1,122 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_wall.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
+/*   Updated: 2026/03/13 11:14:55 by mgarnier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void	draw_wall(t_mlx *mlx)
+{
+	int			x;
+	int			hit;
+	int			side;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			draw_start;
+	int			draw_end;
+	int			line_height;
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	mlx_color	color;
+
+	x = 0;
+	while (x < SCREEN_WIDTH)
+	{
+		hit = 0;
+		camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
+		ray_dir_x = mlx->dir_x + mlx->plane_x * camera_x;
+		ray_dir_y = mlx->dir_y + mlx->plane_y * camera_x;
+		map_x = (int)mlx->pos_x;
+		map_y = (int)mlx->pos_y;
+		if (ray_dir_x == 0)
+			delta_dist_x = 1e30;
+		else
+			delta_dist_x = fabs(1 / ray_dir_x);
+		if (ray_dir_y == 0)
+			delta_dist_y = 1e30;
+		else
+			delta_dist_y = fabs(1 / ray_dir_y);
+		if (ray_dir_x < 0)
+		{
+			step_x = -1;
+			side_dist_x = (mlx->pos_x - map_x) * delta_dist_x;
+		}
+		else
+		{
+			step_x = 1;
+			side_dist_x = (map_x + 1.0 - mlx->pos_x) * delta_dist_x;
+		}
+		if (ray_dir_y < 0)
+		{
+			step_y = -1;
+			side_dist_y = (mlx->pos_y - map_y) * delta_dist_y;
+		}
+		else
+		{
+			step_y = 1;
+			side_dist_y = (map_y + 1.0 - mlx->pos_y) * delta_dist_y;
+		}
+		while (hit == 0)
+		{
+			if (side_dist_x < side_dist_y)
+			{
+				side_dist_x += delta_dist_x;
+				map_x += step_x;
+				side = 0;
+			}
+			else
+			{
+				side_dist_y += delta_dist_y;
+				map_y += step_y;
+				side = 1;
+			}
+			if (g_world_map[map_x][map_y] > 0)
+				hit = 1;
+		}
+		if (side == 0)
+			perp_wall_dist = (side_dist_x - delta_dist_x);
+		else
+			perp_wall_dist = (side_dist_y - delta_dist_y);
+		line_height = (int)(SCREEN_HEIGHT / perp_wall_dist);
+		draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
+		if (draw_start < 0)
+			draw_start = 0;
+		draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
+		if (draw_end >= SCREEN_HEIGHT)
+			draw_end = SCREEN_HEIGHT - 1;
+		if (g_world_map[map_x][map_y] == 1)
+			color = (mlx_color){.rgba = RGB_GREEN};
+		else if (g_world_map[map_x][map_y] == 2)
+			color = (mlx_color){.rgba = RGB_RED};
+		else if (g_world_map[map_x][map_y] == 3)
+			color = (mlx_color){.rgba = RGB_BLUE};
+		else if (g_world_map[map_x][map_y] == 4)
+			color = (mlx_color){.rgba = RGB_WHITE};
+		else
+			color = (mlx_color){.rgba = RGB_YELLOW};
+		if (side == 1)
+		{
+			color.r = (uint8_t)(color.r * 0.7);
+			color.g = (uint8_t)(color.g * 0.7);
+			color.b = (uint8_t)(color.b * 0.7);
+		}
+		while (draw_start < draw_end)
+			mlx_pixel_put(mlx->cont, mlx->win, x, draw_start++, color);
+		x++;
+	}
+}

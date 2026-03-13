@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/11 15:29:05 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/13 11:14:55 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ void	init_mlx_struct(t_mlx *mlx)
 	mlx->frame_count = 0;
 	mlx->fps_timer = 1.0;
 	gettimeofday(&mlx->last_time, NULL);
-	mlx->context = mlx_init();
-	mlx->window = mlx_new_window(mlx->context, &mlx->info);
-	mlx_set_fps_goal(mlx->context, 90);
+	mlx->cont = mlx_init();
+	mlx->win = mlx_new_window(mlx->cont, &mlx->info);
+	mlx_set_fps_goal(mlx->cont, 90);
+	mlx->pos_x = 8.5;
+	mlx->pos_y = 5.5;
+	mlx->dir_x = -1;
+	mlx->dir_y = 0;
+	mlx->plane_x = 0;
+	mlx->plane_y = 0.66;
 }

@@ -6,7 +6,7 @@
 #    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/11 15:16:20 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/13 10:01:34 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ SRC			= $(DIR)main.c \
 				$(UTILS)fps_calculator.c \
 				$(UTILS)events.c \
 				$(UTILS)set_background.c \
-				$(UTILS)init_struct.c
+				$(UTILS)init_struct.c \
+				$(UTILS)map.c \
+				$(UTILS)draw_wall.c
 
 OBJ			= $(SRC:%.c=$(OBJ_DIR)%.o)
 

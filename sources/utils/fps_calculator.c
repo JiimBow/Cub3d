@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:02:47 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/11 15:30:41 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/13 11:13:25 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	update_frame(void *param)
 	char		*buff;
 
 	mlx = param;
+	draw_wall(mlx);
 	get_delta_time(mlx);
 	mlx->fps_timer += mlx->delta;
 	mlx->frame_count++;
@@ -42,6 +43,6 @@ void	update_frame(void *param)
 		buff = ft_itoa(mlx->fps);
 		ft_strlcpy(title + ft_strlen(title), buff, ft_strlen(buff) + 1);
 		free(buff);
-		mlx_set_window_title(mlx->context, mlx->window, title);
+		mlx_set_window_title(mlx->cont, mlx->win, title);
 	}
 }
