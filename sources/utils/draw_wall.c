@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 15:58:44 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:02:29 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	draw_wall(t_mlx *mlx)
 	double frame_time = (mlx->time - mlx->old_time) / 1000.0;
 	if (frame_time < 0)
 		frame_time = 0;
-	double rot_speed = 3.0;
+	double rot_speed = frame_time * 3.0;
 	if (mlx->keys[79] == 1)
 	{
 		double	old_dir_x = mlx->dir_x;
