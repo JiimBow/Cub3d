@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:09:29 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/13 15:32:18 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/03/16 13:17:38 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static int	zero_check(char **map, int map_line, int map_col)
 {
 	if (map[map_line - 1][0])
 	{
-		if (map[map_line - 1][map_col - 1] == ' ' || map[map_line - 1][map_col] == ' ' || map[map_line - 1][map_col + 1] == ' ')
+		if (map[map_line - 1][map_col - 1] == ' ' || map[map_line - 1][map_col] == ' ' || map[map_line - 1][map_col + 1] == ' ' || !map[map_line - 1][map_col + 1])
 			return (0);
 	}
 	if (map[map_line][map_col - 1] == ' ' || map[map_line][map_col + 1] == ' ')
 			return (0);
 	if (map[map_line + 1])
 	{
-		if (map[map_line + 1][map_col - 1] == ' ' || map[map_line + 1][map_col] == ' ' || map[map_line + 1][map_col + 1] == ' ')
+		if (map[map_line + 1][map_col - 1] == ' ' || map[map_line + 1][map_col] == ' ' || map[map_line + 1][map_col + 1] == ' ' || !map[map_line + 1][map_col + 1])
 			return (0);
 	}
 	else

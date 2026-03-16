@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/13 15:01:04 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/03/16 13:01:22 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,3 @@ int	map_is_valid(char *map_name)
 	free_double_ptr(map_copy);
 	return (1);
 }
-
-// pour parser la map, calculer la ligne la plus longue avec le premier gnl,
-// puis malloc la taille de cette ligne tout les tab[i]. puis memset espace
-// chaque tab[i]. ensuite re gnl dans un char*, que je strcpy dans mon tab[i].
