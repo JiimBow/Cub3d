@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/13 17:58:38 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 11:58:53 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,22 @@ typedef struct s_mlx
 	double					dir_y;
 	double					plane_x;
 	double					plane_y;
+	int						keys[512];
 }	t_mlx;
 
 // ERROR
-int		error_message(int code);
+int			error_message(int code);
 
 // Memory Management
-void	free_double_ptr(char **ptr);
+void		free_double_ptr(char **ptr);
 
 // PARSING
-int		check_element(char **map);
-int		is_element(char *map_line, t_list **elem_lst);
-int		map_is_valid(char *map_name);
-t_list	*element_init_lst(void);
-int		is_space(char c);
-int		check_map(char **map);
+int			check_element(char **map);
+int			is_element(char *map_line, t_list **elem_lst);
+int			map_is_valid(char *map_name);
+t_list		*element_init_lst(void);
+int			is_space(char c);
+int			check_map(char **map);
 
 void		update_frame(void *param);
 void		window_hook(int event, void *par);
@@ -75,5 +76,3 @@ void		key_hook(int key, void *param);
 mlx_image	set_background(t_mlx mlx);
 void		init_mlx_struct(t_mlx *mlx);
 void		draw_wall(t_mlx *mlx);
-
-int	main();

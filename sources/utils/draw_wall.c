@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/13 17:52:55 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 11:25:37 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	draw_wall(t_mlx *mlx)
 				map_y += step_y;
 				side = 1;
 			}
-			if (g_world_map[map_x][map_y] > 0)
+			if (g_world_map[map_y][map_x] > 0)
 				hit = 1;
 		}
 		if (side == 0)
@@ -99,13 +99,13 @@ void	draw_wall(t_mlx *mlx)
 		draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
-		if (g_world_map[map_x][map_y] == 1)
+		if (g_world_map[map_y][map_x] == 1)
 			color = (mlx_color){.rgba = RGB_GREEN};
-		else if (g_world_map[map_x][map_y] == 2)
+		else if (g_world_map[map_y][map_x] == 2)
 			color = (mlx_color){.rgba = RGB_RED};
-		else if (g_world_map[map_x][map_y] == 3)
+		else if (g_world_map[map_y][map_x] == 3)
 			color = (mlx_color){.rgba = RGB_BLUE};
-		else if (g_world_map[map_x][map_y] == 4)
+		else if (g_world_map[map_y][map_x] == 4)
 			color = (mlx_color){.rgba = RGB_WHITE};
 		else
 			color = (mlx_color){.rgba = RGB_YELLOW};
@@ -116,12 +116,7 @@ void	draw_wall(t_mlx *mlx)
 			color.b = (uint8_t)(color.b * 0.7);
 		}
 		while (draw_start < draw_end)
-		{
-			if (mlx->dir_x == -1)
-				mlx_pixel_put(mlx->cont, mlx->win, x, draw_start++, color);
-			else
-				mlx_pixel_put(mlx->cont, mlx->win, SCREEN_WIDTH - x, draw_start++, color);
-		}
+			mlx_pixel_put(mlx->cont, mlx->win, x, draw_start++, color);
 		x++;
 	}
 }
