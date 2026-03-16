@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 09:59:36 by jodone            #+#    #+#             */
-/*   Updated: 2026/01/27 11:08:39 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/16 14:10:23 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stddef.h>
 
 size_t	gnl_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str && str[i])
@@ -24,15 +25,10 @@ size_t	gnl_strlen(const char *str)
 
 void	*gnl_calloc(size_t nmemb, size_t size)
 {
-	char			*result;
-	unsigned int	i;
+	char	*result;
+	size_t	i;
 
-	if (nmemb == 0 || size == 0)
-	{
-		result = malloc(0);
-		return (result);
-	}
-	if (((size_t) - 1 / nmemb) < size)
+	if ((size_t) - 1 < size * nmemb)
 		return (NULL);
 	result = malloc(nmemb * size);
 	if (!result)
@@ -48,8 +44,8 @@ void	*gnl_calloc(size_t nmemb, size_t size)
 
 char	*gnl_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*result;
-	unsigned int	lensrc;
+	char	*result;
+	size_t	lensrc;
 
 	if (!s)
 		return (NULL);
@@ -82,6 +78,8 @@ char	*gnl_strjoin(char *s1, char *s2)
 		tab = gnl_substr(s2, 0, gnl_strlen(s2));
 		return (tab);
 	}
+	if (!s2)
+		return (s1);
 	lens1 = gnl_strlen(s1);
 	tab = gnl_calloc((lens1 + gnl_strlen(s2)) + 1, sizeof(char));
 	if (!tab)

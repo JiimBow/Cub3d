@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fps_calculator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:02:47 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 15:50:26 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/16 15:59:23 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	get_delta_time(t_mlx *mlx)
+long	get_delta_time(t_mlx *mlx)
 {
 	struct timeval	now;
 
@@ -20,6 +20,7 @@ static void	get_delta_time(t_mlx *mlx)
 	mlx->delta = (now.tv_sec - mlx->last_time.tv_sec)
 		+ (now.tv_usec - mlx->last_time.tv_usec) / 1000000.0f;
 	mlx->last_time = now;
+	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
 
 void	update_frame(void *param)

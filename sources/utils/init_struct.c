@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 13:58:35 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/16 15:59:27 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_mlx_struct(t_mlx *mlx)
 	mlx->info.title = "cub3D";
 	mlx->frame_count = 0;
 	mlx->fps_timer = 1.0;
+	mlx->time = 0;
+	mlx->old_time = 0;
 	gettimeofday(&mlx->last_time, NULL);
 	mlx->cont = mlx_init();
 	mlx->win = mlx_new_window(mlx->cont, &mlx->info);
