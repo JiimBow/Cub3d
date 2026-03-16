@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/13 15:38:18 by jimbow           ###   ########.fr        #
+#    Updated: 2026/03/16 14:55:54 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ OBJ_DIR		= objects/
 MLX_DIR		= mlx/
 UTILS		= $(DIR)utils/
 PARSING		= $(DIR)parsing/
+MOVING		= $(DIR)moving/
 
 # MINISHELL
 NAME		= cub3D
@@ -44,7 +45,8 @@ SRC			= $(DIR)main.c \
 				$(PARSING)map_is_valid.c \
 				$(PARSING)check_element.c \
 				$(PARSING)parse_element.c \
-				$(PARSING)check_map.c 
+				$(PARSING)check_map.c \
+				$(MOVING)player_move.c
 
 OBJ			= $(SRC:%.c=$(OBJ_DIR)%.o)
 

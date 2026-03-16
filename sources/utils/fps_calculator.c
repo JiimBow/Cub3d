@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fps_calculator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:02:47 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/13 11:13:25 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 15:50:26 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	update_frame(void *param)
 	const char	*base = "Cub3D - FPS: ";
 	char		*buff;
 
-	mlx = param;
+	mlx = (t_mlx *)param;
+	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
+	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	draw_wall(mlx);
 	get_delta_time(mlx);
 	mlx->fps_timer += mlx->delta;

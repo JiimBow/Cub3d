@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 11:58:53 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 15:12:06 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <math.h>
+
+#define W 26
+#define A 4
+#define S 22
+#define D 7
+#define RIGHT_KEY 79
+#define LEFT_KEY 80
+#define UP_KEY 81
+#define DOWN_KEY 82
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 963
@@ -69,6 +78,9 @@ int			map_is_valid(char *map_name);
 t_list		*element_init_lst(void);
 int			is_space(char c);
 int			check_map(char **map);
+
+//MOVING
+int			player_move(t_mlx *mlx, int key, int delx, int dely);
 
 void		update_frame(void *param);
 void		window_hook(int event, void *par);

@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/11 15:06:03 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 15:12:52 by jodone           ###   ########.fr       */
+/*   Created: 2026/03/16 14:54:48 by jodone            #+#    #+#             */
+/*   Updated: 2026/03/16 15:42:40 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	key_hook(int key, void *param)
+int	player_move(t_mlx *mlx, int key, int delx, int dely)
 {
-	t_mlx		*mlx;
+	int	playerX;
+	int	playerY;
 
-	mlx = (t_mlx *)param;
-	if (key == 41)
-		mlx_loop_end(mlx->cont);
-	player_move(mlx, key, 0, 0);
-}
-
-void	window_hook(int event, void *par)
-{
-	if (event == 0)
-		mlx_loop_end((mlx_context)par);
+	playerX = (int)mlx->pos_x;
+	playerY = (int)mlx->pos_y;
+	if (key == W)
+		dely--;
+	else if (key == A)
+		delx--;
+	else if (key == S)
+		dely++;
+	else if (key == D)
+		delx++;
+	if (g_world_map[playerY + dely][playerX + delx] == 0 && (delx != 0  || dely != 0))
+	{
+		mlx->pos_x += delx;
+		mlx->pos_y += dely;
+	}
+	return (0);
 }
