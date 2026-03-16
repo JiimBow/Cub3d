@@ -6,11 +6,12 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 11:25:37 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 15:53:02 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "mlx.h"
 
 void	draw_wall(t_mlx *mlx)
 {
@@ -34,6 +35,8 @@ void	draw_wall(t_mlx *mlx)
 	double		perp_wall_dist;
 	mlx_color	color;
 
+	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
+	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
@@ -85,6 +88,8 @@ void	draw_wall(t_mlx *mlx)
 				map_y += step_y;
 				side = 1;
 			}
+			if (map_x < 0 || map_x >= SCREEN_WIDTH || map_y < 0 || map_y >= SCREEN_HEIGHT)
+				break;
 			if (g_world_map[map_y][map_x] > 0)
 				hit = 1;
 		}
@@ -118,5 +123,21 @@ void	draw_wall(t_mlx *mlx)
 		while (draw_start < draw_end)
 			mlx_pixel_put(mlx->cont, mlx->win, x, draw_start++, color);
 		x++;
+	}
+	mlx->old_time = mlx->time;
+	mlx->time = get_delta_time(mlx);
+	double frame_time = (mlx->time - mlx->old_time) / 1000.0;
+	if (frame_time < 0)
+		frame_time = 0;
+	double rot_speed = 3.0;
+	if (mlx->keys[79] == 1)
+	{
+		double	old_dir_x = mlx->dir_x;
+		
+		mlx->dir_x = mlx->dir_x * cos(-rot_speed) - mlx->dir_y * sin(-rot_speed);
+		mlx->dir_y = old_dir_x * sin(-rot_speed) + mlx->dir_y * cos(-rot_speed);
+		double old_plane_x = mlx->plane_x;
+		mlx->plane_x = mlx->plane_x * cos(-rot_speed) - mlx->plane_y * sin(-rot_speed);
+		mlx->plane_y = old_plane_x * sin(-rot_speed) + mlx->plane_y * cos(-rot_speed);
 	}
 }

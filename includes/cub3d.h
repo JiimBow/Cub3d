@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 11:58:53 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:57:37 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_mlx
 	double					dir_y;
 	double					plane_x;
 	double					plane_y;
+	double					time;
+	double					old_time;
 	int						keys[512];
 }	t_mlx;
 
@@ -72,7 +74,9 @@ int			check_map(char **map);
 
 void		update_frame(void *param);
 void		window_hook(int event, void *par);
-void		key_hook(int key, void *param);
+void		key_down(int key, void *param);
+void		key_up(int key, void *param);
 mlx_image	set_background(t_mlx mlx);
 void		init_mlx_struct(t_mlx *mlx);
 void		draw_wall(t_mlx *mlx);
+long		get_delta_time(t_mlx *mlx);

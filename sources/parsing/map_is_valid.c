@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/13 15:01:04 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/03/16 14:13:31 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static char	**copy_map(char *map_name)
 		map_copy[i] = malloc((max_len + 1) * sizeof(char));
 		ft_memset(map_copy[i], ' ', max_len);
 		ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line));
+		free(tab_line);
 		i++;
 	}
 	close(map_fd);

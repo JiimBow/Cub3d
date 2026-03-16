@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/13 15:38:38 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/03/16 15:53:28 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "mlx.h"
 
 int	main(int ac, char **av)
 {
-	t_mlx		mlx;
+	t_mlx	mlx;
 
 	if (ac != 2)
 		return (error_message(0));
@@ -23,9 +24,9 @@ int	main(int ac, char **av)
 	init_mlx_struct(&mlx);
 	mlx.background = set_background(mlx);
 	mlx.wall = mlx_new_image(mlx.cont, SCREEN_WIDTH, SCREEN_HEIGHT);
-	mlx_put_image_to_window(mlx.cont, mlx.win, mlx.background, 0, 0);
 	mlx_put_image_to_window(mlx.cont, mlx.win, mlx.wall, 0, 0);
-	mlx_on_event(mlx.cont, mlx.win, MLX_KEYDOWN, key_hook, &mlx);
+	mlx_on_event(mlx.cont, mlx.win, MLX_KEYDOWN, key_down, &mlx);
+	mlx_on_event(mlx.cont, mlx.win, MLX_KEYUP, key_up, &mlx);
 	mlx_on_event(mlx.cont, mlx.win, MLX_WINDOW_EVENT, window_hook, mlx.cont);
 	mlx_add_loop_hook(mlx.cont, update_frame, &mlx);
 	mlx_loop(mlx.cont);

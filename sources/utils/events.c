@@ -6,19 +6,28 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:06:03 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/13 11:13:25 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:46:03 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	key_hook(int key, void *param)
+void	key_down(int key, void *param)
 {
 	t_mlx		*mlx;
 
 	mlx = (t_mlx *)param;
+	mlx->keys[key] = 1;
 	if (key == 41)
 		mlx_loop_end(mlx->cont);
+}
+
+void	key_up(int key, void *param)
+{
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *)param;
+	mlx->keys[key] = 0;
 }
 
 void	window_hook(int event, void *par)

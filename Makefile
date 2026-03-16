@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+         #
+#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/13 15:38:18 by jimbow           ###   ########.fr        #
+#    Updated: 2026/03/16 14:15:28 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address
 
 # COLOR
 GREEN   := \033[1;38;5;46m
@@ -53,7 +53,7 @@ LIBFT		= ./Great_Libft/g_libft.a
 all :		$(NAME)
 
 $(NAME): $(MLX_DIR)libmlx.so $(OBJ) $(LIBFT)
-			@$(CC) $(CFLAGS) $(HEADER) $(OBJ) $(LIBFT) $(MLX_DIR)libmlx.so -lSDL2 -o $(NAME)
+			@$(CC) $(CFLAGS) $(HEADER) $(OBJ) -lm $(LIBFT) $(MLX_DIR)libmlx.so -lSDL2 -o $(NAME)
 			@printf "${GREEN}\r[▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬] SUCCESS 100%%${RESET}\n"
 
 $(LIBFT):
