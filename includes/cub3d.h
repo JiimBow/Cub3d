@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 15:57:49 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/16 16:58:19 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			is_space(char c);
 int			check_map(char **map);
 
 //MOVING
-int			player_move(t_mlx *mlx, int key, int delx, int dely);
+int			player_move(t_mlx *mlx, int delx, int dely);
 
 void		update_frame(void *param);
 void		window_hook(int event, void *par);
