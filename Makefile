@@ -6,7 +6,7 @@
 #    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/16 15:57:42 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/17 22:07:47 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRC			= $(DIR)main.c \
 				$(PARSING)check_element.c \
 				$(PARSING)parse_element.c \
 				$(PARSING)check_map.c \
-				$(MOVING)player_move.c
+				$(MOVING)player_move.c \
+				$(MOVING)player_rotate.c
 
 OBJ			= $(SRC:%.c=$(OBJ_DIR)%.o)
 

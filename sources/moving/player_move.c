@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 14:54:48 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/17 18:02:09 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/17 22:19:34 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ double	get_move_time(void)
 
 int	player_move(t_mlx *mlx, double delx, double dely, double frame_time)
 {
-	int		playerX;
-	int		playerY;
+	int		player_x;
+	int		player_y;
 
 	if (mlx->keys[W] == 1)
 	{
@@ -45,11 +45,11 @@ int	player_move(t_mlx *mlx, double delx, double dely, double frame_time)
 		delx = -mlx->dir_y * frame_time;
 		dely = mlx->dir_x * frame_time;
 	}
-	playerX = (mlx->pos_x + delx);
-	if (g_world_map[(int)mlx->pos_y][playerX] == 0.0 && delx != 0)
+	player_x = (mlx->pos_x + delx);
+	if (g_world_map[(int)mlx->pos_y][player_x] == 0.0 && delx != 0)
 		mlx->pos_x += delx;
-	playerY = (mlx->pos_y + dely);
-	if (g_world_map[playerY][(int)mlx->pos_x] == 0.0 && dely != 0)
+	player_y = (mlx->pos_y + dely);
+	if (g_world_map[player_y][(int)mlx->pos_x] == 0.0 && dely != 0)
 		mlx->pos_y += dely;
 	return (0);
 }

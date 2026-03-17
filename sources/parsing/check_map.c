@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:09:29 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/16 13:17:38 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/17 22:18:41 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,20 @@ static int	zero_check(char **map, int map_line, int map_col)
 {
 	if (map[map_line - 1][0])
 	{
-		if (map[map_line - 1][map_col - 1] == ' ' || map[map_line - 1][map_col] == ' ' || map[map_line - 1][map_col + 1] == ' ' || !map[map_line - 1][map_col + 1])
+		if (map[map_line - 1][map_col - 1] == ' '
+			|| map[map_line - 1][map_col] == ' '
+			|| map[map_line - 1][map_col + 1] == ' '
+			|| !map[map_line - 1][map_col + 1])
 			return (0);
 	}
 	if (map[map_line][map_col - 1] == ' ' || map[map_line][map_col + 1] == ' ')
-			return (0);
+		return (0);
 	if (map[map_line + 1])
 	{
-		if (map[map_line + 1][map_col - 1] == ' ' || map[map_line + 1][map_col] == ' ' || map[map_line + 1][map_col + 1] == ' ' || !map[map_line + 1][map_col + 1])
+		if (map[map_line + 1][map_col - 1] == ' '
+			|| map[map_line + 1][map_col] == ' '
+			|| map[map_line + 1][map_col + 1] == ' '
+			|| !map[map_line + 1][map_col + 1])
 			return (0);
 	}
 	else
@@ -40,7 +46,7 @@ static int	zero_check(char **map, int map_line, int map_col)
 
 static int	first_row_is_valid(char **map, int *map_line, int map_col)
 {
-	int is_first;
+	int	is_first;
 
 	is_first = 0;
 	while (map && map[(*map_line)])
@@ -86,7 +92,8 @@ static int	check_row(char **map, int map_line, int map_col)
 			else
 				return (0);
 		}
-		else if (map[map_line][map_col] == '\n' && map[map_line][map_col - 1] == '1')
+		else if (map[map_line][map_col] == '\n'
+			&& map[map_line][map_col - 1] == '1')
 			map_col++;
 		else
 			return (0);

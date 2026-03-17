@@ -6,13 +6,13 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/16 15:58:18 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/17 22:17:21 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int nbline_in_file(int fd, int *max_len)
+static int	nbline_in_file(int fd, int *max_len)
 {
 	int		result;
 	char	*tab;
