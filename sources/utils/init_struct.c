@@ -6,12 +6,11 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 15:59:27 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/17 10:22:40 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft.h"
 
 void	init_mlx_struct(t_mlx *mlx)
 {

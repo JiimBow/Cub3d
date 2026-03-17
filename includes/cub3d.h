@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/16 15:57:49 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/17 10:18:31 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@
 #define SKY (mlx_color){.rgba = 0x5a96d7ff}
 #define GROUND (mlx_color){.rgba = 0xa2a2a2ff}
 
-extern const int	g_world_map[10][10];
+// extern const int	g_world_map[10][10];
+extern const int	g_world_map[15][15];
 
 typedef struct s_mlx
 {
