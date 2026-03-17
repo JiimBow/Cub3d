@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:02:47 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/17 18:02:43 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/17 18:17:12 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	update_frame(void *param)
 	char		*buff;
 
 	mlx = (t_mlx *)param;
-	draw_wall(mlx);
 	get_delta_time(mlx);
+	draw_wall(mlx);
 	mlx->fps_timer += mlx->delta;
 	mlx->frame_count++;
 	if (mlx->fps_timer >= 1.0)
