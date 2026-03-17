@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/17 10:51:29 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/17 14:55:03 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,5 @@ void	draw_wall(t_mlx *mlx)
 		mlx->plane_x = mlx->plane_x * cos(-rot_speed) - mlx->plane_y * sin(-rot_speed);
 		mlx->plane_y = old_plane_x * sin(-rot_speed) + mlx->plane_y * cos(-rot_speed);
 	}
-	player_move(mlx, 0, 0);
+	player_move(mlx, 0.0, 0.0, frame_time * 3.0);
 }

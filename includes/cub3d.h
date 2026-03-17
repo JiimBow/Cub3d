@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/17 10:52:02 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/17 14:54:36 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			is_space(char c);
 int			check_map(char **map);
 
 //MOVING
-int			player_move(t_mlx *mlx, double delx, double dely);
+int			player_move(t_mlx *mlx, double delx, double dely, double frame_time);
 
 void		update_frame(void *param);
 void		window_hook(int event, void *par);
@@ -92,3 +92,4 @@ mlx_image	set_background(t_mlx mlx);
 void		init_mlx_struct(t_mlx *mlx);
 void		draw_wall(t_mlx *mlx);
 long		get_delta_time(t_mlx *mlx);
+double		get_move_time(void);
