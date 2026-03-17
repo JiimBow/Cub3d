@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/17 14:55:03 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/17 18:02:29 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "mlx.h"
 
 void	draw_wall(t_mlx *mlx)
 {
@@ -124,13 +123,24 @@ void	draw_wall(t_mlx *mlx)
 			mlx_pixel_put(mlx->cont, mlx->win, x, draw_start++, color);
 		x++;
 	}
+	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->wall, 50, 50, 4, 4, 0);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
 	double frame_time = (mlx->time - mlx->old_time) / 1000.0;
 	if (frame_time < 0)
 		frame_time = 0;
-	double rot_speed = frame_time * 3.0;
+	double rot_speed = frame_time * 2.0;
 	if (mlx->keys[79] == 1)
+	{
+		double	old_dir_x = mlx->dir_x;
+		
+		mlx->dir_x = mlx->dir_x * cos(rot_speed) - mlx->dir_y * sin(rot_speed);
+		mlx->dir_y = old_dir_x * sin(rot_speed) + mlx->dir_y * cos(rot_speed);
+		double old_plane_x = mlx->plane_x;
+		mlx->plane_x = mlx->plane_x * cos(rot_speed) - mlx->plane_y * sin(rot_speed);
+		mlx->plane_y = old_plane_x * sin(rot_speed) + mlx->plane_y * cos(rot_speed);
+	}
+	if (mlx->keys[80] == 1)
 	{
 		double	old_dir_x = mlx->dir_x;
 		

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fps_calculator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:02:47 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/17 14:56:09 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/17 18:02:43 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	update_frame(void *param)
 	char		*buff;
 
 	mlx = (t_mlx *)param;
-	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
-	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	draw_wall(mlx);
 	get_delta_time(mlx);
 	mlx->fps_timer += mlx->delta;
