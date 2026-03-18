@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 14:54:48 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/17 22:19:34 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/18 13:45:37 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	player_move(t_mlx *mlx, double delx, double dely, double frame_time)
 		dely = mlx->dir_x * frame_time;
 	}
 	player_x = (mlx->pos_x + delx);
-	if (g_world_map[(int)mlx->pos_y][player_x] == 0.0 && delx != 0)
+	if (g_world_map[(int)mlx->pos_y][player_x] == 0 && delx != 0)
 		mlx->pos_x += delx;
 	player_y = (mlx->pos_y + dely);
-	if (g_world_map[player_y][(int)mlx->pos_x] == 0.0 && dely != 0)
+	if (g_world_map[player_y][(int)mlx->pos_x] == 0 && dely != 0)
 		mlx->pos_y += dely;
 	return (0);
 }

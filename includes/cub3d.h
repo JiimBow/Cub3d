@@ -6,14 +6,14 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/17 22:42:53 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/18 13:30:23 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "mlx.h"
-#include "mlx_extended.h"
+#include "../mlx/includes/mlx.h"
+#include "../mlx/includes/mlx_extended.h"
 #include "get_next_line.h"
 #include "ft_printf.h"
 #include "libft.h"
@@ -43,7 +43,7 @@
 #define GROUND 0xa2a2a2ff
 
 // extern const int	g_world_map[10][10];
-extern const int	g_world_map[15][15];
+extern const int	g_world_map[20][20];
 
 typedef struct s_mlx
 {

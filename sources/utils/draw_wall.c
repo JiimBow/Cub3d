@@ -6,12 +6,11 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/17 22:41:30 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/18 13:39:34 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "mlx.h"
 
 	// int		hit; // passe a 1 quand le rayon touche un wall
 	// int		side; // verif si on est sur un side wall
