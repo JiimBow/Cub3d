@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/18 13:39:34 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/18 19:34:15 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,18 @@
 	// double	delta_dist_y;
 	// double	perp_wall_dist;
 
-mlx_color	set_color(int map_x, int map_y, int side)
+mlx_color	set_color(int step_x, int step_y, int side)
 {
 	mlx_color	color;
 
-	if (g_world_map[map_y][map_x] == 1)
+	if (step_y < 0 && side == 1) // VIEW OF SOUTH SIDE
 		color = (mlx_color){.rgba = RGB_GREEN};
-	else if (g_world_map[map_y][map_x] == 2)
+	else if (step_y > 0 && side == 1) // VIEW OF NORTH SIDE
 		color = (mlx_color){.rgba = RGB_RED};
-	else if (g_world_map[map_y][map_x] == 3)
+	if (step_x < 0 && side == 0) // VIEW OF EAST SIDE
 		color = (mlx_color){.rgba = RGB_BLUE};
-	else if (g_world_map[map_y][map_x] == 4)
+	else if (step_x > 0 && side == 0) // VIEW OF WEST SIDE
 		color = (mlx_color){.rgba = RGB_WHITE};
-	else
-		color = (mlx_color){.rgba = RGB_YELLOW};
-	if (side == 1)
-	{
-		color.r = (uint8_t)(color.r * 0.7);
-		color.g = (uint8_t)(color.g * 0.7);
-		color.b = (uint8_t)(color.b * 0.7);
-	}
 	return (color);
 }
 
@@ -75,6 +67,8 @@ void	draw_wall(t_mlx *mlx)
 	double		perp_wall_dist;
 	mlx_color	color;
 
+	mlx_destroy_image(mlx->cont, mlx->wall);
+	mlx->wall = mlx_new_image(mlx->cont, SCREEN_WIDTH, SCREEN_HEIGHT);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	x = 0;
@@ -141,15 +135,15 @@ void	draw_wall(t_mlx *mlx)
 		draw_end = line_height * 0.5 + SCREEN_HEIGHT * 0.5;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
-		color = set_color(map_x, map_y, side);
+		color = set_color(step_x, step_y, side);
 		while (draw_start < draw_end)
-			mlx_pixel_put(mlx->cont, mlx->win, x, draw_start++, color);
+			mlx_set_image_pixel(mlx->cont, mlx->wall, x, draw_start++, color);
 		x++;
 	}
-	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->wall, 50, 50, 4, 4, 0);
+	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
 	frame_time = (mlx->time - mlx->old_time) * 0.001;
-	player_rotate(mlx, frame_time, frame_time * 2.0);
-	player_move(mlx, 0.0, 0.0, frame_time * 3.0);
+	player_rotate(mlx, frame_time, frame_time * 3.0);
+	player_move(mlx, 0.0, 0.0, frame_time * 2.0);
 }
