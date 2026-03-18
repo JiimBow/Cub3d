@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:37:55 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/10 16:42:29 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/18 19:50:16 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@ int	error_message(int code)
 		ft_putstr_fd("Error\nProgram must have only one argument\n", 2);
 	else if (code == 1)
 		ft_putstr_fd("Error\nMap is not valid\n", 2);
+	else if (code == 2)
+		ft_putstr_fd("Error\nTextures value not correct\n", 2);
 	return (1);
 }

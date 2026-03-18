@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   set_background.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:07:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/17 22:26:11 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/18 19:51:32 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	set_background(t_mlx *mlx)
+void	set_background(t_mlx *mlx, t_text *text)
 {
 	int	x;
 	int	y;
@@ -25,7 +25,7 @@ void	set_background(t_mlx *mlx)
 		while (y < mlx->info.height / 2 && x < mlx->info.width)
 		{
 			mlx_set_image_pixel(mlx->cont, mlx->background, x, y,
-				(mlx_color){.rgba = SKY});
+				text->c_color);
 			x++;
 		}
 		x = 0;
@@ -33,7 +33,7 @@ void	set_background(t_mlx *mlx)
 			&& y < mlx->info.height && x < mlx->info.width)
 		{
 			mlx_set_image_pixel(mlx->cont, mlx->background, x, y,
-				(mlx_color){.rgba = GROUND});
+				text->f_color);
 			x++;
 		}
 		y++;

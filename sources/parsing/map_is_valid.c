@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/17 22:17:21 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/18 18:37:14 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,21 @@ static char	**copy_map(char *map_name)
 	return (map_copy);
 }
 
-int	map_is_valid(char *map_name)
+int	map_is_valid(char *file, t_map *map)
 {
-	char	**map_copy;
-
-	map_copy = copy_map(map_name);
-	if (!map_copy)
+	map->map = copy_map(file);
+	if (!map->map)
 		return (0);
-	if (!check_element(map_copy))
+	if (!check_element(map))
 	{
-		free_double_ptr(map_copy);
+		free_double_ptr(map->map);
 		return (0);
 	}
-	if (!check_map(map_copy))
+	if (!check_map(map->map))
 	{
-		free_double_ptr(map_copy);
+		free_double_ptr(map->map);
 		return (0);
 	}
-	free_double_ptr(map_copy);
+	// free_double_ptr(map->map);
 	return (1);
 }

@@ -1,9 +1,12 @@
-NO ./path
-WE ./path
-EA ./path
-SO ./path
-F ./path
-C ./path
+NO          ./path_to_the_north_texture
+SO            ./path_to_the_south_texture
+WE           ./path_to_the_west_texture
+EA        ./path_to_the_east_texture
+
+
+F      162,162,162
+
+C        90,150,215
 
 11111111111
     101101111

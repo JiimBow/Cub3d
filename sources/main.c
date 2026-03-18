@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/18 19:29:33 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/18 20:02:35 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 int	main(int ac, char **av)
 {
 	t_mlx	mlx;
+	t_map	map;
+	t_text	text;
+	int		wid;
+	int		hei;
 
 	if (ac != 2)
 		return (error_message(0));
-	if (!map_is_valid(av[1]))
+	if (!map_is_valid(av[1], &map))
 		return (error_message(1));
 	init_mlx_struct(&mlx);
-	set_background(&mlx);
+	if (!init_textures(&mlx, &text, &map))
+		return (error_message(2));
+	set_background(&mlx, &text);
 	mlx.wall = mlx_new_image(mlx.cont, SCREEN_WIDTH, SCREEN_HEIGHT);
 	mlx_on_event(mlx.cont, mlx.win, MLX_KEYDOWN, key_down, &mlx);
 	mlx_on_event(mlx.cont, mlx.win, MLX_KEYUP, key_up, &mlx);
