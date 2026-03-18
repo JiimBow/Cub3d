@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/18 13:30:23 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/18 14:53:58 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,3 @@ void	set_background(t_mlx *mlx);
 void	init_mlx_struct(t_mlx *mlx);
 void	draw_wall(t_mlx *mlx);
 long	get_delta_time(t_mlx *mlx);
-double	get_move_time(void);
