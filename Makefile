@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
+#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/18 20:03:06 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/18 20:06:39 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,9 @@ SRC			= $(DIR)main.c \
 				$(MOVING)player_move.c \
 				$(MOVING)player_rotate.c
 
-OBJ			= $(SRC:%.c=$(OBJ_DIR)%.o)
+OBJ			= $(SRC:$(DIR)%.c=$(OBJ_DIR)%.o)
+
+DEPS		= $(SRC:$(DIR)%.c=$(OBJ_DIR)%.d)
 
 LIBFT		= ./Great_Libft/g_libft.a
 
