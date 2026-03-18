@@ -6,11 +6,40 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:23:16 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/11 11:26:10 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/18 18:22:13 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	add_texture(t_map *map, char *map_line)
+{
+	char	*tmp_path;
+
+	tmp_path = ft_substr(map_line, 1, ft_strlen(map_line) - 1);
+	if (!ft_strncmp(map_line, "F", 1) || !ft_strncmp(map_line, "C", 1))
+	{
+		while (*tmp_path == ' ')
+			tmp_path++;
+	}
+	else
+	{
+		while (*tmp_path != '.')
+			tmp_path++;
+	}
+	if (!ft_strncmp(map_line, "NO", 2))
+		map->no_path = ft_strdup(tmp_path);
+	else if (!ft_strncmp(map_line, "SO", 2))
+		map->so_path = ft_strdup(tmp_path);
+	else if (!ft_strncmp(map_line, "WE", 2))
+		map->we_path = ft_strdup(tmp_path);
+	else if (!ft_strncmp(map_line, "EA", 2))
+		map->ea_path = ft_strdup(tmp_path);
+	else if (!ft_strncmp(map_line, "F", 1))
+		map->f_value = ft_strdup(tmp_path);
+	else if (!ft_strncmp(map_line, "C", 1))
+		map->c_value = ft_strdup(tmp_path);
+}
 
 static int	first_node(t_list **elem_lst, char *content, int len_content)
 {
@@ -51,7 +80,7 @@ static void	remove_node(t_list **elem_lst, char *content)
 	free(supp);
 }
 
-int	is_element(char *map_line, t_list **elem_lst)
+int	is_element(char *map_line, t_list **elem_lst, t_map *map)
 {
 	t_list	*tmp;
 
@@ -60,6 +89,7 @@ int	is_element(char *map_line, t_list **elem_lst)
 	{
 		if (ft_strncmp(map_line, tmp->content, ft_strlen(tmp->content)) == 0)
 		{
+			add_texture(map, map_line);
 			remove_node(elem_lst, tmp->content);
 			return (1);
 		}
@@ -73,7 +103,7 @@ t_list	*element_init_lst(void)
 	t_list	*elem_lst;
 
 	elem_lst = NULL;
-	ft_lstadd_back(&elem_lst, ft_lstnew((char *)"NO"));
+	ft_lstadd_back(&elem_lst, ft_lstnew("NO"));
 	ft_lstadd_back(&elem_lst, ft_lstnew("SO"));
 	ft_lstadd_back(&elem_lst, ft_lstnew("WE"));
 	ft_lstadd_back(&elem_lst, ft_lstnew("EA"));

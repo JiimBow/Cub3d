@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/17 22:07:47 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/18 19:45:42 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC			= $(DIR)main.c \
 				$(PARSING)parse_element.c \
 				$(PARSING)check_map.c \
 				$(MOVING)player_move.c \
-				$(MOVING)player_rotate.c
+				$(MOVING)player_rotate.c \
 
 OBJ			= $(SRC:%.c=$(OBJ_DIR)%.o)
 

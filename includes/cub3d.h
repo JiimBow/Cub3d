@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/18 14:53:58 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/18 19:52:14 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,28 @@ typedef struct s_mlx
 	int						keys[512];
 }	t_mlx;
 
+typedef struct s_map
+{
+	char		**map;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	char		*f_value;
+	char		*c_value;
+}	t_map;
+
+typedef struct s_text
+{
+	mlx_image	no_text;
+	mlx_image	so_text;
+	mlx_image	we_text;
+	mlx_image	ea_text;
+	mlx_color	f_color;
+	mlx_color	c_color;
+}	t_text;
+
+
 // ERROR
 int		error_message(int code);
 
@@ -75,12 +97,13 @@ int		error_message(int code);
 void	free_double_ptr(char **ptr);
 
 // PARSING
-int		check_element(char **map);
-int		is_element(char *map_line, t_list **elem_lst);
-int		map_is_valid(char *map_name);
+int		check_element(t_map *map);
+int		is_element(char *map_line, t_list **elem_lst, t_map *map);
+int		map_is_valid(char *file, t_map *map);
 t_list	*element_init_lst(void);
 int		is_space(char c);
 int		check_map(char **map);
+int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
 
 //MOVING
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
@@ -90,7 +113,7 @@ void	update_frame(void *param);
 void	window_hook(int event, void *par);
 void	key_down(int key, void *param);
 void	key_up(int key, void *param);
-void	set_background(t_mlx *mlx);
+void	set_background(t_mlx *mlx, t_text *text);
 void	init_mlx_struct(t_mlx *mlx);
 void	draw_wall(t_mlx *mlx);
 long	get_delta_time(t_mlx *mlx);
