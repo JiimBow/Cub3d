@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 11:49:56 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 14:49:16 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ int	main(int ac, char **av)
 	mlx_add_loop_hook(mlx.cont, update_frame, &mlx);
 	mlx_loop(mlx.cont);
 	mlx_destroy_image(mlx.cont, mlx.background);
+	mlx_destroy_image(mlx.cont, mlx.s_text->no_text);
+	mlx_destroy_image(mlx.cont, mlx.s_text->so_text);
+	mlx_destroy_image(mlx.cont, mlx.s_text->we_text);
+	mlx_destroy_image(mlx.cont, mlx.s_text->ea_text);
 	mlx_destroy_image(mlx.cont, mlx.wall);
-	mlx_destroy_image(mlx.cont, text.no_text);
 	mlx_destroy_window(mlx.cont, mlx.win);
 	mlx_destroy_context(mlx.cont);
 	return (0);

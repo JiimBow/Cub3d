@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 11:47:18 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 14:44:36 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
+#define tex_height 64
+#define tex_width 64
 #define RGB_RED 0xff0000ff
 #define RGB_GREEN 0x4bff00ff
 #define RGB_BLUE 0x0000ffff
@@ -68,6 +70,7 @@ typedef struct s_mlx
 	mlx_window_create_info	info;
 	mlx_image				background;
 	mlx_image				wall;
+	mlx_image				north;
 	struct timeval			last_time;
 	double					delta;
 	double					fps;

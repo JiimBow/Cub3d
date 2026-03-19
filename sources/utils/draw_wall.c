@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 10:23:22 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 14:58:35 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,6 @@
 	// double	delta_dist_y;
 	// double	perp_wall_dist;
 
-mlx_color	set_color(int step_x, int step_y, int side)
-{
-	mlx_color	color;
-
-	if (step_y < 0 && side == 1) // VIEW OF SOUTH SIDE
-		color = (mlx_color){.rgba = RGB_GREEN};
-	else if (step_y > 0 && side == 1) // VIEW OF NORTH SIDE
-		color = (mlx_color){.rgba = RGB_RED};
-	if (step_x < 0 && side == 0) // VIEW OF EAST SIDE
-		color = (mlx_color){.rgba = RGB_BLUE};
-	else if (step_x > 0 && side == 0) // VIEW OF WEST SIDE
-		color = (mlx_color){.rgba = RGB_WHITE};
-	return (color);
-}
-
 void	draw_wall(t_mlx *mlx)
 {
 	int			x;
@@ -65,7 +50,13 @@ void	draw_wall(t_mlx *mlx)
 	double		delta_dist_x;
 	double		delta_dist_y;
 	double		perp_wall_dist;
-	mlx_color	color;
+	mlx_color	new;
+	int			i;
+	double		wallX;
+	int			texX;
+	double		step;
+	double		texPos;
+	int			texY;
 
 	mlx_destroy_image(mlx->cont, mlx->wall);
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -135,9 +126,32 @@ void	draw_wall(t_mlx *mlx)
 		draw_end = line_height * 0.5 + SCREEN_HEIGHT * 0.5;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
-		color = set_color(step_x, step_y, side);
-		while (draw_start < draw_end)
-			mlx_set_image_pixel(mlx->cont, mlx->wall, x, draw_start++, color);
+		if (side == 1)
+			wallX = mlx->pos_x + perp_wall_dist * ray_dir_x;
+		else
+			wallX = mlx->pos_y + perp_wall_dist * ray_dir_y;
+		wallX -= floor(wallX);
+		texX = (int)(wallX * (double)tex_width);
+		if ((side == 0 && ray_dir_x > 0) || (side == 1 && ray_dir_y < 0))
+			texX = tex_width - texX - 1;
+		step = 1.0 * tex_height / line_height;
+		texPos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
+		i = draw_start;
+		while (i < draw_end)
+		{
+			texY = (int)texPos & (tex_height - 1);
+			texPos += step;
+			if (step_y < 0 && side == 1)
+				new = mlx_get_image_pixel(mlx->cont, mlx->s_text->no_text, texX, texY);
+			else if (step_y > 0 && side == 1)
+				new = mlx_get_image_pixel(mlx->cont, mlx->s_text->so_text, texX, texY);
+			if (step_x < 0 && side == 0)
+				new = mlx_get_image_pixel(mlx->cont, mlx->s_text->we_text, texX, texY);
+			else if (step_x > 0 && side == 0)
+				new = mlx_get_image_pixel(mlx->cont, mlx->s_text->ea_text, texX, texY);
+			mlx_set_image_pixel(mlx->cont, mlx->wall, x, i, new);
+			i++;
+		}
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
