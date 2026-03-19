@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 14:49:16 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 15:50:27 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(int ac, char **av)
 	mlx_on_event(mlx.cont, mlx.win, MLX_KEYDOWN, key_down, &mlx);
 	mlx_on_event(mlx.cont, mlx.win, MLX_KEYUP, key_up, &mlx);
 	mlx_on_event(mlx.cont, mlx.win, MLX_WINDOW_EVENT, window_hook, mlx.cont);
+	mlx_mouse_move(mlx.cont, mlx.win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_mouse_hide(mlx.cont);
 	mlx_add_loop_hook(mlx.cont, update_frame, &mlx);
 	mlx_loop(mlx.cont);
 	mlx_destroy_image(mlx.cont, mlx.background);
