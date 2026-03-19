@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/18 20:02:46 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 10:26:20 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	return (1);
 }
 
-void	init_mlx_struct(t_mlx *mlx)
+void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 {
 	ft_bzero(mlx, sizeof(*mlx));
 	ft_bzero(&mlx->info, sizeof(mlx->info));
@@ -71,13 +71,25 @@ void	init_mlx_struct(t_mlx *mlx)
 	mlx->cont = mlx_init();
 	mlx->win = mlx_new_window(mlx->cont, &mlx->info);
 	mlx_set_fps_goal(mlx->cont, 90);
-	mlx->pos_x = 5.5;
-	mlx->pos_y = 8.5;
+	mlx->pos_x = 6.5;
+	mlx->pos_y = 17.5;
 	mlx->dir_x = 0;
 	mlx->dir_y = -1;
 	mlx->plane_x = 0.66;
 	mlx->plane_y = 0;
+	mlx->s_map = map;
+	mlx->s_text = text;
 }
+
+// 0 pour vide, 1 pour vert, 2 pour rouge, 3 pour bleu et 4 pour blanc
+
+// NORD:	dir_x =  0, dir_y = -1, plane_x =  0.66, plane_y =     0;
+// SUD:		dir_x =  0, dir_y =  1, plane_x = -0.66, plane_y =     0;
+// EST:		dir_x =  1, dir_y =  0, plane_x =     0, plane_y =  0.66;
+// OUEST:	dir_x = -1, dir_y =  0, plane_x =     0, plane_y = -0.66;
+
+// le pos_X indique dans quelle ligne on se trouve
+// le pos_Y indique dans quelle colonne on se trouve
 
 	//NORD
 

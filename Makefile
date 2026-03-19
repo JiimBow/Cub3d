@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/18 20:06:39 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/19 10:10:44 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -MMD -MP -O3 -march=native -flto -ffast-math
+CFLAGS		= -Wall -Wextra -Werror -g #-MMD -MP -O3 -march=native -flto -ffast-math
 
 # COLOR
 GREEN   := \033[1;38;5;46m

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/18 19:34:15 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 10:23:22 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	draw_wall(t_mlx *mlx)
 				map_y += step_y;
 				side = 1;
 			}
-			if (g_world_map[map_y][map_x] > 0)
+			if (mlx->s_map->map[map_y][map_x] != '0')
 				break ;
 		}
 		if (side == 0)

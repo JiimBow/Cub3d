@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/18 20:02:12 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 10:26:47 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,26 @@
 #define SKY 0x5a96d7ff
 #define GROUND 0xa2a2a2ff
 
-// extern const int	g_world_map[10][10];
-extern const int	g_world_map[20][20];
+typedef struct s_map
+{
+	char		**map;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	char		*f_value;
+	char		*c_value;
+}	t_map;
+
+typedef struct s_text
+{
+	mlx_image	no_text;
+	mlx_image	so_text;
+	mlx_image	we_text;
+	mlx_image	ea_text;
+	mlx_color	f_color;
+	mlx_color	c_color;
+}	t_text;
 
 typedef struct s_mlx
 {
@@ -66,29 +84,9 @@ typedef struct s_mlx
 	double					time;
 	double					old_time;
 	int						keys[512];
+	t_map					*s_map;
+	t_text					*s_text;
 }	t_mlx;
-
-typedef struct s_map
-{
-	char		**map;
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
-	char		*f_value;
-	char		*c_value;
-}	t_map;
-
-typedef struct s_text
-{
-	mlx_image	no_text;
-	mlx_image	so_text;
-	mlx_image	we_text;
-	mlx_image	ea_text;
-	mlx_color	f_color;
-	mlx_color	c_color;
-}	t_text;
-
 
 // ERROR
 int		error_message(int code);
@@ -114,6 +112,6 @@ void	window_hook(int event, void *par);
 void	key_down(int key, void *param);
 void	key_up(int key, void *param);
 void	set_background(t_mlx *mlx, t_text *text);
-void	init_mlx_struct(t_mlx *mlx);
+void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
 void	draw_wall(t_mlx *mlx);
 long	get_delta_time(t_mlx *mlx);
