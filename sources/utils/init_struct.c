@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 10:26:20 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 11:49:20 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static int	put_color_value(mlx_color *color, char *value)
 
 int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 {
-	// int		w;
-	// int		h;
+	int		w;
+	int		h;
 
-	// text->no_text = mlx_new_image_from_file(mlx->cont, map->no_path, &w, &h);
+	text->no_text = mlx_new_image_from_file(mlx->cont, "pics/eagle.png", &w, &h);
 	// text->so_text = mlx_new_image_from_file(mlx->cont, map->so_path, &w, &h);
 	// text->we_text = mlx_new_image_from_file(mlx->cont, map->we_path, &w, &h);
 	// text->ea_text = mlx_new_image_from_file(mlx->cont, map->ea_path, &w, &h);

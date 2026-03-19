@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 11:11:50 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 11:47:18 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 #define D 7
 #define RIGHT_KEY 79
 #define LEFT_KEY 80
-#define UP_KEY 81
-#define DOWN_KEY 82
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080

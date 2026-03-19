@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 09:59:32 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 11:49:56 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av)
 	mlx_loop(mlx.cont);
 	mlx_destroy_image(mlx.cont, mlx.background);
 	mlx_destroy_image(mlx.cont, mlx.wall);
+	mlx_destroy_image(mlx.cont, text.no_text);
 	mlx_destroy_window(mlx.cont, mlx.win);
 	mlx_destroy_context(mlx.cont);
 	return (0);
