@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 17:17:37 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:43:17 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	int		h;
 
 	(void)mlx;
-	text->no_text = mlx_new_image_from_file(mlx->cont, "pics/eagle.png", &w, &h);
-	text->so_text = mlx_new_image_from_file(mlx->cont, "pics/wood.png", &w, &h);
-	text->we_text = mlx_new_image_from_file(mlx->cont, "pics/greystone.png", &w, &h);
-	text->ea_text = mlx_new_image_from_file(mlx->cont, "pics/redbrick.png", &w, &h);
+	text->no_text = mlx_new_image_from_file(mlx->cont, map->no_path, &w, &h);
+	text->so_text = mlx_new_image_from_file(mlx->cont, map->so_path, &w, &h);
+	text->we_text = mlx_new_image_from_file(mlx->cont, map->we_path, &w, &h);
+	text->ea_text = mlx_new_image_from_file(mlx->cont, map->ea_path, &w, &h);
 	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text)\
 		return (0);
 	if (!put_color_value(&text->f_color, map->f_value))

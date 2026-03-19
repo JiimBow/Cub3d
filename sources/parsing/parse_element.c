@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_element.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:23:16 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/18 18:22:13 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 17:43:10 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,12 @@ static void	add_texture(t_map *map, char *map_line)
 
 	tmp_path = ft_substr(map_line, 1, ft_strlen(map_line) - 1);
 	if (!ft_strncmp(map_line, "F", 1) || !ft_strncmp(map_line, "C", 1))
-	{
 		while (*tmp_path == ' ')
 			tmp_path++;
-	}
 	else
-	{
 		while (*tmp_path != '.')
 			tmp_path++;
-	}
+	tmp_path[ft_strlen(tmp_path) - 1] = '\0';
 	if (!ft_strncmp(map_line, "NO", 2))
 		map->no_path = ft_strdup(tmp_path);
 	else if (!ft_strncmp(map_line, "SO", 2))
