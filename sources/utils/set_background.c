@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_background.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:07:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/18 19:51:32 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 18:53:44 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_background(t_mlx *mlx, t_text *text)
 	int	x;
 	int	y;
 
-	mlx->background = mlx_new_image(mlx->cont, SCREEN_WIDTH, SCREEN_HEIGHT);
+	mlx->background = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	y = 0;
 	while (y < mlx->info.height)
 	{

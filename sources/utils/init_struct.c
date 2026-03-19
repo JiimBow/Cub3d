@@ -6,11 +6,38 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 17:43:17 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 19:42:17 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_ray_data(t_mlx *mlx, t_wall *ray, int x)
+{
+	ray->camera_x = 2 * x / (double)SCREEN_W - 1;
+	ray->ray_dir_x = mlx->dir_x + mlx->plane_x * ray->camera_x;
+	ray->ray_dir_y = mlx->dir_y + mlx->plane_y * ray->camera_x;
+	ray->map_x = (int)mlx->pos_x;
+	ray->map_y = (int)mlx->pos_y;
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	ray->step_x = (ray->ray_dir_x < 0) * -1 + (ray->ray_dir_x >= 0);
+	ray->step_y = (ray->ray_dir_y < 0) * -1 + (ray->ray_dir_y >= 0);
+	if (ray->ray_dir_x < 0)
+		ray->side_dist_x = (mlx->pos_x - ray->map_x) * ray->delta_dist_x;
+	else
+		ray->side_dist_x = (ray->map_x + 1.0 - mlx->pos_x) * ray->delta_dist_x;
+	if (ray->ray_dir_y < 0)
+		ray->side_dist_y = (mlx->pos_y - ray->map_y) * ray->delta_dist_y;
+	else
+		ray->side_dist_y = (ray->map_y + 1.0 - mlx->pos_y) * ray->delta_dist_y;
+}
 
 static int	put_color_value(mlx_color *color, char *value)
 {
@@ -46,7 +73,7 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	text->so_text = mlx_new_image_from_file(mlx->cont, map->so_path, &w, &h);
 	text->we_text = mlx_new_image_from_file(mlx->cont, map->we_path, &w, &h);
 	text->ea_text = mlx_new_image_from_file(mlx->cont, map->ea_path, &w, &h);
-	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text)\
+	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text)
 		return (0);
 	if (!put_color_value(&text->f_color, map->f_value))
 		return (0);

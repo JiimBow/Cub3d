@@ -6,158 +6,118 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 17:17:54 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 19:43:38 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-	// int		hit; // passe a 1 quand le rayon touche un wall
-	// int		side; // verif si on est sur un side wall
-	// int		map_x; // recup la position x du joueur
-	// int		map_y; // recup la position y du joueur
-	// int		step_x; // sert a decaler le point de depart du rayon de 1 ou -1
-	// int		step_y; // sert a decaler le point de depart du rayon de 1 ou -1
-	// int		draw_start; // debut de la ligne a dessiner
-	// int		draw_end; // fin de la ligne a dessiner
-	// int line_height; hauteur de la ligne en fonction de sa distance du joueur
-	// double	camera_x; // 
-	// double	ray_dir_x;
-	// double	ray_dir_y;
-	// double	side_dist_x;
-	// double	side_dist_y;
-	// double	delta_dist_x;
-	// double	delta_dist_y;
-	// double	perp_wall_dist;
+static void	set_textures(t_mlx *mlx, t_text *text, t_wall *ray, int x)
+{
+	mlx_color	buf;
+	int			i;
+	double		step;
+
+	step = 1.0 * TEX_HEIGHT / ray->line_height;
+	i = ray->draw_start;
+	while (i < ray->draw_end)
+	{
+		ray->tex_y = (int)ray->tex_pos & (TEX_HEIGHT - 1);
+		ray->tex_pos += step;
+		if (ray->step_y < 0 && ray->side == 1)
+			buf = mlx_get_image_pixel(mlx->cont, text->no_text,
+					ray->tex_x, ray->tex_y);
+		else if (ray->step_y > 0 && ray->side == 1)
+			buf = mlx_get_image_pixel(mlx->cont, text->so_text,
+					ray->tex_x, ray->tex_y);
+		if (ray->step_x < 0 && ray->side == 0)
+			buf = mlx_get_image_pixel(mlx->cont, text->we_text,
+					ray->tex_x, ray->tex_y);
+		else if (ray->step_x > 0 && ray->side == 0)
+			buf = mlx_get_image_pixel(mlx->cont, text->ea_text,
+					ray->tex_x, ray->tex_y);
+		mlx_set_image_pixel(mlx->cont, mlx->wall, x, i, buf);
+		i++;
+	}
+}
+
+static void	get_textures(t_mlx *mlx, t_wall *ray)
+{
+	double	step;
+
+	if (ray->side == 1)
+		ray->wall_x = mlx->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
+	else
+		ray->wall_x = mlx->pos_y + ray->perp_wall_dist * ray->ray_dir_y;
+	ray->wall_x -= floor(ray->wall_x);
+	ray->tex_x = (int)(ray->wall_x * (double)TEX_WIDTH);
+	if ((ray->side == 0 && ray->ray_dir_x > 0)
+		|| (ray->side == 1 && ray->ray_dir_y < 0))
+		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
+	step = 1.0 * TEX_HEIGHT / ray->line_height;
+	ray->tex_pos = (ray->draw_start - SCREEN_H / 2 + ray->line_height / 2);
+	ray->tex_pos *= step;
+}
+
+static void	send_ray_until_wall(t_mlx *mlx, t_wall *ray)
+{
+	while (true)
+	{
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		if (mlx->s_map->map[ray->map_y][ray->map_x] != '0')
+			break ;
+	}
+}
+
+static void	calculate_height_wall(t_wall *ray)
+{
+	if (ray->side == 0)
+		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
+	else
+		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
+	ray->line_height = SCREEN_H / ray->perp_wall_dist;
+	ray->draw_start = -ray->line_height * 0.5 + SCREEN_H * 0.5;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = ray->line_height * 0.5 + SCREEN_H * 0.5;
+	if (ray->draw_end >= SCREEN_H)
+		ray->draw_end = SCREEN_H - 1;
+}
 
 void	draw_wall(t_mlx *mlx)
 {
-	int			x;
-	int			side;
-	int			map_x;
-	int			map_y;
-	int			step_x;
-	int			step_y;
-	int			draw_start;
-	int			draw_end;
-	double		line_height;
-	double		frame_time;
-	double		camera_x;
-	double		ray_dir_x;
-	double		ray_dir_y;
-	double		side_dist_x;
-	double		side_dist_y;
-	double		delta_dist_x;
-	double		delta_dist_y;
-	double		perp_wall_dist;
-	mlx_color	new;
-	int			i;
-	double		wall_x;
-	int			tex_x;
-	double		step;
-	double		tex_pos;
-	int			tex_y;
+	t_wall	ray;
+	int		x;
 
 	mlx_destroy_image(mlx->cont, mlx->wall);
-	mlx->wall = mlx_new_image(mlx->cont, SCREEN_WIDTH, SCREEN_HEIGHT);
+	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	x = 0;
-	while (x < SCREEN_WIDTH)
+	while (x < SCREEN_W)
 	{
-		camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-		ray_dir_x = mlx->dir_x + mlx->plane_x * camera_x;
-		ray_dir_y = mlx->dir_y + mlx->plane_y * camera_x;
-		map_x = (int)mlx->pos_x;
-		map_y = (int)mlx->pos_y;
-		if (ray_dir_x == 0)
-			delta_dist_x = 1e30;
-		else
-			delta_dist_x = fabs(1 / ray_dir_x);
-		if (ray_dir_y == 0)
-			delta_dist_y = 1e30;
-		else
-			delta_dist_y = fabs(1 / ray_dir_y);
-		if (ray_dir_x < 0)
-		{
-			step_x = -1;
-			side_dist_x = (mlx->pos_x - map_x) * delta_dist_x;
-		}
-		else
-		{
-			step_x = 1;
-			side_dist_x = (map_x + 1.0 - mlx->pos_x) * delta_dist_x;
-		}
-		if (ray_dir_y < 0)
-		{
-			step_y = -1;
-			side_dist_y = (mlx->pos_y - map_y) * delta_dist_y;
-		}
-		else
-		{
-			step_y = 1;
-			side_dist_y = (map_y + 1.0 - mlx->pos_y) * delta_dist_y;
-		}
-		while (true)
-		{
-			if (side_dist_x < side_dist_y)
-			{
-				side_dist_x += delta_dist_x;
-				map_x += step_x;
-				side = 0;
-			}
-			else
-			{
-				side_dist_y += delta_dist_y;
-				map_y += step_y;
-				side = 1;
-			}
-			if (mlx->s_map->map[map_y][map_x] != '0')
-				break ;
-		}
-		if (side == 0)
-			perp_wall_dist = (side_dist_x - delta_dist_x);
-		else
-			perp_wall_dist = (side_dist_y - delta_dist_y);
-		line_height = SCREEN_HEIGHT / perp_wall_dist;
-		draw_start = -line_height * 0.5 + SCREEN_HEIGHT * 0.5;
-		if (draw_start < 0)
-			draw_start = 0;
-		draw_end = line_height * 0.5 + SCREEN_HEIGHT * 0.5;
-		if (draw_end >= SCREEN_HEIGHT)
-			draw_end = SCREEN_HEIGHT - 1;
-		if (side == 1)
-			wall_x = mlx->pos_x + perp_wall_dist * ray_dir_x;
-		else
-			wall_x = mlx->pos_y + perp_wall_dist * ray_dir_y;
-		wall_x -= floor(wall_x);
-		tex_x = (int)(wall_x * (double)tex_width);
-		if ((side == 0 && ray_dir_x > 0) || (side == 1 && ray_dir_y < 0))
-			tex_x = tex_width - tex_x - 1;
-		step = 1.0 * tex_height / line_height;
-		tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
-		i = draw_start;
-		while (i < draw_end)
-		{
-			tex_y = (int)tex_pos & (tex_height - 1);
-			tex_pos += step;
-			if (step_y < 0 && side == 1)
-				new = mlx_get_image_pixel(mlx->cont, mlx->s_text->no_text, tex_x, tex_y);
-			else if (step_y > 0 && side == 1)
-				new = mlx_get_image_pixel(mlx->cont, mlx->s_text->so_text, tex_x, tex_y);
-			if (step_x < 0 && side == 0)
-				new = mlx_get_image_pixel(mlx->cont, mlx->s_text->we_text, tex_x, tex_y);
-			else if (step_x > 0 && side == 0)
-				new = mlx_get_image_pixel(mlx->cont, mlx->s_text->ea_text, tex_x, tex_y);
-			mlx_set_image_pixel(mlx->cont, mlx->wall, x, i, new);
-			i++;
-		}
+		init_ray_data(mlx, &ray, x);
+		send_ray_until_wall(mlx, &ray);
+		calculate_height_wall(&ray);
+		get_textures(mlx, &ray);
+		set_textures(mlx, mlx->s_text, &ray, x);
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
-	frame_time = (mlx->time - mlx->old_time) * 0.001;
-	player_rotate(mlx, frame_time, frame_time * mlx->sp_rot);
-	player_move(mlx, 0.0, 0.0, frame_time * mlx->sp_move);
+	ray.frame_time = (mlx->time - mlx->old_time) * 0.001;
+	player_rotate(mlx, ray.frame_time, ray.frame_time * mlx->sp_rot);
+	player_move(mlx, 0.0, 0.0, ray.frame_time * mlx->sp_move);
 }

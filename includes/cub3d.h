@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 17:22:01 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 19:42:31 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@
 #define UP_KEY 82
 #define ESC 41
 
-#define SCREEN_WIDTH 1920
-#define SCREEN_HEIGHT 1080
-#define tex_height 64
-#define tex_width 64
+#define SCREEN_W 1920
+#define SCREEN_H 1080
+#define TEX_HEIGHT 64
+#define TEX_WIDTH 64
 #define RGB_RED 0xff0000ff
 #define RGB_GREEN 0x4bff00ff
 #define RGB_BLUE 0x0000ffff
@@ -44,6 +44,32 @@
 #define RGB_YELLOW 0xffff00ff
 #define SKY 0x5a96d7ff
 #define GROUND 0xa2a2a2ff
+
+typedef struct s_wall
+{
+	int			side;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			draw_start;
+	int			draw_end;
+	double		line_height;
+	double		frame_time;
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	double		wall_x;
+	double		tex_pos;
+	int			tex_x;
+	int			tex_y;
+	int			step;
+}	t_wall;
 
 typedef struct s_map
 {
@@ -108,6 +134,7 @@ t_list	*element_init_lst(void);
 int		is_space(char c);
 int		check_map(char **map);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
+void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 
 //MOVING
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
