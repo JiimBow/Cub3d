@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 14:44:36 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:22:01 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 #define D 7
 #define RIGHT_KEY 79
 #define LEFT_KEY 80
+#define DOWN_KEY 81
+#define UP_KEY 82
+#define ESC 41
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
@@ -85,6 +88,8 @@ typedef struct s_mlx
 	double					time;
 	double					old_time;
 	int						keys[512];
+	double					sp_move;
+	double					sp_rot;
 	t_map					*s_map;
 	t_text					*s_text;
 }	t_mlx;

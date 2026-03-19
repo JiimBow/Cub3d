@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 15:07:15 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/19 17:17:37 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	mlx->plane_y = 0;
 	mlx->s_map = map;
 	mlx->s_text = text;
+	mlx->sp_move = 2.0;
+	mlx->sp_rot = 3.0;
 }
 
 // 0 pour vide, 1 pour vert, 2 pour rouge, 3 pour bleu et 4 pour blanc
