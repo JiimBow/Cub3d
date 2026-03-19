@@ -6,11 +6,107 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 14:54:48 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/19 11:11:46 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/19 11:48:16 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	m_forward(t_mlx *mlx, double *delx, double *dely, double frame_time)
+{
+	if (mlx->keys[A] == 1)
+	{
+		*delx = ((mlx->dir_x * frame_time) + (mlx->dir_y * frame_time)) / 2;
+		*dely = ((mlx->dir_y * frame_time) + (-mlx->dir_x * frame_time)) / 2;
+	}
+	else if (mlx->keys[D] == 1)
+	{
+		*delx = ((mlx->dir_x * frame_time) + (-mlx->dir_x * frame_time)) / 2;
+		*dely = ((mlx->dir_y * frame_time) + (-mlx->dir_y * frame_time)) / 2;
+	}
+	else if (mlx->keys[S] == 1)
+	{
+		*delx = 0.0;
+		*dely = 0.0;
+	}
+	else
+	{
+		*delx = mlx->dir_x * frame_time;
+		*dely = mlx->dir_y * frame_time;
+	}
+}
+
+static void	m_back(t_mlx *mlx, double *delx, double *dely, double frame_time)
+{
+	if (mlx->keys[A] == 1)
+	{
+		*delx = ((-mlx->dir_x * frame_time) + (mlx->dir_y * frame_time)) / 2;
+		*dely = ((-mlx->dir_y * frame_time) + (-mlx->dir_x * frame_time)) / 2;
+	}
+	else if (mlx->keys[D] == 1)
+	{
+		*delx = ((-mlx->dir_x * frame_time) + (-mlx->dir_y * frame_time)) / 2;
+		*dely = ((-mlx->dir_y * frame_time) + (mlx->dir_x * frame_time)) / 2;
+	}
+	else if (mlx->keys[W] == 1)
+	{
+		*delx = 0.0;
+		*dely = 0.0;
+	}
+	else
+	{
+		*delx = -mlx->dir_x * frame_time;
+		*dely = -mlx->dir_y * frame_time;
+	}
+}
+
+static void	m_right(t_mlx *mlx, double *delx, double *dely, double frame_time)
+{
+	if (mlx->keys[W] == 1)
+	{
+		*delx = ((-mlx->dir_y * frame_time) + (mlx->dir_x * frame_time)) / 2;
+		*dely = ((mlx->dir_x * frame_time) + (mlx->dir_y * frame_time)) / 2;
+	}
+	else if (mlx->keys[S] == 1)
+	{
+		*delx = ((-mlx->dir_x * frame_time) + (-mlx->dir_y * frame_time)) / 2;
+		*dely = ((-mlx->dir_y * frame_time) + (mlx->dir_x * frame_time)) / 2;
+	}
+	else if (mlx->keys[A] == 1)
+	{
+		*delx = 0.0;
+		*dely = 0.0;
+	}
+	else
+	{
+		*delx = -mlx->dir_y * frame_time;
+		*dely = mlx->dir_x * frame_time;
+	}
+}
+
+static void	m_left(t_mlx *mlx, double *delx, double *dely, double frame_time)
+{
+	if (mlx->keys[W] == 1)
+	{
+		*delx = ((mlx->dir_y * frame_time) + (mlx->dir_x * frame_time)) / 2;
+		*dely = ((-mlx->dir_x * frame_time) + (mlx->dir_y * frame_time)) / 2;
+	}
+	else if (mlx->keys[S] == 1)
+	{
+		*delx = ((mlx->dir_y * frame_time) + (-mlx->dir_x * frame_time)) / 2;
+		*dely = ((-mlx->dir_x * frame_time) + (-mlx->dir_y * frame_time)) / 2;
+	}
+	else if (mlx->keys[D] == 1)
+	{
+		*delx = 0.0;
+		*dely = 0.0;
+	}
+	else
+	{
+		*delx = mlx->dir_y * frame_time;
+		*dely = -mlx->dir_x * frame_time;
+	}
+}
 
 int	player_move(t_mlx *mlx, double delx, double dely, double frame_time)
 {
@@ -18,97 +114,13 @@ int	player_move(t_mlx *mlx, double delx, double dely, double frame_time)
 	int		player_y;
 
 	if (mlx->keys[W] == 1)
-	{
-		if (mlx->keys[A] == 1)
-		{
-			delx = ((mlx->dir_x * frame_time) + (mlx->dir_y * frame_time)) / 2;
-			dely = ((mlx->dir_y * frame_time) + (-mlx->dir_x * frame_time)) / 2;
-		}
-		else if (mlx->keys[D] == 1)
-		{
-			delx = ((mlx->dir_x * frame_time) + (-mlx->dir_x * frame_time)) / 2;
-			dely = ((mlx->dir_y * frame_time) + (-mlx->dir_y * frame_time)) / 2;
-		}
-		else if (mlx->keys[S] == 1)
-		{
-			delx = 0.0;
-			dely = 0.0;
-		}
-		else
-		{
-			delx = mlx->dir_x * frame_time;
-			dely = mlx->dir_y * frame_time;
-		}
-	}
+		m_forward(mlx, &delx, &dely, frame_time);
 	if (mlx->keys[A] == 1)
-	{
-		if (mlx->keys[W] == 1)
-		{
-			delx = ((mlx->dir_y * frame_time) + (mlx->dir_x * frame_time)) / 2;
-			dely = ((-mlx->dir_x * frame_time) + (mlx->dir_y * frame_time)) / 2;
-		}
-		else if (mlx->keys[S] == 1)
-		{
-			delx = ((mlx->dir_y * frame_time) + (-mlx->dir_x * frame_time)) / 2;
-			dely = ((-mlx->dir_x * frame_time) + (-mlx->dir_y * frame_time)) / 2;
-		}
-		else if (mlx->keys[D] == 1)
-		{
-			delx = 0.0;
-			dely = 0.0;
-		}
-		else
-		{
-			delx = mlx->dir_y * frame_time;
-			dely = -mlx->dir_x * frame_time;
-		}
-	}
+		m_left(mlx, &delx, &dely, frame_time);
 	if (mlx->keys[S] == 1)
-	{
-		if (mlx->keys[A] == 1)
-		{
-			delx = ((-mlx->dir_x * frame_time) + (mlx->dir_y * frame_time)) / 2;
-			dely = ((-mlx->dir_y * frame_time) + (-mlx->dir_x * frame_time)) / 2;
-		}
-		else if (mlx->keys[D] == 1)
-		{
-			delx = ((-mlx->dir_x * frame_time) + (-mlx->dir_y * frame_time)) / 2;
-			dely = ((-mlx->dir_y * frame_time) + (mlx->dir_x * frame_time)) / 2;
-		}
-		else if (mlx->keys[W] == 1)
-		{
-			delx = 0.0;
-			dely = 0.0;
-		}
-		else
-		{
-			delx = -mlx->dir_x * frame_time;
-			dely = -mlx->dir_y * frame_time;
-		}
-	}
+		m_back(mlx, &delx, &dely, frame_time);
 	if (mlx->keys[D] == 1)
-	{
-		if (mlx->keys[W] == 1)
-		{
-			delx = ((-mlx->dir_y * frame_time) + (mlx->dir_x * frame_time)) / 2;
-			dely = ((mlx->dir_x * frame_time) + (mlx->dir_y * frame_time)) / 2;
-		}
-		else if (mlx->keys[S] == 1)
-		{
-			delx = ((-mlx->dir_x * frame_time) + (-mlx->dir_y * frame_time)) / 2;
-			dely = ((-mlx->dir_y * frame_time) + (mlx->dir_x * frame_time)) / 2;
-		}
-		else if (mlx->keys[A] == 1)
-		{
-			delx = 0.0;
-			dely = 0.0;
-		}
-		else
-		{
-			delx = -mlx->dir_y * frame_time;
-			dely = mlx->dir_x * frame_time;
-		}
-	}
+		m_right(mlx, &delx, &dely, frame_time);
 	if (delx > 0)
 		player_x = (mlx->pos_x + delx + 0.2);
 	else
