@@ -1,7 +1,7 @@
 NO ./pics/eagle.png
 SO ./pics/wood.png
 WE ./pics/greystone.png
-EA ./pics/redbrick.png
+EA ./pics/no_exist.png
 
 F 162,162,162
 C 90,150,215
