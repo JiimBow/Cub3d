@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/20 16:37:50 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/20 19:07:07 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,9 @@ void	set_all_textures(t_mlx *mlx, mlx_color *buf, mlx_image *img)
 
 int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 {
-	int		w;
-	int		h;
+	int	w;
+	int	h;
 
-	(void)mlx;
 	text->no_text = mlx_new_image_from_file(mlx->cont, map->no_path, &w, &h);
 	text->so_text = mlx_new_image_from_file(mlx->cont, map->so_path, &w, &h);
 	text->we_text = mlx_new_image_from_file(mlx->cont, map->we_path, &w, &h);
@@ -122,37 +121,10 @@ void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	mlx->pos_y = 17.5;
 	mlx->dir_x = 0;
 	mlx->dir_y = -1;
-	mlx->plane_x = 0.66;
+	mlx->plane_x = M_PI / 4;
 	mlx->plane_y = 0;
 	mlx->s_map = map;
 	mlx->s_text = text;
 	mlx->sp_move = 2.0;
 	mlx->sp_rot = 3.0;
 }
-
-// 0 pour vide, 1 pour vert, 2 pour rouge, 3 pour bleu et 4 pour blanc
-
-// NORD:	dir_x =  0, dir_y = -1, plane_x =  0.66, plane_y =     0;
-// SUD:		dir_x =  0, dir_y =  1, plane_x = -0.66, plane_y =     0;
-// EST:		dir_x =  1, dir_y =  0, plane_x =     0, plane_y =  0.66;
-// OUEST:	dir_x = -1, dir_y =  0, plane_x =     0, plane_y = -0.66;
-
-// le pos_X indique dans quelle ligne on se trouve
-// le pos_Y indique dans quelle colonne on se trouve
-
-	//NORD
-
-	// //SUD
-	// mlx->pos_x =     5.5; mlx->pos_y = 2.5;
-	// mlx->dir_x =       0; mlx->dir_y =   1;
-	// mlx->plane_x = -0.66; mlx->plane_y = 0;
-
-	// //EST
-	// mlx->pos_x = 2.5; mlx->pos_y =    4.5;
-	// mlx->dir_x =   1; mlx->dir_y =      0;
-	// mlx->plane_x = 0; mlx->plane_y = 0.66;
-
-	// //OUEST
-	// mlx->pos_x = 7.5; mlx->pos_y =     4.5;
-	// mlx->dir_x =  -1; mlx->dir_y =       0;
-	// mlx->plane_x = 0; mlx->plane_y = -0.66;
