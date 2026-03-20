@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/20 16:01:48 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/20 16:37:50 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,13 @@ void	set_all_textures(t_mlx *mlx, mlx_color *buf, mlx_image *img)
 	int	y;
 	int	i;
 
-	x = 0;
+	x = TEX_WIDTH;
 	i = 0;
-	while (x < TEX_WIDTH)
+	while (x-- > 0)
 	{
 		y = 0;
 		while (y < TEX_HEIGHT)
 			buf[i++] = mlx_get_image_pixel(mlx->cont, *img, x, y++);
-		x++;
 	}
 }
 

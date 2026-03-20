@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/20 16:00:56 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/20 16:28:47 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 	{
 		ray->tex_y = (int)ray->tex_pos & (TEX_HEIGHT - 1);
 		ray->tex_pos += step;
-		buf[i++] = col[ray->tex_x * TEX_HEIGHT + ray->tex_y];
+		buf[i++] = col[ray->tex_x * TEX_WIDTH + ray->tex_y];
 	}
 	mlx_set_image_region(mlx->cont, mlx->wall, x, ray->draw_start,
 		0, ray->line_height, buf + ray->draw_start);

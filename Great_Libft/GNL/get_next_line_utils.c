@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 09:59:36 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/16 14:10:23 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/20 16:41:04 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,9 @@ char	*gnl_strjoin(char *s1, char *s2)
 	tab = gnl_calloc((lens1 + gnl_strlen(s2)) + 1, sizeof(char));
 	if (!tab)
 		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
+	i = -1;
+	while (s1[++i])
 		tab[i] = s1[i];
-		i++;
-	}
 	i = 0;
 	while (s2 && s2[i])
 		tab[lens1++] = s2[i++];
