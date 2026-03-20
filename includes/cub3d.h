@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 19:42:31 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/20 15:25:08 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ typedef struct s_mlx
 	mlx_image				background;
 	mlx_image				wall;
 	mlx_image				north;
+	mlx_color				buf_no[TEX_HEIGHT * TEX_HEIGHT];
+	mlx_color				buf_so[TEX_HEIGHT * TEX_HEIGHT];
+	mlx_color				buf_we[TEX_HEIGHT * TEX_HEIGHT];
+	mlx_color				buf_ea[TEX_HEIGHT * TEX_HEIGHT];
 	struct timeval			last_time;
 	double					delta;
 	double					fps;

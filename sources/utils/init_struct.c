@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 19:42:17 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/20 16:01:48 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,23 @@ static int	put_color_value(mlx_color *color, char *value)
 	return (1);
 }
 
+void	set_all_textures(t_mlx *mlx, mlx_color *buf, mlx_image *img)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	x = 0;
+	i = 0;
+	while (x < TEX_WIDTH)
+	{
+		y = 0;
+		while (y < TEX_HEIGHT)
+			buf[i++] = mlx_get_image_pixel(mlx->cont, *img, x, y++);
+		x++;
+	}
+}
+
 int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 {
 	int		w;
@@ -75,6 +92,10 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	text->ea_text = mlx_new_image_from_file(mlx->cont, map->ea_path, &w, &h);
 	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text)
 		return (0);
+	set_all_textures(mlx, mlx->buf_no, &text->no_text);
+	set_all_textures(mlx, mlx->buf_so, &text->so_text);
+	set_all_textures(mlx, mlx->buf_we, &text->we_text);
+	set_all_textures(mlx, mlx->buf_ea, &text->ea_text);
 	if (!put_color_value(&text->f_color, map->f_value))
 		return (0);
 	if (!put_color_value(&text->c_color, map->c_value))

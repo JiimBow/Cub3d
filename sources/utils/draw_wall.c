@@ -6,39 +6,37 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/19 19:43:38 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/20 16:00:56 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	set_textures(t_mlx *mlx, t_text *text, t_wall *ray, int x)
+static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 {
-	mlx_color	buf;
+	mlx_color	buf[SCREEN_H];
+	mlx_color	*col;
 	int			i;
 	double		step;
 
 	step = 1.0 * TEX_HEIGHT / ray->line_height;
+	if (ray->step_y < 0 && ray->side == 1)
+		col = mlx->buf_no;
+	else if (ray->step_y > 0 && ray->side == 1)
+		col = mlx->buf_so;
+	if (ray->step_x < 0 && ray->side == 0)
+		col = mlx->buf_we;
+	else if (ray->step_x > 0 && ray->side == 0)
+		col = mlx->buf_ea;
 	i = ray->draw_start;
 	while (i < ray->draw_end)
 	{
 		ray->tex_y = (int)ray->tex_pos & (TEX_HEIGHT - 1);
 		ray->tex_pos += step;
-		if (ray->step_y < 0 && ray->side == 1)
-			buf = mlx_get_image_pixel(mlx->cont, text->no_text,
-					ray->tex_x, ray->tex_y);
-		else if (ray->step_y > 0 && ray->side == 1)
-			buf = mlx_get_image_pixel(mlx->cont, text->so_text,
-					ray->tex_x, ray->tex_y);
-		if (ray->step_x < 0 && ray->side == 0)
-			buf = mlx_get_image_pixel(mlx->cont, text->we_text,
-					ray->tex_x, ray->tex_y);
-		else if (ray->step_x > 0 && ray->side == 0)
-			buf = mlx_get_image_pixel(mlx->cont, text->ea_text,
-					ray->tex_x, ray->tex_y);
-		mlx_set_image_pixel(mlx->cont, mlx->wall, x, i, buf);
-		i++;
+		buf[i++] = col[ray->tex_x * TEX_HEIGHT + ray->tex_y];
 	}
+	mlx_set_image_region(mlx->cont, mlx->wall, x, ray->draw_start,
+		0, ray->line_height, buf + ray->draw_start);
 }
 
 static void	get_textures(t_mlx *mlx, t_wall *ray)
@@ -111,7 +109,7 @@ void	draw_wall(t_mlx *mlx)
 		send_ray_until_wall(mlx, &ray);
 		calculate_height_wall(&ray);
 		get_textures(mlx, &ray);
-		set_textures(mlx, mlx->s_text, &ray, x);
+		set_textures(mlx, &ray, x);
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
