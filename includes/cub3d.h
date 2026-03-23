@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/20 19:06:10 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/23 16:42:20 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_wall
 typedef struct s_map
 {
 	char		**map;
+	char		**old_map;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
@@ -130,11 +131,12 @@ int		error_message(int code);
 
 // Memory Management
 void	free_double_ptr(char **ptr);
+void	free_map(t_map *map);
 
 // PARSING
 int		check_element(t_map *map);
 int		is_element(char *map_line, t_list **elem_lst, t_map *map);
-int		map_is_valid(char *file, t_map *map);
+int		map_is_not_valid(char *file, t_map *map);
 t_list	*element_init_lst(void);
 int		is_space(char c);
 int		check_map(char **map);

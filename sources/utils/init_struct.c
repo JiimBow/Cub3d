@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/20 19:07:07 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/23 16:56:28 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,17 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	text->we_text = mlx_new_image_from_file(mlx->cont, map->we_path, &w, &h);
 	text->ea_text = mlx_new_image_from_file(mlx->cont, map->ea_path, &w, &h);
 	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text)
-		return (0);
+		return (error_message(2));
 	set_all_textures(mlx, mlx->buf_no, &text->no_text);
 	set_all_textures(mlx, mlx->buf_so, &text->so_text);
 	set_all_textures(mlx, mlx->buf_we, &text->we_text);
 	set_all_textures(mlx, mlx->buf_ea, &text->ea_text);
 	if (!put_color_value(&text->f_color, map->f_value))
-		return (0);
+		return (error_message(5));
 	if (!put_color_value(&text->c_color, map->c_value))
-		return (0);
-	return (1);
+		return (error_message(5));
+	mlx->win = mlx_new_window(mlx->cont, &mlx->info);
+	return (0);
 }
 
 void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
@@ -115,16 +116,15 @@ void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	mlx->old_time = 0;
 	gettimeofday(&mlx->last_time, NULL);
 	mlx->cont = mlx_init();
-	mlx->win = mlx_new_window(mlx->cont, &mlx->info);
 	mlx_set_fps_goal(mlx->cont, 90);
 	mlx->pos_x = 6.5;
-	mlx->pos_y = 17.5;
+	mlx->pos_y = 8.5;
 	mlx->dir_x = 0;
 	mlx->dir_y = -1;
 	mlx->plane_x = M_PI / 4;
 	mlx->plane_y = 0;
-	mlx->s_map = map;
 	mlx->s_text = text;
 	mlx->sp_move = 2.0;
 	mlx->sp_rot = 3.0;
+	mlx->s_map = map;
 }

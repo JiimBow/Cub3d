@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:09:29 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/19 11:51:27 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/23 13:00:17 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ int	check_map(char **map)
 
 	map_line = 0;
 	if (!first_row_is_valid(map, &map_line, 0))
-		return (0);
+		return (error_message(1));
 	while (map && map[map_line])
 	{
 		if (!check_row(map, map_line, 0))
-			return (0);
+			return (error_message(1));
 		map_line++;
 	}
-	return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/19 10:18:42 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/23 16:43:15 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,31 @@ static int	nbline_in_file(int fd, int *max_len)
 	return (result);
 }
 
+static void	get_map_from_file(int map_fd, char **map_copy, int max_len)
+{
+	char	*tab_line;
+	int		i;
+
+	i = 0;
+	while (true)
+	{
+		tab_line = get_next_line(map_fd);
+		if (!tab_line)
+		{
+			map_copy[i] = NULL;
+			return ;
+		}
+		map_copy[i] = malloc((max_len + 1) * sizeof(char));
+		ft_memset(map_copy[i], ' ', max_len);
+		ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line) + 1);
+		free(tab_line);
+		i++;
+	}
+}
+
 static char	**copy_map(char *map_name)
 {
 	char	**map_copy;
-	char	*tab_line;
 	int		map_fd;
 	int		i;
 	int		max_len;
@@ -52,39 +73,61 @@ static char	**copy_map(char *map_name)
 	if (map_fd < 0)
 		return (NULL);
 	i = 0;
-	while (true)
-	{
-		tab_line = get_next_line(map_fd);
-		if (!tab_line)
-		{
-			map_copy[i] = NULL;
-			break ;
-		}
-		map_copy[i] = malloc((max_len + 1) * sizeof(char));
-		ft_memset(map_copy[i], ' ', max_len);
-		ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line) + 1);
-		free(tab_line);
-		i++;
-	}
+	get_map_from_file(map_fd, map_copy, max_len);
 	close(map_fd);
 	return (map_copy);
 }
 
-int	map_is_valid(char *file, t_map *map)
+static int	check_filename(char *file, char *ext)
 {
-	map->map = copy_map(file);
-	if (!map->map)
-		return (0);
-	if (!check_element(map))
+	int	i;
+	int	j;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(file);
+	if (len < 5)
+		return (error_message(4));
+	while (file && file[i] && file[0] != '.')
 	{
-		free_double_ptr(map->map);
-		return (0);
+		if (file[i] == ext[0])
+		{
+			j = 0;
+			while (file[i] && file[i] == ext[j])
+			{
+				i++;
+				j++;
+			}
+			if (file[i] == '\0')
+				return (0);
+		}
+		i++;
 	}
-	if (!check_map(map->map))
+	return (error_message(3));
+}
+
+int	map_is_not_valid(char *file, t_map *map)
+{
+	char	*copy_name;
+
+	copy_name = ft_strrchr(file, '/') + 1;
+	if (check_filename(copy_name, ".cub"))
+		return (1);
+	map->old_map = copy_map(file);
+	if (!map->old_map)
+		return (error_message(4));
+	if (check_element(map))
 	{
-		free_double_ptr(map->map);
-		return (0);
+		free_double_ptr(map->old_map);
+		return (1);
 	}
-	// free_double_ptr(map->map);
-	return (1);
+	if (check_map(map->old_map))
+	{
+		free_double_ptr(map->old_map);
+		return (1);
+	}
+	map->map = map->old_map;
+	while (map->map[0][0] == '\0' || map->map[0][0] == '\n')
+		map->map++;
+	return (0);
 }
