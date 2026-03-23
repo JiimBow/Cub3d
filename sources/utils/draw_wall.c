@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 15:16:32 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/23 17:02:33 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 		buf[i++] = col[ray->tex_x * TEX_WIDTH + ray->tex_y];
 	}
 	mlx_set_image_region(mlx->cont, mlx->wall, x, ray->draw_start,
-		0, ray->line_height, buf + ray->draw_start);
+		1, ray->line_height, buf + ray->draw_start);
 }
 
 static void	get_textures(t_mlx *mlx, t_wall *ray)
@@ -99,7 +99,9 @@ void	draw_wall(t_mlx *mlx)
 	int		x;
 
 	mlx_destroy_image(mlx->cont, mlx->wall);
+	mlx_destroy_image(mlx->cont, mlx->minimap);
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
+	mlx->minimap = mlx_new_image(mlx->cont, SCREEN_W / 10, SCREEN_H / 10);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	x = 0;
@@ -113,6 +115,7 @@ void	draw_wall(t_mlx *mlx)
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
+	draw_minimap(mlx, &ray);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
 	ray.frame_time = (mlx->time - mlx->old_time) * 0.001;

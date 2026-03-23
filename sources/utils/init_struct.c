@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 16:56:28 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/23 17:03:26 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	mlx->s_text = text;
 	mlx->sp_move = 2.0;
 	mlx->sp_rot = 3.0;
+	mlx->minimap = mlx_new_image(mlx->cont, SCREEN_W / 10, SCREEN_H / 10);
 	mlx->s_map = map;
 }

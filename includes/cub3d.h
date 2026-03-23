@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 16:42:20 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/23 17:01:51 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_wall
 
 typedef struct s_map
 {
-	char		**map;
+	char		**map;mlx->buf_minimap[y * max + x].rgba = 0x0000001a;
 	char		**old_map;
 	char		*no_path;
 	char		*so_path;
@@ -101,11 +101,12 @@ typedef struct s_mlx
 	mlx_window_create_info	info;
 	mlx_image				background;
 	mlx_image				wall;
-	mlx_image				north;
-	mlx_color				buf_no[TEX_HEIGHT * TEX_HEIGHT];
-	mlx_color				buf_so[TEX_HEIGHT * TEX_HEIGHT];
-	mlx_color				buf_we[TEX_HEIGHT * TEX_HEIGHT];
-	mlx_color				buf_ea[TEX_HEIGHT * TEX_HEIGHT];
+	mlx_image				minimap;
+	mlx_color				buf_minimap[(SCREEN_H / 10) * (SCREEN_W / 10)];
+	mlx_color				buf_no[TEX_WIDTH * TEX_HEIGHT];
+	mlx_color				buf_so[TEX_WIDTH * TEX_HEIGHT];
+	mlx_color				buf_we[TEX_WIDTH * TEX_HEIGHT];
+	mlx_color				buf_ea[TEX_WIDTH * TEX_HEIGHT];
 	struct timeval			last_time;
 	double					delta;
 	double					fps;
@@ -154,4 +155,5 @@ void	key_up(int key, void *param);
 void	set_background(t_mlx *mlx, t_text *text);
 void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
 void	draw_wall(t_mlx *mlx);
+void	draw_minimap(t_mlx *mlx, t_wall *ray);
 long	get_delta_time(t_mlx *mlx);

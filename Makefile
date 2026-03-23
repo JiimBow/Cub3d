@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
+#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/23 16:56:57 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/23 17:01:14 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC			= $(DIR)main.c \
 				$(UTILS)set_background.c \
 				$(UTILS)init_struct.c \
 				$(UTILS)draw_wall.c \
+				$(UTILS)draw_minimap.c \
 				$(PARSING)map_is_valid.c \
 				$(PARSING)check_element.c \
 				$(PARSING)parse_element.c \
