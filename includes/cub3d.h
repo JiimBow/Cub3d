@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 17:01:51 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/23 17:06:02 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_wall
 
 typedef struct s_map
 {
-	char		**map;mlx->buf_minimap[y * max + x].rgba = 0x0000001a;
+	char		**map;
 	char		**old_map;
 	char		*no_path;
 	char		*so_path;
