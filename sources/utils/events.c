@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:06:03 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 13:52:51 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 16:22:36 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	key_down(int key, void *param)
 	if (key == DOWN_KEY)
 		mlx->sp_move /= 1.5;
 	if (mlx->sp_move < 1.0 || mlx->sp_move > 30.0)
-		mlx->sp_move = (mlx->sp_move < 1.0) * 1.0 + (mlx->sp_move > 30.0) * 30.0;
+		mlx->sp_move = (mlx->sp_move < 1.0) * 1.0
+			+ (mlx->sp_move > 30.0) * 30.0;
 	if (key == E)
 		mlx->zoom += 1;
 	if (key == R)
