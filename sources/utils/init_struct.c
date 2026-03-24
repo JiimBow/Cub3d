@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 16:57:43 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 17:20:21 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,11 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	ft_bzero(mlx, sizeof(*mlx));
 	ft_bzero(&mlx->info, sizeof(mlx->info));
 	ft_bzero(mlx->keys, 512);
+	ft_bzero(text, sizeof(*text));
+	if (set_player_start(mlx, map))
+		return (error_message(7));
+	mlx->s_text = text;
+	mlx->s_map = map;
 	mlx->info.height = 1080;
 	mlx->info.width = 1920;
 	mlx->info.title = "cub3D";
@@ -118,12 +123,8 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	gettimeofday(&mlx->last_time, NULL);
 	mlx->cont = mlx_init();
 	mlx_set_fps_goal(mlx->cont, 90);
-	if (set_player_start(mlx, map))
-		return (error_message(7));
-	mlx->s_text = text;
 	mlx->sp_move = 2.0;
 	mlx->sp_rot = 3.0;
-	mlx->s_map = map;
 	mlx->zoom = 4;
 	set_minimap(mlx);
 	return (0);

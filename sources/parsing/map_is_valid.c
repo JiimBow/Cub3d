@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 16:35:26 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 17:33:15 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	map_is_not_valid(char *file, t_map *map)
 {
 	char	*copy_name;
 
+	ft_bzero(map, sizeof(map));
 	copy_name = ft_strrchr(file, '/') + 1;
 	if (check_filename(copy_name, ".cub"))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 16:57:32 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 17:21:50 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		mlx_destroy_image(mlx->cont, mlx->s_text->ea_text);
 	if (mlx->wall)
 		mlx_destroy_image(mlx->cont, mlx->wall);
-	if (mlx->win)
+	if (mlx->minimap)
 		mlx_destroy_image(mlx->cont, mlx->minimap);
-	mlx_destroy_window(mlx->cont, mlx->win);
-	mlx_destroy_context(mlx->cont);
+	if (mlx->win)
+		mlx_destroy_window(mlx->cont, mlx->win);
+	if (mlx->cont)
+		mlx_destroy_context(mlx->cont);
 	free_map(map);
 }
 
@@ -44,7 +46,10 @@ int	main(int ac, char **av)
 	if (map_is_not_valid(av[1], &map))
 		return (1);
 	if (init_mlx_struct(&mlx, &map, &text))
+	{
+		free_map(&map);
 		return (1);
+	}
 	if (init_textures(&mlx, &text, &map))
 	{
 		destroy_image_window_context(&mlx, &map);
