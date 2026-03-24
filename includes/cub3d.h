@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 17:06:02 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:20:36 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 #define A 4
 #define S 22
 #define D 7
+#define E 8
+#define R 21
 #define RIGHT_KEY 79
 #define LEFT_KEY 80
 #define DOWN_KEY 81
@@ -114,6 +116,8 @@ typedef struct s_mlx
 	double					frame_count;
 	double					pos_x;
 	double					pos_y;
+	double					old_pos_x;
+	double					old_pos_y;
 	double					dir_x;
 	double					dir_y;
 	double					plane_x;
@@ -121,6 +125,7 @@ typedef struct s_mlx
 	double					time;
 	double					old_time;
 	int						keys[512];
+	int						zoom;
 	double					sp_move;
 	double					sp_rot;
 	t_map					*s_map;
@@ -155,5 +160,6 @@ void	key_up(int key, void *param);
 void	set_background(t_mlx *mlx, t_text *text);
 void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
 void	draw_wall(t_mlx *mlx);
-void	draw_minimap(t_mlx *mlx, t_wall *ray);
+void	set_minimap(t_mlx *mlx);
+void	put_minimap_on_map(t_mlx *mlx);
 long	get_delta_time(t_mlx *mlx);

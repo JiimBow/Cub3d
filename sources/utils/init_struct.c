@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 17:03:26 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 12:14:42 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	return (0);
 }
 
+
+
 void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 {
 	ft_bzero(mlx, sizeof(*mlx));
@@ -126,6 +128,9 @@ void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	mlx->s_text = text;
 	mlx->sp_move = 2.0;
 	mlx->sp_rot = 3.0;
-	mlx->minimap = mlx_new_image(mlx->cont, SCREEN_W / 10, SCREEN_H / 10);
 	mlx->s_map = map;
+	mlx->zoom = 4;
+	mlx->old_pos_x = mlx->pos_x;
+	mlx->old_pos_y = mlx->pos_y;
+	set_minimap(mlx);
 }

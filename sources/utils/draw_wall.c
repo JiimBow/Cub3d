@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 17:02:33 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 11:26:02 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,7 @@ void	draw_wall(t_mlx *mlx)
 	int		x;
 
 	mlx_destroy_image(mlx->cont, mlx->wall);
-	mlx_destroy_image(mlx->cont, mlx->minimap);
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
-	mlx->minimap = mlx_new_image(mlx->cont, SCREEN_W / 10, SCREEN_H / 10);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	x = 0;
@@ -115,7 +113,7 @@ void	draw_wall(t_mlx *mlx)
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
-	draw_minimap(mlx, &ray);
+	put_minimap_on_map(mlx);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
 	ray.frame_time = (mlx->time - mlx->old_time) * 0.001;

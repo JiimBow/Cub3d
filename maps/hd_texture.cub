@@ -1,10 +1,10 @@
-NO ./pics/eagle.png
-SO ./pics/wood.png
-WE ./pics/greystone.png
-EA ./pics/redbrick.png
+NO ./TEXTURES/desmumtz13-512x512.jpeg
+SO ./TEXTURES/desmumtz13-512x512.jpeg
+WE ./TEXTURES/desmumtz13-512x512.jpeg
+EA ./TEXTURES/desmumtz13-512x512.jpeg
 
-F 162,162,162
-C 90,150,215
+F 80,80,80
+C 0,0,100
 
 11111111111111111111
 11111111000001111111
