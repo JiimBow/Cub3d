@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_pos.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:55:06 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 16:54:07 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 18:08:48 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	void	set_horizontal_direction(char c, t_mlx *mlx, int line, int col)
 {
 	if (c == 'E')
 	{
-		mlx->pos_x = col - 0.5;
+		mlx->pos_x = col + 0.5;
 		mlx->pos_y = line + 0.5;
 		mlx->dir_x = 1;
 		mlx->dir_y = 0;
@@ -32,7 +32,7 @@ static	void	set_horizontal_direction(char c, t_mlx *mlx, int line, int col)
 	}
 	else if (c == 'W')
 	{
-		mlx->pos_x = col - 0.5;
+		mlx->pos_x = col + 0.5;
 		mlx->pos_y = line + 0.5;
 		mlx->dir_x = -1;
 		mlx->dir_y = 0;
@@ -45,7 +45,7 @@ static	void	set_vertical_direction(char c, t_mlx *mlx, int line, int col)
 {
 	if (c == 'N')
 	{
-		mlx->pos_x = col - 0.5;
+		mlx->pos_x = col + 0.5;
 		mlx->pos_y = line + 0.5;
 		mlx->dir_x = 0;
 		mlx->dir_y = -1;
@@ -54,7 +54,7 @@ static	void	set_vertical_direction(char c, t_mlx *mlx, int line, int col)
 	}
 	else if (c == 'S')
 	{
-		mlx->pos_x = col - 0.5;
+		mlx->pos_x = col + 0.5;
 		mlx->pos_y = line + 0.5;
 		mlx->dir_x = 0;
 		mlx->dir_y = 1;

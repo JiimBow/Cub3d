@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 16:53:49 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 18:37:09 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #define D 7
 #define E 8
 #define R 21
+#define M 16
 #define RIGHT_KEY 79
 #define LEFT_KEY 80
 #define DOWN_KEY 81
@@ -123,6 +124,7 @@ typedef struct s_mlx
 	double					sp_rot;
 	int						keys[512];
 	int						zoom;
+	int						lock_mouse;
 	t_map					*s_map;
 	t_text					*s_text;
 }	t_mlx;
@@ -132,8 +134,8 @@ int		error_message(int code);
 
 // Memory Management
 void	free_map(t_map *map);
-void	free_double_ptr(char **ptr);
 void	free_lst(t_list *lst);
+void	free_double_ptr(char **ptr);
 
 // PARSING
 int		is_space(char c);
@@ -149,8 +151,8 @@ int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
 int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
 
 // MOVING
-void	player_rotate(t_mlx *mlx, double frame_time, double speed);
 int		set_player_start(t_mlx *mlx, t_map *map);
+void	player_rotate(t_mlx *mlx, double frame_time, double speed);
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
 
 // GRAPHICS

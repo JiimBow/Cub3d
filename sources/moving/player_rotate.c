@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 22:03:15 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 17:18:57 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 18:35:24 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void	player_rotate(t_mlx *mlx, double frame_time, double speed)
 		mlx->plane_x = mlx->plane_x * cos(speed) - mlx->plane_y * sin(speed);
 		mlx->plane_y = old_plane_x * sin(speed) + mlx->plane_y * cos(speed);
 	}
-	mouse_rotate(mlx, old_dir_x, old_plane_x);
+	if (mlx->lock_mouse == 0)
+		mouse_rotate(mlx, old_dir_x, old_plane_x);
 }

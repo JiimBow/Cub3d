@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:06:03 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 16:22:36 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 18:37:13 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,19 @@ void	key_down(int key, void *param)
 		mlx->zoom -= 1;
 	if (mlx->zoom < 2 || mlx->zoom > 12)
 		mlx->zoom = (mlx->zoom < 2) * 2 + (mlx->zoom > 12) * 12;
+	if (key == M)
+	{
+		if (mlx->lock_mouse == 0)
+		{
+			mlx_mouse_show(mlx->cont);
+			mlx->lock_mouse = 1;
+		}
+		else
+		{
+			mlx_mouse_hide(mlx->cont);
+			mlx->lock_mouse = 0;
+		}
+	}
 }
 
 void	key_up(int key, void *param)
