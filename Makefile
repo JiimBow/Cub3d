@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/24 10:21:56 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/24 13:54:29 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -MMD -MP -O3 -march=native -flto -ffast-math #-fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g #-MMD -MP -O3 -march=native -flto -ffast-math #-fsanitize=address
 
 # COLOR
 GREEN   := \033[1;38;5;46m
@@ -25,7 +25,7 @@ UTILS		= $(DIR)utils/
 PARSING		= $(DIR)parsing/
 MOVING		= $(DIR)moving/
 
-# MINISHELL
+# CUB3D
 NAME		= cub3D
 HEADER		= -Iincludes \
 				-IGreat_Libft/Libft \
@@ -46,6 +46,7 @@ SRC			= $(DIR)main.c \
 				$(PARSING)check_element.c \
 				$(PARSING)parse_element.c \
 				$(PARSING)check_map.c \
+				$(PARSING)init_player_pos.c \
 				$(MOVING)player_move.c \
 				$(MOVING)player_rotate.c
 

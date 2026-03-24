@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_element.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:45:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 13:32:42 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 16:39:38 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	check_element(t_map *map)
 	while (map->old_map[tab_line])
 	{
 		if (still_element(map, &elem_lst, &nb_elem, tab_line))
+		{
+			free_lst(elem_lst);
 			return (1);
+		}
 		tab_line++;
 	}
 	return (0);

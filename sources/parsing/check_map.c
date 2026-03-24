@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:09:29 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/23 13:00:17 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 12:26:23 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 static int	is_game_char(char c)
 {
-	if (c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	static int	start_nb = 0;
+
+	if (c == '1')
 		return (1);
+	else if ((c == 'N' || c == 'S' || c == 'E' || c == 'W') && start_nb == 0)
+	{
+		start_nb++;
+		return (1);
+	}
 	return (0);
 }
 
@@ -52,6 +59,7 @@ static int	first_row_is_valid(char **map, int *map_line, int map_col)
 	is_first = 0;
 	while (map && map[(*map_line)])
 	{
+		map_col = 0;
 		while (map[(*map_line)][map_col])
 		{
 			if (is_space(map[(*map_line)][map_col])
@@ -73,29 +81,29 @@ static int	first_row_is_valid(char **map, int *map_line, int map_col)
 	return (0);
 }
 
-static int	check_row(char **map, int map_line, int map_col)
+static int	check_row(char **map, int line, int col)
 {
 	int	f_wall;
 
 	f_wall = 0;
-	while (map[map_line][map_col])
+	while (map[line][col])
 	{
-		if (is_space(map[map_line][map_col]))
-			map_col++;
-		else if (map[map_line][map_col] == '1' && f_wall == 0)
+		if (is_space(map[line][col]))
+			col++;
+		else if (map[line][col] == '1' && f_wall == 0)
 			f_wall = 1;
-		else if ((is_game_char(map[map_line][map_col]) && f_wall == 1))
-			map_col++;
-		else if (map[map_line][map_col] == '0' && f_wall == 1)
+		else if ((is_game_char(map[line][col]) && f_wall == 1))
+			col++;
+		else if (map[line][col] == '0' && f_wall == 1)
 		{
-			if (zero_check(map, map_line, map_col))
-				map_col++;
+			if (zero_check(map, line, col))
+				col++;
 			else
 				return (0);
 		}
-		else if (map[map_line][map_col] == '\n'
-			&& map[map_line][map_col - 1] == '1')
-			map_col++;
+		else if (map[line][col] == '\n'
+			&& map[line][col - 1] == '1')
+			col++;
 		else
 			return (0);
 	}

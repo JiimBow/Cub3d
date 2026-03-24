@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/23 16:43:15 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:35:26 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,12 @@ int	map_is_not_valid(char *file, t_map *map)
 		return (error_message(4));
 	if (check_element(map))
 	{
-		free_double_ptr(map->old_map);
+		free_map(map);
 		return (1);
 	}
 	if (check_map(map->old_map))
 	{
-		free_double_ptr(map->old_map);
+		free_map(map);
 		return (1);
 	}
 	map->map = map->old_map;

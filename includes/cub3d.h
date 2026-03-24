@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 14:01:38 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 16:39:32 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int		error_message(int code);
 // Memory Management
 void	free_map(t_map *map);
 void	free_double_ptr(char **ptr);
+void	free_lst(t_list *lst);
 
 // PARSING
 int		is_space(char c);
@@ -149,6 +150,7 @@ void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
 
 // MOVING
 void	player_rotate(t_mlx *mlx, double frame_time, double speed);
+void	set_player_start(t_mlx *mlx, t_map *map);
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
 
 // GRAPHICS

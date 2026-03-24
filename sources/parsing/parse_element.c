@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:23:16 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/23 15:40:25 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 09:18:13 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	add_texture(t_map *map, char *map_line, int i)
 
 	tmp_path = ft_substr(map_line, 1, ft_strlen(map_line) - 1);
 	if (!ft_strncmp(map_line, "F", 1) || !ft_strncmp(map_line, "C", 1))
-		while (tmp_path[i] == ' ')
+		while (tmp_path[i] && tmp_path[i] == ' ')
 			i++;
 	else
-		while (tmp_path[i] != '.')
+		while (tmp_path[i] && tmp_path[i] != '.')
 			i++;
 	tmp_path[ft_strlen(tmp_path) - 1] = '\0';
 	if (!ft_strncmp(map_line, "NO", 2))
