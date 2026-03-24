@@ -6,7 +6,7 @@
 #    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/24 13:45:23 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/24 13:46:21 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC			= $(DIR)main.c \
 				$(PARSING)check_element.c \
 				$(PARSING)parse_element.c \
 				$(PARSING)check_map.c \
+				$(PARSING)init_player_pos.c \
 				$(MOVING)player_move.c \
 				$(MOVING)player_rotate.c
 

@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 13:45:29 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 13:46:27 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	free_lst(t_list *lst);
 // PARSING
 int		check_element(t_map *map);
 int		is_element(char *map_line, t_list **elem_lst, t_map *map);
-int		map_is_not_valid(char *file, t_map *map);
+int		map_is_not_valid(char *file, t_map *map, t_mlx *mlx);
 t_list	*element_init_lst(void);
 int		is_space(char c);
 int		check_map(char **map);
@@ -151,6 +151,7 @@ int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 
 //MOVING
+void	set_player_start(t_mlx *mlx);
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
 void	player_rotate(t_mlx *mlx, double frame_time, double speed);
 

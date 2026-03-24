@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:45:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 09:14:10 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 09:33:15 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	still_element(t_map *map, t_list **elem_lst, int *nb_elem, int tab_line)
 		{
 			if (is_element(map->old_map[tab_line], elem_lst, map))
 			{
-				ft_bzero(map->old_map[tab_line], ft_strlen(map->old_map[tab_line]));
+				ft_bzero(map->old_map[tab_line],
+					ft_strlen(map->old_map[tab_line]));
 				(*nb_elem)++;
 				break ;
 			}
