@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 13:46:40 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:37:25 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	return (0);
 }
 
-
-
 void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 {
 	ft_bzero(mlx, sizeof(*mlx));
@@ -119,10 +117,7 @@ void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	gettimeofday(&mlx->last_time, NULL);
 	mlx->cont = mlx_init();
 	mlx_set_fps_goal(mlx->cont, 90);
-	// mlx->pos_x = 6.5;
-	// mlx->pos_y = 8.5;
-	// mlx->dir_x = 0;
-	// mlx->dir_y = -1;
+	set_player_start(mlx, map);
 	mlx->plane_x = M_PI / 4;
 	mlx->plane_y = 0;
 	mlx->s_text = text;

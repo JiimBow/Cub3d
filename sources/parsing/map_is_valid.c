@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 12:26:38 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:35:26 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static int	check_filename(char *file, char *ext)
 	return (error_message(3));
 }
 
-int	map_is_not_valid(char *file, t_map *map, t_mlx *mlx)
+int	map_is_not_valid(char *file, t_map *map)
 {
 	char	*copy_name;
 
@@ -129,6 +129,5 @@ int	map_is_not_valid(char *file, t_map *map, t_mlx *mlx)
 	map->map = map->old_map;
 	while (map->map[0][0] == '\0' || map->map[0][0] == '\n')
 		map->map++;
-	set_player_start(mlx);
 	return (0);
 }

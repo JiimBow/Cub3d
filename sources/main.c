@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 13:46:37 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:35:41 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (error_message(0));
-	if (map_is_not_valid(av[1], &map, &mlx))
+	if (map_is_not_valid(av[1], &map))
 		return (1);
 	init_mlx_struct(&mlx, &map, &text);
 	if (init_textures(&mlx, &text, &map) == 1)

@@ -6,12 +6,12 @@
 #    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/24 13:46:21 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/24 13:54:29 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -MMD -MP -O3 -march=native -flto -ffast-math #-fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g #-MMD -MP -O3 -march=native -flto -ffast-math #-fsanitize=address
 
 # COLOR
 GREEN   := \033[1;38;5;46m

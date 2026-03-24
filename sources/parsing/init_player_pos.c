@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:55:06 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 12:25:02 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:31:41 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,22 @@ static	void	set_vertical_direction(char c, t_mlx *mlx, int line, int col)
 	}
 }
 
-void	set_player_start(t_mlx *mlx)
+void	set_player_start(t_mlx *mlx, t_map *map)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (mlx->s_map->map[y])
+	while (map->map[y])
 	{
 		x = 0;
-		while (mlx->s_map->map[y][x])
+		while (map->map[y][x])
 		{
-			if (is_start_char(mlx->s_map->map[y][x]))
+			if (is_start_char(map->map[y][x]))
 			{
-				set_vertical_direction(mlx->s_map->map[y][x], mlx, y, x);
-				set_horizontal_direction(mlx->s_map->map[y][x], mlx, y, x);
+				set_vertical_direction(map->map[y][x], mlx, y, x);
+				set_horizontal_direction(map->map[y][x], mlx, y, x);
+				return ;
 			}
 			x++;
 		}
