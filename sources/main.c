@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/23 17:02:24 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 13:45:51 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		mlx_destroy_image(mlx->cont, mlx->s_text->ea_text);
 	if (mlx->wall)
 		mlx_destroy_image(mlx->cont, mlx->wall);
-	mlx_destroy_image(mlx->cont, mlx->minimap);
-	mlx_destroy_window(mlx->cont, mlx->win);
+	if (mlx->win)
+		mlx_destroy_image(mlx->cont, mlx->minimap);
+	mlx_destroy_window(mlx->cont, mlx->win);	
 	mlx_destroy_context(mlx->cont);
 	free_map(map);
 }

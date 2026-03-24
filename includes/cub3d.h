@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 12:20:36 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 13:45:29 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int		error_message(int code);
 // Memory Management
 void	free_double_ptr(char **ptr);
 void	free_map(t_map *map);
+void	free_lst(t_list *lst);
 
 // PARSING
 int		check_element(t_map *map);

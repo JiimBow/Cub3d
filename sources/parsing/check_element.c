@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:45:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/23 16:47:03 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 09:14:10 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	check_element(t_map *map)
 	while (map->old_map[tab_line])
 	{
 		if (still_element(map, &elem_lst, &nb_elem, tab_line))
+		{
+			free_lst(elem_lst);
 			return (1);
+		}
 		tab_line++;
 	}
 	return (0);

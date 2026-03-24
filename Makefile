@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/24 10:21:56 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/24 13:45:23 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ UTILS		= $(DIR)utils/
 PARSING		= $(DIR)parsing/
 MOVING		= $(DIR)moving/
 
-# MINISHELL
+# CUB3D
 NAME		= cub3D
 HEADER		= -Iincludes \
 				-IGreat_Libft/Libft \
