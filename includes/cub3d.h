@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 12:20:36 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 14:01:38 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,12 @@
 #define TEX_WIDTH 64
 #define M_PI 3.14159265358979323846
 #define RGB_RED 0xff0000ff
-#define RGB_GREEN 0x4bff00ff
-#define RGB_BLUE 0x0000ffff
-#define RGB_WHITE 0xffffffff
-#define RGB_YELLOW 0xffff00ff
-#define SKY 0x5a96d7ff
-#define GROUND 0xa2a2a2ff
 
 typedef struct s_wall
 {
+	int			tex_x;
+	int			tex_y;
+	int			step;
 	int			side;
 	int			map_x;
 	int			map_y;
@@ -69,9 +66,7 @@ typedef struct s_wall
 	double		perp_wall_dist;
 	double		wall_x;
 	double		tex_pos;
-	int			tex_x;
-	int			tex_y;
-	int			step;
+
 }	t_wall;
 
 typedef struct s_map
@@ -124,10 +119,10 @@ typedef struct s_mlx
 	double					plane_y;
 	double					time;
 	double					old_time;
-	int						keys[512];
-	int						zoom;
 	double					sp_move;
 	double					sp_rot;
+	int						keys[512];
+	int						zoom;
 	t_map					*s_map;
 	t_text					*s_text;
 }	t_mlx;
@@ -136,30 +131,39 @@ typedef struct s_mlx
 int		error_message(int code);
 
 // Memory Management
-void	free_double_ptr(char **ptr);
 void	free_map(t_map *map);
+void	free_double_ptr(char **ptr);
 
 // PARSING
-int		check_element(t_map *map);
-int		is_element(char *map_line, t_list **elem_lst, t_map *map);
-int		map_is_not_valid(char *file, t_map *map);
-t_list	*element_init_lst(void);
 int		is_space(char c);
 int		check_map(char **map);
-int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
+t_list	*element_init_lst(void);
+int		check_element(t_map *map);
+int		map_is_not_valid(char *file, t_map *map);
+int		is_element(char *map_line, t_list **elem_lst, t_map *map);
+
+// INITIALIZE
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
+int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
+void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
 
-//MOVING
-int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
+// MOVING
 void	player_rotate(t_mlx *mlx, double frame_time, double speed);
+int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
 
+// GRAPHICS
+void	draw_wall(t_mlx *mlx);
 void	update_frame(void *param);
 void	window_hook(int event, void *par);
-void	key_down(int key, void *param);
-void	key_up(int key, void *param);
 void	set_background(t_mlx *mlx, t_text *text);
-void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
-void	draw_wall(t_mlx *mlx);
+
+// MINIMAP
 void	set_minimap(t_mlx *mlx);
 void	put_minimap_on_map(t_mlx *mlx);
+
+// KEY
+void	key_up(int key, void *param);
+void	key_down(int key, void *param);
+
+// TIME
 long	get_delta_time(t_mlx *mlx);

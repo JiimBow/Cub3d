@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_element.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:45:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/23 16:47:03 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 13:32:42 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	still_element(t_map *map, t_list **elem_lst, int *nb_elem, int tab_line)
 		{
 			if (is_element(map->old_map[tab_line], elem_lst, map))
 			{
-				ft_bzero(map->old_map[tab_line], ft_strlen(map->old_map[tab_line]));
+				ft_bzero(map->old_map[tab_line],
+					ft_strlen(map->old_map[tab_line]));
 				(*nb_elem)++;
 				break ;
 			}
