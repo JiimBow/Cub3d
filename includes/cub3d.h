@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 16:39:32 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:53:49 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,11 @@ int		is_element(char *map_line, t_list **elem_lst, t_map *map);
 // INITIALIZE
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
-void	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
+int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
 
 // MOVING
 void	player_rotate(t_mlx *mlx, double frame_time, double speed);
-void	set_player_start(t_mlx *mlx, t_map *map);
+int		set_player_start(t_mlx *mlx, t_map *map);
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
 
 // GRAPHICS

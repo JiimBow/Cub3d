@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:55:06 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 16:31:41 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:54:07 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static	void	set_horizontal_direction(char c, t_mlx *mlx, int line, int col)
 		mlx->pos_y = line + 0.5;
 		mlx->dir_x = 1;
 		mlx->dir_y = 0;
+		mlx->plane_x = 0;
+		mlx->plane_y = M_PI / 4;
 	}
 	else if (c == 'W')
 	{
@@ -34,6 +36,8 @@ static	void	set_horizontal_direction(char c, t_mlx *mlx, int line, int col)
 		mlx->pos_y = line + 0.5;
 		mlx->dir_x = -1;
 		mlx->dir_y = 0;
+		mlx->plane_x = 0;
+		mlx->plane_y = -(M_PI / 4);
 	}
 }
 
@@ -45,6 +49,8 @@ static	void	set_vertical_direction(char c, t_mlx *mlx, int line, int col)
 		mlx->pos_y = line + 0.5;
 		mlx->dir_x = 0;
 		mlx->dir_y = -1;
+		mlx->plane_x = M_PI / 4;
+		mlx->plane_y = 0;
 	}
 	else if (c == 'S')
 	{
@@ -52,10 +58,12 @@ static	void	set_vertical_direction(char c, t_mlx *mlx, int line, int col)
 		mlx->pos_y = line + 0.5;
 		mlx->dir_x = 0;
 		mlx->dir_y = 1;
+		mlx->plane_x = -(M_PI / 4);
+		mlx->plane_y = 0;
 	}
 }
 
-void	set_player_start(t_mlx *mlx, t_map *map)
+int	set_player_start(t_mlx *mlx, t_map *map)
 {
 	int	x;
 	int	y;
@@ -70,10 +78,12 @@ void	set_player_start(t_mlx *mlx, t_map *map)
 			{
 				set_vertical_direction(map->map[y][x], mlx, y, x);
 				set_horizontal_direction(map->map[y][x], mlx, y, x);
-				return ;
+				map->map[y][x] = '0';
+				return (0);
 			}
 			x++;
 		}
 		y++;
 	}
+	return (1);
 }

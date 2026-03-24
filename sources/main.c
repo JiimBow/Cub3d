@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 16:35:41 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:57:32 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	main(int ac, char **av)
 		return (error_message(0));
 	if (map_is_not_valid(av[1], &map))
 		return (1);
-	init_mlx_struct(&mlx, &map, &text);
-	if (init_textures(&mlx, &text, &map) == 1)
+	if (init_mlx_struct(&mlx, &map, &text))
+		return (1);
+	if (init_textures(&mlx, &text, &map))
 	{
 		destroy_image_window_context(&mlx, &map);
 		return (1);
 	}
-	set_background(&mlx, &text);
 	mlx.wall = mlx_new_image(mlx.cont, SCREEN_W, SCREEN_H);
 	mlx_on_event(mlx.cont, mlx.win, MLX_KEYDOWN, key_down, &mlx);
 	mlx_on_event(mlx.cont, mlx.win, MLX_KEYUP, key_up, &mlx);
