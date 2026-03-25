@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 18:36:17 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/25 12:07:59 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 
 int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 {
-	ft_bzero(mlx, sizeof(*mlx));
-	ft_bzero(&mlx->info, sizeof(mlx->info));
+	ft_bzero(mlx, sizeof(t_mlx));
+	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
 	ft_bzero(mlx->keys, 512);
-	ft_bzero(text, sizeof(*text));
+	ft_bzero(text, sizeof(t_text));
 	if (set_player_start(mlx, map))
 		return (error_message(7));
 	mlx->s_text = text;

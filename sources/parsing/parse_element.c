@@ -6,23 +6,28 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:23:16 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 09:18:13 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/25 10:17:24 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	add_texture(t_map *map, char *map_line, int i)
+static int	add_texture(t_map *map, char *map_line, int i)
 {
 	char	*tmp_path;
 
 	tmp_path = ft_substr(map_line, 1, ft_strlen(map_line) - 1);
 	if (!ft_strncmp(map_line, "F", 1) || !ft_strncmp(map_line, "C", 1))
-		while (tmp_path[i] && tmp_path[i] == ' ')
+		while (tmp_path[i] && !ft_isdigit(tmp_path[i]))
 			i++;
 	else
 		while (tmp_path[i] && tmp_path[i] != '.')
 			i++;
+	if (tmp_path[i] == '\0')
+	{
+		free(tmp_path);
+		return (0);
+	}
 	tmp_path[ft_strlen(tmp_path) - 1] = '\0';
 	if (!ft_strncmp(map_line, "NO", 2))
 		map->no_path = ft_strdup(tmp_path + i);
@@ -37,6 +42,7 @@ static void	add_texture(t_map *map, char *map_line, int i)
 	else if (!ft_strncmp(map_line, "C", 1))
 		map->c_value = ft_strdup(tmp_path + i);
 	free(tmp_path);
+	return (1);
 }
 
 static int	first_node(t_list **elem_lst, char *content, int len_content)
@@ -87,7 +93,8 @@ int	is_element(char *map_line, t_list **elem_lst, t_map *map)
 	{
 		if (ft_strncmp(map_line, tmp->content, ft_strlen(tmp->content)) == 0)
 		{
-			add_texture(map, map_line, 0);
+			if (!add_texture(map, map_line, 0))
+				return (0);
 			remove_node(elem_lst, tmp->content);
 			return (1);
 		}
