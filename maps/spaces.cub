@@ -1,14 +1,14 @@
 
-NO          ./pics/eagle.png
+NO          ./pics/north_texture.png
 
 
-SO                            ./pics/wood.png
+SO                            ./pics/south_texture.png
 
 
-WE                               ./pics/greystone.png
+WE                               ./pics/west_texture.png
 
 
-EA                         ./pics/redbrick.png
+EA                         ./pics/east_texture.png
 
 
 F                162,162,162

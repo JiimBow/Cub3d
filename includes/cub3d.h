@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 19:20:18 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/24 23:39:51 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 
 #define SCREEN_W 1920
 #define SCREEN_H 1080
-#define TEX_HEIGHT 64
-#define TEX_WIDTH 64
+#define TEX_HEIGHT 512
+#define TEX_WIDTH 512
 #define M_PI 3.14159265358979323846
 #define RGB_RED 0xff0000ff
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
+#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/24 17:33:53 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/24 23:15:12 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ MLX_DIR		= mlx/
 UTILS		= $(DIR)utils/
 PARSING		= $(DIR)parsing/
 MOVING		= $(DIR)moving/
+GRAPHIC		= $(DIR)graphic/
 
 # CUB3D
 NAME		= cub3D
@@ -36,12 +37,12 @@ HEADER		= -Iincludes \
 SRC			= $(DIR)main.c \
 				$(UTILS)error_management.c \
 				$(UTILS)free_memory.c \
-				$(UTILS)fps_calculator.c \
 				$(UTILS)events.c \
-				$(UTILS)set_background.c \
 				$(UTILS)init_struct.c \
-				$(UTILS)draw_wall.c \
-				$(UTILS)minimap.c \
+				$(GRAPHIC)update_frame.c \
+				$(GRAPHIC)set_background.c \
+				$(GRAPHIC)draw_wall.c \
+				$(GRAPHIC)minimap.c \
 				$(PARSING)map_is_valid.c \
 				$(PARSING)check_element.c \
 				$(PARSING)parse_element.c \

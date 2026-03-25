@@ -1,7 +1,7 @@
-NO ./pics/eagle.png
-SO ./pics/wood.png
-WE ./pics/greystone.png
-EA ./pics/redbrick.png
+NO ./pics/north_texture.png
+SO ./pics/south_texture.png
+WE ./pics/west_texture.png
+EA ./pics/east_texture.png
 
 F 				
 C 90,150,215

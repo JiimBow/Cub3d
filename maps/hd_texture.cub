@@ -1,7 +1,7 @@
-NO ./TEXTURES/desmumtz13-512x512.jpeg
-SO ./TEXTURES/desmumtz13-512x512.jpeg
-WE ./TEXTURES/desmumtz13-512x512.jpeg
-EA ./TEXTURES/desmumtz13-512x512.jpeg
+NO ./pics/desmumtz13-512x512.jpeg
+SO ./pics/desmumtz13-512x512.jpeg
+WE ./pics/desmumtz13-512x512.jpeg
+EA ./pics/desmumtz13-512x512.jpeg
 
 F 80,80,80
 C 0,0,100

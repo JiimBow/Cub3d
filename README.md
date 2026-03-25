@@ -1,6 +1,6 @@
 <span style="color:gold">*This project has been created as part of the 42 curriculum by jodone & mgarnier.*</span>
 
-# <h1 align="center"><p style="font-size: 100px;"><span style="color:gold">CUB</span><img src="images/gold-and-white-3d.png" width="80"></h1>
+# <h1 align="center"><p style="font-size: 90px;"><span style="color:gold">CUB</span><img src="images/gold-and-white-3d.png" width="70"></h1>
 
 ## <span style="color:green">Description</span>
 
@@ -20,29 +20,22 @@ There were several challenges we had to overcome:
 
 ### Movements:
 
-`W` move forward
+-	`W` move forward
+-	`S` move backward
+-	`A` move left
+-	`D` move right
 
-`S` move backward
-
-`A` move left
-
-`D` move right
-
-`LEFT_KEY` rotate left
-
-`RIGHT_KEY` rotate right
+-	`LEFT_KEY`  rotate left
+-	`RIGHT_KEY` rotate right
 
 ### Settings:
 
-`UP_KEY` increase speed
+-	`UP_KEY`   increase speed
+-	`DOWN_KEY` decrease speed
+-	`E` increase the minimap size
+-	`R` decrease the minimap size
 
-`DOWN_KEY` decrease speed
-
-`E` increase the minimap size
-
-`R` decrease the minimap size
-
-`M` toggle mouse on/off
+-	`M` toggle mouse on/off
 
 ## <span style="color:green">Resources</span>
 
