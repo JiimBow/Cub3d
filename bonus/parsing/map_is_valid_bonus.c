@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_is_valid.c                                     :+:      :+:    :+:   */
+/*   map_is_valid_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/25 17:26:22 by jodone           ###   ########.fr       */
+/*   Created: 2026/03/25 14:30:56 by jodone            #+#    #+#             */
+/*   Updated: 2026/03/25 17:25:03 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d_bonus.h>
 
 static int	nbline_in_file(int fd, int *max_len)
 {
@@ -33,7 +33,7 @@ static int	nbline_in_file(int fd, int *max_len)
 	return (result);
 }
 
-static int	get_map_from_file(int map_fd, char **map_copy, int max_len)
+static void	get_map_from_file(int map_fd, char **map_copy, int max_len)
 {
 	char	*tab_line;
 	int		i;
@@ -49,13 +49,12 @@ static int	get_map_from_file(int map_fd, char **map_copy, int max_len)
 		}
 		map_copy[i] = malloc((max_len + 1) * sizeof(char));
 		if (!map_copy)
-			return (1);
+			return ;
 		ft_memset(map_copy[i], ' ', max_len);
 		ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line) + 1);
 		free(tab_line);
 		i++;
 	}
-	return (0);
 }
 
 static char	**copy_map(char *map_name)
@@ -71,14 +70,14 @@ static char	**copy_map(char *map_name)
 		return (NULL);
 	i = nbline_in_file(map_fd, &max_len);
 	map_copy = ft_calloc(i + 1, sizeof(char *));
+	if (!map_copy)
+		return (NULL);
 	close(map_fd);
 	map_fd = open(map_name, O_RDONLY);
 	if (map_fd < 0)
 		return (NULL);
 	i = 0;
 	get_map_from_file(map_fd, map_copy, max_len);
-	if (!map_copy)
-		return (NULL);
 	close(map_fd);
 	return (map_copy);
 }
@@ -116,8 +115,7 @@ int	map_is_not_valid(char *file, t_map *map)
 	char	*copy_name;
 
 	ft_bzero(map, sizeof(t_map));
-	char *slash = ft_strrchr(file, '/');
-	copy_name = slash ? slash + 1 : file;
+	copy_name = ft_strrchr(file, '/') + 1;
 	if (check_filename(copy_name, ".cub"))
 		return (1);
 	map->old_map = copy_map(file);

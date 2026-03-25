@@ -6,11 +6,25 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:45:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 16:39:38 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/25 14:37:24 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static t_list	*element_init_lst(void)
+{
+	t_list	*elem_lst;
+
+	elem_lst = NULL;
+	ft_lstadd_back(&elem_lst, ft_lstnew("NO"));
+	ft_lstadd_back(&elem_lst, ft_lstnew("SO"));
+	ft_lstadd_back(&elem_lst, ft_lstnew("WE"));
+	ft_lstadd_back(&elem_lst, ft_lstnew("EA"));
+	ft_lstadd_back(&elem_lst, ft_lstnew("F"));
+	ft_lstadd_back(&elem_lst, ft_lstnew("C"));
+	return (elem_lst);
+}
 
 int	is_space(char c)
 {

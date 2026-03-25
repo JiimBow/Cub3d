@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/25 17:26:10 by jodone           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #pragma once
 
 #include "../mlx/includes/mlx.h"
@@ -70,7 +58,7 @@ typedef struct s_wall
 
 }	t_wall;
 
-typedef struct s_map
+typedef struct	s_map
 {
 	char		**map;
 	char		**old_map;
@@ -82,7 +70,7 @@ typedef struct s_map
 	char		*c_value;
 }	t_map;
 
-typedef struct s_text
+typedef struct	s_text
 {
 	mlx_image	no_text;
 	mlx_image	so_text;
@@ -92,7 +80,13 @@ typedef struct s_text
 	mlx_color	c_color;
 }	t_text;
 
-typedef struct s_mlx
+typedef struct	s_sprite
+{
+	double	pos_x;
+	double	pos_y;
+}	t_sprite;
+
+typedef struct	s_mlx
 {
 	mlx_context				cont;
 	mlx_window				win;
@@ -127,6 +121,7 @@ typedef struct s_mlx
 	int						lock_mouse;
 	t_map					*s_map;
 	t_text					*s_text;
+	t_sprite				**spr;
 }	t_mlx;
 
 // ERROR
@@ -139,9 +134,9 @@ void	free_double_ptr(char **ptr);
 
 // PARSING
 int		is_space(char c);
+int		map_is_not_valid(char *file, t_map *map);
 int		check_map(char **map);
 int		check_element(t_map *map);
-int		map_is_not_valid(char *file, t_map *map);
 int		is_element(char *map_line, t_list **elem_lst, t_map *map);
 
 // INITIALIZE
