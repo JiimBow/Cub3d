@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:23:16 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/25 10:17:24 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/25 14:37:14 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,4 @@ int	is_element(char *map_line, t_list **elem_lst, t_map *map)
 		tmp = tmp->next;
 	}
 	return (0);
-}
-
-t_list	*element_init_lst(void)
-{
-	t_list	*elem_lst;
-
-	elem_lst = NULL;
-	ft_lstadd_back(&elem_lst, ft_lstnew("NO"));
-	ft_lstadd_back(&elem_lst, ft_lstnew("SO"));
-	ft_lstadd_back(&elem_lst, ft_lstnew("WE"));
-	ft_lstadd_back(&elem_lst, ft_lstnew("EA"));
-	ft_lstadd_back(&elem_lst, ft_lstnew("F"));
-	ft_lstadd_back(&elem_lst, ft_lstnew("C"));
-	return (elem_lst);
 }
