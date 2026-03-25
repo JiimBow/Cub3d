@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 23:39:51 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:58:02 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ typedef struct s_mlx
 	mlx_image				wall;
 	mlx_image				minimap;
 	mlx_color				buf_minimap[(SCREEN_H / 10) * (SCREEN_W / 10)];
-	mlx_color				buf_no[TEX_WIDTH * TEX_HEIGHT];
-	mlx_color				buf_so[TEX_WIDTH * TEX_HEIGHT];
-	mlx_color				buf_we[TEX_WIDTH * TEX_HEIGHT];
-	mlx_color				buf_ea[TEX_WIDTH * TEX_HEIGHT];
+	mlx_color				*buf_no;
+	mlx_color				*buf_so;
+	mlx_color				*buf_we;
+	mlx_color				*buf_ea;
 	struct timeval			last_time;
 	double					delta;
 	double					fps;

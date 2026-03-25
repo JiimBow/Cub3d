@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 17:21:50 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/25 17:01:47 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 {
+	if (mlx->buf_no)
+		free(mlx->buf_no);
+	if (mlx->buf_so)
+		free(mlx->buf_so);
+	if (mlx->buf_ea)
+		free(mlx->buf_ea);
+	if (mlx->buf_we)
+		free(mlx->buf_we);
 	if (mlx->background)
 		mlx_destroy_image(mlx->cont, mlx->background);
 	if (mlx->s_text->no_text)

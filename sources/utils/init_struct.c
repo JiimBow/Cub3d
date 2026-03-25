@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/25 12:07:59 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/25 17:08:06 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,12 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	text->ea_text = mlx_new_image_from_file(mlx->cont, map->ea_path, &w, &h);
 	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text)
 		return (error_message(2));
+	mlx->buf_no = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
+	mlx->buf_so = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
+	mlx->buf_ea = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
+	mlx->buf_we = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
+	if (!mlx->buf_no || !mlx->buf_so || !mlx->buf_ea || !mlx->buf_we)
+		return (error_message(8));
 	set_all_textures(mlx, mlx->buf_no, &text->no_text);
 	set_all_textures(mlx, mlx->buf_so, &text->so_text);
 	set_all_textures(mlx, mlx->buf_we, &text->we_text);
@@ -113,8 +119,8 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 		return (error_message(7));
 	mlx->s_text = text;
 	mlx->s_map = map;
-	mlx->info.height = 1080;
-	mlx->info.width = 1920;
+	mlx->info.height = SCREEN_H;
+	mlx->info.width = SCREEN_W;
 	mlx->info.title = "cub3D";
 	mlx->frame_count = 0;
 	mlx->fps_timer = 1.0;

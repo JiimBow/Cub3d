@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:37:55 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 16:54:44 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/25 17:06:34 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ int	error_message(int code)
 		ft_putstr_fd("Error\nGiven elements aren't correct\n", 2);
 	else if (code == 7)
 		ft_putstr_fd("Error\nNo player position given\n", 2);
+	else if (code == 8)
+		ft_putstr_fd("Error\nAllocation memory failed\n", 2);
 	return (1);
 }
