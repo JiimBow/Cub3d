@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/25 17:26:22 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/25 17:34:30 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	get_map_from_file(int map_fd, char **map_copy, int max_len)
 		if (!tab_line)
 		{
 			map_copy[i] = NULL;
-			return ;
+			return (1);
 		}
 		map_copy[i] = malloc((max_len + 1) * sizeof(char));
 		if (!map_copy)

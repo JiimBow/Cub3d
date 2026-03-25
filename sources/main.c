@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:30 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/25 17:01:47 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/25 18:05:51 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		free(mlx->buf_ea);
 	if (mlx->buf_we)
 		free(mlx->buf_we);
+	if (mlx->buf_do)
+		free(mlx->buf_do);
 	if (mlx->background)
 		mlx_destroy_image(mlx->cont, mlx->background);
 	if (mlx->s_text->no_text)
@@ -32,6 +34,8 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		mlx_destroy_image(mlx->cont, mlx->s_text->we_text);
 	if (mlx->s_text->ea_text)
 		mlx_destroy_image(mlx->cont, mlx->s_text->ea_text);
+	if (mlx->s_text->do_text)
+		mlx_destroy_image(mlx->cont, mlx->s_text->do_text);
 	if (mlx->wall)
 		mlx_destroy_image(mlx->cont, mlx->wall);
 	if (mlx->minimap)

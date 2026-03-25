@@ -76,6 +76,7 @@ typedef struct	s_text
 	mlx_image	so_text;
 	mlx_image	we_text;
 	mlx_image	ea_text;
+	mlx_image	do_text;
 	mlx_color	f_color;
 	mlx_color	c_color;
 }	t_text;
@@ -99,6 +100,7 @@ typedef struct	s_mlx
 	mlx_color				*buf_so;
 	mlx_color				*buf_we;
 	mlx_color				*buf_ea;
+	mlx_color				*buf_do;
 	struct timeval			last_time;
 	double					delta;
 	double					fps;

@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/25 14:16:05 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/25 18:06:12 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 {
+	if (mlx->buf_no)
+		free(mlx->buf_no);
+	if (mlx->buf_so)
+		free(mlx->buf_so);
+	if (mlx->buf_ea)
+		free(mlx->buf_ea);
+	if (mlx->buf_we)
+		free(mlx->buf_we);
+	if (mlx->buf_do)
+		free(mlx->buf_do);
 	if (mlx->background)
 		mlx_destroy_image(mlx->cont, mlx->background);
 	if (mlx->s_text->no_text)
@@ -24,6 +34,8 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		mlx_destroy_image(mlx->cont, mlx->s_text->we_text);
 	if (mlx->s_text->ea_text)
 		mlx_destroy_image(mlx->cont, mlx->s_text->ea_text);
+	if (mlx->s_text->do_text)
+		mlx_destroy_image(mlx->cont, mlx->s_text->do_text);
 	if (mlx->wall)
 		mlx_destroy_image(mlx->cont, mlx->wall);
 	if (mlx->minimap)

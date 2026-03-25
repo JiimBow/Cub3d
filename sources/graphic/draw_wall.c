@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 11:26:02 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/25 18:07:33 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 	double		step;
 
 	step = 1.0 * TEX_HEIGHT / ray->line_height;
-	if (ray->step_y < 0 && ray->side == 1)
+	if (mlx->s_map->map[ray->map_y][ray->map_x] == 'D')
+		col = mlx->buf_do;
+	else if (ray->step_y < 0 && ray->side == 1)
 		col = mlx->buf_no;
 	else if (ray->step_y > 0 && ray->side == 1)
 		col = mlx->buf_so;
-	if (ray->step_x < 0 && ray->side == 0)
+	else if (ray->step_x < 0 && ray->side == 0)
 		col = mlx->buf_we;
 	else if (ray->step_x > 0 && ray->side == 0)
 		col = mlx->buf_ea;
