@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 11:07:15 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 16:36:55 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,15 @@ typedef struct s_sprite
 	double	pos_y;
 }	t_sprite;
 
+typedef struct s_door
+{
+	int	pos_x;
+	int	pos_y;
+	int	second_x;
+	int	second_y;
+	int	open;
+}	t_door;
+
 typedef struct s_mlx
 {
 	mlx_context				cont;
@@ -136,6 +145,7 @@ typedef struct s_mlx
 	t_map					*s_map;
 	t_text					*s_text;
 	t_sprite				**spr;
+	t_door					*s_door;
 }	t_mlx;
 
 // ERROR
@@ -157,7 +167,7 @@ int		is_element(char *map_line, t_list **elem_lst, t_map *map);
 // INITIALIZE
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
-int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
+int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door);
 
 // MOVING
 int		set_player_start(t_mlx *mlx, t_map *map);

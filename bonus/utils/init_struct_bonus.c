@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 11:10:46 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 14:47:36 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,16 +115,18 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	return (0);
 }
 
-int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
+int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door)
 {
 	ft_bzero(mlx, sizeof(t_mlx));
 	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
 	ft_bzero(mlx->keys, 512);
 	ft_bzero(text, sizeof(t_text));
+	ft_bzero(door, sizeof(t_door));
 	if (set_player_start(mlx, map))
 		return (error_message(7));
 	mlx->s_text = text;
 	mlx->s_map = map;
+	mlx->s_door = door;
 	mlx->info.height = SCREEN_H;
 	mlx->info.width = SCREEN_W;
 	mlx->info.title = "cub3D";

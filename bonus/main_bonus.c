@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 11:07:41 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 14:48:21 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 
 static int	parse_main(char **av, t_mlx *mlx, t_map *map, t_text *text)
 {
+	t_door	door;
+
 	if (map_is_not_valid(av[1], map))
 		return (1);
-	if (init_mlx_struct(mlx, map, text))
+	if (init_mlx_struct(mlx, map, text, &door))
 	{
 		free_map(map);
 		return (1);
