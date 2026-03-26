@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   update_frame.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:02:47 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 23:49:42 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/26 10:32:19 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifdef BONUS
+	#include "cub3d_bonus.h"
+#else
+	#include "cub3d.h"
+#endif
 
 long	get_delta_time(t_mlx *mlx)
 {

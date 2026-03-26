@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_pos.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:55:06 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 18:08:48 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/26 10:32:55 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifdef BONUS
+	#include "cub3d_bonus.h"
+#else
+	#include "cub3d.h"
+#endif
 
 static int	is_start_char(char c)
 {

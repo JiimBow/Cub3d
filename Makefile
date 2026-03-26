@@ -6,12 +6,12 @@
 #    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/25 17:31:02 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/26 10:31:20 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -MMD -MP -O3 -march=native -flto -ffast-math
+CFLAGS		= -Wall -Wextra -Werror -g #-MMD -MP -O3 -march=native -flto -ffast-math
 
 # COLOR
 GREEN   := \033[1;38;5;46m
@@ -27,6 +27,9 @@ PARSING		= $(DIR)parsing/
 MOVING		= $(DIR)moving/
 GRAPHIC		= $(DIR)graphic/
 BONUS_PARS	= $(DIR_BONUS)parsing/
+BONUS_GRAPH	= $(DIR_BONUS)graphic/
+BONUS_MOV	= $(DIR_BONUS)moving/
+BONUS_UTILS	= $(DIR_BONUS)utils/
 
 # CUB3D
 NAME		= cub3D
@@ -50,25 +53,25 @@ SRC			= $(DIR)main.c \
 				$(PARSING)parse_element.c \
 				$(PARSING)check_map.c \
 				$(PARSING)init_player_pos.c \
-				$(MOVING)player_move.c \
-				$(MOVING)player_rotate.c
+				$(MOVING)player_rotate.c \
+				$(MOVING)player_move.c
 
 SRC_BONUS	= $(DIR_BONUS)main_bonus.c \
 				$(UTILS)error_management.c \
 				$(UTILS)free_memory.c \
 				$(UTILS)events.c \
-				$(UTILS)init_struct.c \
-				$(GRAPHIC)update_frame.c \
+				$(BONUS_UTILS)init_struct_bonus.c \
 				$(GRAPHIC)set_background.c \
-				$(GRAPHIC)draw_wall.c \
-				$(GRAPHIC)minimap.c \
+				$(BONUS_GRAPH)update_frame_bonus.c \
+				$(BONUS_GRAPH)minimap_bonus.c \
+				$(BONUS_GRAPH)draw_wall_bonus.c \
 				$(PARSING)check_element.c \
 				$(PARSING)parse_element.c \
-				$(PARSING)init_player_pos.c \
+				$(BONUS_PARS)init_player_pos_bonus.c \
 				$(BONUS_PARS)check_map_bonus.c \
 				$(BONUS_PARS)map_is_valid_bonus.c \
-				$(MOVING)player_move.c \
-				$(MOVING)player_rotate.c
+				$(MOVING)player_rotate.c \
+				$(BONUS_MOV)player_move_bonus.c
 
 OBJ			= $(SRC:$(DIR)%.c=$(OBJ_DIR)%.o)
 
@@ -85,7 +88,7 @@ $(NAME): $(MLX_DIR)libmlx.so $(OBJ) $(LIBFT)
 			@printf "${GREEN}\r[▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬] SUCCESS 100%%${RESET}\n"
 
 bonus: $(MLX_DIR)libmlx.so $(OBJ_BONUS) $(LIBFT)
-			@$(CC) $(CFLAGS) $(HEADER) $(OBJ_BONUS) -lm $(LIBFT) $(MLX_DIR)libmlx.so -lSDL2 -o $(NAME)
+			@$(CC) $(CFLAGS) $(HEADER) $(OBJ_BONUS) -lm $(LIBFT) $(MLX_DIR)libmlx.so -lSDL2 -DBONUS -o $(NAME)
 			@printf "${GREEN}\r[▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬] SUCCESS 100%%${RESET}\n"
 
 $(LIBFT):

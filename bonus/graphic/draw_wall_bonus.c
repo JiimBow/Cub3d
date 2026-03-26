@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_wall.c                                        :+:      :+:    :+:   */
+/*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 09:55:46 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 09:59:28 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 {
@@ -20,7 +20,9 @@ static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 	double		step;
 
 	step = 1.0 * TEX_HEIGHT / ray->line_height;
-	if (ray->step_y < 0 && ray->side == 1)
+	if (mlx->s_map->map[ray->map_y][ray->map_x] == 'D')
+		col = mlx->buf_do;
+	else if (ray->step_y < 0 && ray->side == 1)
 		col = mlx->buf_no;
 	else if (ray->step_y > 0 && ray->side == 1)
 		col = mlx->buf_so;

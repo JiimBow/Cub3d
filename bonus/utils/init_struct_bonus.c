@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 10:09:26 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 09:59:46 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x)
 {
@@ -88,18 +88,21 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	text->so_text = mlx_new_image_from_file(mlx->cont, map->so_path, &w, &h);
 	text->we_text = mlx_new_image_from_file(mlx->cont, map->we_path, &w, &h);
 	text->ea_text = mlx_new_image_from_file(mlx->cont, map->ea_path, &w, &h);
+	text->do_text = mlx_new_image_from_file(mlx->cont, "./pics/door.png", &w, &h);
 	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text)
 		return (error_message(2));
 	mlx->buf_no = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
 	mlx->buf_so = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
 	mlx->buf_ea = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
 	mlx->buf_we = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
-	if (!mlx->buf_no || !mlx->buf_so || !mlx->buf_ea || !mlx->buf_we)
+	mlx->buf_do = malloc(sizeof(mlx_color) * (TEX_HEIGHT * TEX_WIDTH));
+	if (!mlx->buf_no || !mlx->buf_so || !mlx->buf_ea || !mlx->buf_we || !mlx->buf_do)
 		return (error_message(8));
 	set_all_textures(mlx, mlx->buf_no, &text->no_text);
 	set_all_textures(mlx, mlx->buf_so, &text->so_text);
 	set_all_textures(mlx, mlx->buf_we, &text->we_text);
 	set_all_textures(mlx, mlx->buf_ea, &text->ea_text);
+	set_all_textures(mlx, mlx->buf_do, &text->do_text);
 	if (!put_color_value(&text->f_color, map->f_value))
 		return (error_message(5));
 	if (!put_color_value(&text->c_color, map->c_value))
@@ -133,6 +136,6 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	mlx->sp_rot = 3.0;
 	mlx->zoom = 4;
 	mlx->lock_mouse = 0;
-	map(mlx);
+	set_minimap(mlx);
 	return (0);
 }

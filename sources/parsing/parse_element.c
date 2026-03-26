@@ -6,11 +6,15 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:23:16 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/25 14:37:14 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 10:33:01 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifdef BONUS
+	#include "cub3d_bonus.h"
+#else
+	#include "cub3d.h"
+#endif
 
 static int	add_texture(t_map *map, char *map_line, int i)
 {

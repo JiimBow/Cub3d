@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:06:03 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/24 23:53:02 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/26 10:33:18 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifdef BONUS
+	#include "cub3d_bonus.h"
+#else
+	#include "cub3d.h"
+#endif
 
 void	toggle_mouse(t_mlx *mlx)
 {
