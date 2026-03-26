@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 10:09:26 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 10:53:22 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,6 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	mlx->sp_rot = 3.0;
 	mlx->zoom = 4;
 	mlx->lock_mouse = 0;
-	map(mlx);
+	set_minimap(mlx);
 	return (0);
 }

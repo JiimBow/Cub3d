@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 09:57:01 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 10:47:19 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int		error_message(int code);
 void	free_map(t_map *map);
 void	free_lst(t_list *lst);
 void	free_double_ptr(char **ptr);
+void	free_color(t_mlx *mlx);
 
 // PARSING
 int		is_space(char c);

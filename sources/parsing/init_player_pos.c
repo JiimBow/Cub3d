@@ -6,14 +6,14 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 11:55:06 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 10:32:55 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 10:55:46 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef BONUS
-	#include "cub3d_bonus.h"
+# include "cub3d_bonus.h"
 #else
-	#include "cub3d.h"
+# include "cub3d.h"
 #endif
 
 static int	is_start_char(char c)

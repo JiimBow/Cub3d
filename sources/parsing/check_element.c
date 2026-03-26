@@ -6,14 +6,14 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:45:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 10:32:47 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 10:55:38 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef BONUS
-	#include "cub3d_bonus.h"
+# include "cub3d_bonus.h"
 #else
-	#include "cub3d.h"
+# include "cub3d.h"
 #endif
 
 static t_list	*element_init_lst(void)

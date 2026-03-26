@@ -6,14 +6,14 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 12:22:36 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 10:32:06 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 10:55:24 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef BONUS
-	#include "cub3d_bonus.h"
+# include "cub3d_bonus.h"
 #else
-	#include "cub3d.h"
+# include "cub3d.h"
 #endif
 
 void	set_minimap(t_mlx *mlx)

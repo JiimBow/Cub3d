@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
+/*   Updated: 2026/03/26 11:07:15 by jodone           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include "../mlx/includes/mlx.h"
@@ -58,7 +70,7 @@ typedef struct s_wall
 
 }	t_wall;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char		**map;
 	char		**old_map;
@@ -70,7 +82,7 @@ typedef struct	s_map
 	char		*c_value;
 }	t_map;
 
-typedef struct	s_text
+typedef struct s_text
 {
 	mlx_image	no_text;
 	mlx_image	so_text;
@@ -81,13 +93,13 @@ typedef struct	s_text
 	mlx_color	c_color;
 }	t_text;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	double	pos_x;
 	double	pos_y;
 }	t_sprite;
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	mlx_context				cont;
 	mlx_window				win;
@@ -133,6 +145,7 @@ int		error_message(int code);
 void	free_map(t_map *map);
 void	free_lst(t_list *lst);
 void	free_double_ptr(char **ptr);
+void	free_color(t_mlx *mlx);
 
 // PARSING
 int		is_space(char c);

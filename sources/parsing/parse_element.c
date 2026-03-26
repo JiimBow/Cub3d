@@ -6,32 +6,39 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:23:16 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 10:33:01 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 11:04:20 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef BONUS
-	#include "cub3d_bonus.h"
+# include "cub3d_bonus.h"
 #else
-	#include "cub3d.h"
+# include "cub3d.h"
 #endif
+
+static int	skip_to_path(char *map_line, char *tmp_path, int *i)
+{
+	if (!ft_strncmp(map_line, "F", 1) || !ft_strncmp(map_line, "C", 1))
+		while (tmp_path[(*i)] && !ft_isdigit(tmp_path[(*i)]))
+			(*i)++;
+	else
+		while (tmp_path[(*i)] && tmp_path[(*i)] != '.')
+			(*i)++;
+	if (tmp_path[(*i)] == '\0')
+	{
+		free(tmp_path);
+		return (0);
+	}
+	return (1);
+}
 
 static int	add_texture(t_map *map, char *map_line, int i)
 {
 	char	*tmp_path;
 
 	tmp_path = ft_substr(map_line, 1, ft_strlen(map_line) - 1);
-	if (!ft_strncmp(map_line, "F", 1) || !ft_strncmp(map_line, "C", 1))
-		while (tmp_path[i] && !ft_isdigit(tmp_path[i]))
-			i++;
-	else
-		while (tmp_path[i] && tmp_path[i] != '.')
-			i++;
-	if (tmp_path[i] == '\0')
-	{
-		free(tmp_path);
+	if (!skip_to_path(map_line, tmp_path, &i))
 		return (0);
-	}
 	tmp_path[ft_strlen(tmp_path) - 1] = '\0';
 	if (!ft_strncmp(map_line, "NO", 2))
 		map->no_path = ft_strdup(tmp_path + i);

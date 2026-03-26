@@ -6,14 +6,14 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 22:03:15 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 10:32:31 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 10:55:34 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef BONUS
-	#include "cub3d_bonus.h"
+# include "cub3d_bonus.h"
 #else
-	#include "cub3d.h"
+# include "cub3d.h"
 #endif
 
 static void	mouse_rotate(t_mlx *mlx, double old_dir_x, double old_plane_x)

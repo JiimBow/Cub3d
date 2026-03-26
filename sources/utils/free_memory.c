@@ -6,11 +6,27 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:05:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 10:33:30 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/26 11:06:47 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifdef BONUS
+# include "cub3d_bonus.h"
+#else
+# include "cub3d.h"
+#endif
+
+void	free_color(t_mlx *mlx)
+{
+	if (mlx->buf_no)
+		free(mlx->buf_no);
+	if (mlx->buf_so)
+		free(mlx->buf_so);
+	if (mlx->buf_ea)
+		free(mlx->buf_ea);
+	if (mlx->buf_we)
+		free(mlx->buf_we);
+}
 
 void	free_double_ptr(char **ptr)
 {
