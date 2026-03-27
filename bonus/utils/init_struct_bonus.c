@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/27 12:11:58 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/27 16:36:44 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,11 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door)
 	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
 	ft_bzero(mlx->keys, 512);
 	ft_bzero(text, sizeof(t_text));
-	ft_bzero(door, sizeof(t_door));
 	if (set_player_start(mlx, map))
 		return (error_message(7));
+	init_door_pos(mlx, map, door, 0);
+	door = malloc(mlx->door_count * sizeof(t_door));
+	init_door_pos(mlx, map, door, 1);
 	mlx->s_text = text;
 	mlx->s_map = map;
 	mlx->s_door = door;

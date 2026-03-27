@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 14:54:48 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/27 12:07:54 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/27 16:52:26 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	player_move(t_mlx *mlx, double delx, double dely, double frame_time)
 	{
 		open_door(mlx, player_x, mlx->pos_y);
 		mlx->pos_x += delx;
-		close_door(mlx, player_x, mlx->pos_y);
 	}
 	if (dely > 0)
 		player_y = (mlx->pos_y + dely + 0.2);
@@ -36,7 +35,6 @@ int	player_move(t_mlx *mlx, double delx, double dely, double frame_time)
 	{
 		open_door(mlx, mlx->pos_x, player_y);
 		mlx->pos_y += dely;
-		close_door(mlx, mlx->pos_x, player_y);
 	}
 	return (0);
 }
