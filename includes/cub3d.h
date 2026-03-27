@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/27 10:54:33 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/27 12:14:14 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ int		is_element(char *map_line, t_list **elem_lst, t_map *map);
 
 // INITIALIZE
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
+int		load_image(t_mlx *mlx, t_text *text, t_map *map);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
 int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text);
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/27 11:17:55 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/27 12:15:55 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC			= $(DIR)main.c \
 				$(UTILS)free_memory.c \
 				$(UTILS)events.c \
 				$(UTILS)init_struct.c \
+				$(UTILS)load_image.c \
 				$(GRAPHIC)update_frame.c \
 				$(GRAPHIC)set_background.c \
 				$(GRAPHIC)draw_wall.c \
@@ -62,6 +63,7 @@ SRC_BONUS	= $(DIR_BONUS)main_bonus.c \
 				$(UTILS)free_memory.c \
 				$(UTILS)events.c \
 				$(BONUS_UTILS)init_struct_bonus.c \
+				$(BONUS_UTILS)load_image_bonus.c \
 				$(GRAPHIC)set_background.c \
 				$(GRAPHIC)update_frame.c \
 				$(GRAPHIC)minimap.c \
@@ -74,7 +76,8 @@ SRC_BONUS	= $(DIR_BONUS)main_bonus.c \
 				$(BONUS_PARS)map_is_valid_bonus.c \
 				$(MOVING)player_rotate.c \
 				$(BONUS_MOV)player_move_bonus.c \
-				$(BONUS_MOV)door_bonus.c
+				$(BONUS_MOV)door_bonus.c \
+				$(BONUS_MOV)direction_bonus.c
 
 OBJ			= $(SRC:$(DIR)%.c=$(OBJ_DIR)%.o)
 

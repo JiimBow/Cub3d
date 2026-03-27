@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/27 11:15:53 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/27 12:10:20 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,11 +170,13 @@ int		is_element(char *map_line, t_list **elem_lst, t_map *map);
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
 int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door);
+int		load_image(t_mlx *mlx, t_text *text, t_map *map);
 
 // MOVING
 int		set_player_start(t_mlx *mlx, t_map *map);
 void	player_rotate(t_mlx *mlx, double frame_time, double speed);
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
+void	direction_move(t_mlx *mlx, double *delx, double *dely, double frame);
 void	close_door(t_mlx *mlx, double player_x, double player_y);
 void	open_door(t_mlx *mlx, double player_x, double player_y);
 
