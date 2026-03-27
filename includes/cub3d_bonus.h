@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/27 12:10:20 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/27 16:52:17 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,6 @@ typedef struct s_door
 {
 	int	pos_x;
 	int	pos_y;
-	int	second_x;
-	int	second_y;
-	int	open;
-	int	second_open;
 }	t_door;
 
 typedef struct s_mlx
@@ -143,6 +139,7 @@ typedef struct s_mlx
 	int						keys[512];
 	int						zoom;
 	int						lock_mouse;
+	int						door_count;
 	t_map					*s_map;
 	t_text					*s_text;
 	t_sprite				**spr;
@@ -171,13 +168,13 @@ void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
 int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door);
 int		load_image(t_mlx *mlx, t_text *text, t_map *map);
+void	init_door_pos(t_mlx *mlx, t_map *map, t_door *door, int type);
 
 // MOVING
 int		set_player_start(t_mlx *mlx, t_map *map);
 void	player_rotate(t_mlx *mlx, double frame_time, double speed);
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
 void	direction_move(t_mlx *mlx, double *delx, double *dely, double frame);
-void	close_door(t_mlx *mlx, double player_x, double player_y);
 void	open_door(t_mlx *mlx, double player_x, double player_y);
 
 // GRAPHICS
