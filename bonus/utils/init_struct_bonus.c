@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/27 12:11:58 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/27 17:21:25 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,11 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door)
 	ft_bzero(door, sizeof(t_door));
 	if (set_player_start(mlx, map))
 		return (error_message(7));
+	mlx->cont = mlx_init();
+	if (!mlx->cont)
+		return (error_message(9));
+	gettimeofday(&mlx->last_time, NULL);
+	mlx_set_fps_goal(mlx->cont, 90);
 	mlx->s_text = text;
 	mlx->s_map = map;
 	mlx->s_door = door;
@@ -112,9 +117,6 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door)
 	mlx->info.width = SCREEN_W;
 	mlx->info.title = "cub3D";
 	mlx->fps_timer = 1.0;
-	gettimeofday(&mlx->last_time, NULL);
-	mlx->cont = mlx_init();
-	mlx_set_fps_goal(mlx->cont, 90);
 	mlx->sp_move = 2.0;
 	mlx->sp_rot = 3.0;
 	mlx->zoom = 4;
