@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 10:53:22 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/27 10:52:51 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,21 @@ static int	put_color_value(mlx_color *color, char *value)
 	char	**rgb;
 
 	rgb = ft_split(value, ',');
-	if (!rgb[0] || !rgb[1] || !rgb[2])
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
 	{
 		free_double_ptr(rgb);
 		return (0);
 	}
-	color->a = 255;
+	if (!color_valid(rgb[0]) || !color_valid(rgb[1]) || !color_valid(rgb[2]))
+	{
+		free_double_ptr(rgb);
+		return (0);
+	}
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
+	color->a = 255;
 	free_double_ptr(rgb);
-	if (color->r < 0 || color->r > 255)
-		return (0);
-	if (color->g < 0 || color->g > 255)
-		return (0);
-	if (color->b < 0 || color->b > 255)
-		return (0);
 	return (1);
 }
 
@@ -113,26 +112,24 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 {
 	ft_bzero(mlx, sizeof(t_mlx));
 	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
-	ft_bzero(mlx->keys, 512);
+	ft_bzero(mlx->keys, sizeof(mlx->keys));
 	ft_bzero(text, sizeof(t_text));
 	if (set_player_start(mlx, map))
 		return (error_message(7));
+	mlx->cont = mlx_init();
+	if (!mlx->cont)
+		return (error_message(9));
+	gettimeofday(&mlx->last_time, NULL);
+	mlx_set_fps_goal(mlx->cont, 90);
 	mlx->s_text = text;
 	mlx->s_map = map;
 	mlx->info.height = SCREEN_H;
 	mlx->info.width = SCREEN_W;
 	mlx->info.title = "cub3D";
-	mlx->frame_count = 0;
 	mlx->fps_timer = 1.0;
-	mlx->time = 0;
-	mlx->old_time = 0;
-	gettimeofday(&mlx->last_time, NULL);
-	mlx->cont = mlx_init();
-	mlx_set_fps_goal(mlx->cont, 90);
 	mlx->sp_move = 2.0;
 	mlx->sp_rot = 3.0;
 	mlx->zoom = 4;
-	mlx->lock_mouse = 0;
 	set_minimap(mlx);
 	return (0);
 }

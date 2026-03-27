@@ -3,7 +3,7 @@ SO ./pics/south_texture.png
 WE ./pics/west_texture.png
 EA ./pics/east_texture.png
 
-F 				
+F 1 0 0,	,	
 C 90,150,215
 
 11111111111111111111

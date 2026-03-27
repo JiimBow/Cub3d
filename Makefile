@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
+#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/27 11:06:15 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/27 11:11:21 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC			= $(DIR)main.c \
 				$(PARSING)parse_element.c \
 				$(PARSING)check_map.c \
 				$(PARSING)init_player_pos.c \
+				$(PARSING)color_valid.c \
 				$(MOVING)player_rotate.c \
 				$(MOVING)player_move.c
 

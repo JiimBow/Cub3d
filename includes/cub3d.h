@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 10:47:19 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/27 10:54:33 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void	free_color(t_mlx *mlx);
 // PARSING
 int		is_space(char c);
 int		check_map(char **map);
+int		color_valid(char *str);
 int		check_element(t_map *map);
 int		map_is_not_valid(char *file, t_map *map);
 int		is_element(char *map_line, t_list **elem_lst, t_map *map);
