@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 09:59:28 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/27 10:35:24 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	send_ray_until_wall(t_mlx *mlx, t_wall *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (mlx->s_map->map[ray->map_y][ray->map_x] != '0')
+		if (mlx->s_map->map[ray->map_y][ray->map_x] != '0' && mlx->s_map->map[ray->map_y][ray->map_x] != 'O')
 			break ;
 	}
 }
