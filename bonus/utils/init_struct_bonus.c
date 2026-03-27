@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 14:47:36 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/27 11:15:30 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,21 @@ static int	put_color_value(mlx_color *color, char *value)
 	char	**rgb;
 
 	rgb = ft_split(value, ',');
-	if (!rgb[0] || !rgb[1] || !rgb[2])
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
 	{
 		free_double_ptr(rgb);
 		return (0);
 	}
-	color->a = 255;
+	if (!color_valid(rgb[0]) || !color_valid(rgb[1]) || !color_valid(rgb[2]))
+	{
+		free_double_ptr(rgb);
+		return (0);
+	}
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
+	color->a = 255;
 	free_double_ptr(rgb);
-	if (color->r < 0 || color->r > 255)
-		return (0);
-	if (color->g < 0 || color->g > 255)
-		return (0);
-	if (color->b < 0 || color->b > 255)
-		return (0);
 	return (1);
 }
 
