@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/27 11:32:30 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/28 14:27:40 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ void	draw_wall(t_mlx *mlx)
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
 	ray.frame_time = (mlx->time - mlx->old_time) * 0.001;
+	if (ray.frame_time > 0.5)
+		ray.frame_time = 0.5;
 	player_rotate(mlx, ray.frame_time, ray.frame_time * mlx->sp_rot);
 	player_move(mlx, 0.0, 0.0, ray.frame_time * mlx->sp_move);
 }

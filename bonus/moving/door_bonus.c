@@ -6,7 +6,7 @@
 /*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 11:05:21 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/27 17:21:53 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/03/28 14:19:14 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,21 @@ void	open_door(t_mlx *mlx, double player_x, double player_y)
 {
 	double	diff_x;
 	double	diff_y;
-	// double	diff_dist;
+	double	diff_dist;
 	int		i;
 
 	i = 0;
 	while (i < mlx->door_count)
 	{
-		diff_x = fabs(player_x - (mlx->s_door[i].pos_x + 0.5));
-		diff_y = fabs(player_y - (mlx->s_door[i].pos_y + 0.5));
-		// diff_dist = diff_x * diff_x + diff_y * diff_y;
-		printf("%f    %f    %f    %f\n", diff_x, diff_y, mlx->pos_x, mlx->pos_y);
+		diff_x = fabs(player_x - ((double)mlx->s_door[i].pos_x + 0.5));
+		diff_y = fabs(player_y - ((double)mlx->s_door[i].pos_y + 0.5));
+		diff_dist = diff_x * diff_x + diff_y * diff_y;
+		// printf("%f    %f    %f    %f\n", diff_x, diff_y, player_x, player_y);
 		if (mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x] == 'D'
-			&& diff_x <= 0.8 && diff_y <= 0.8)
+			&& diff_dist < 1)
 			mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x] = 'O';
 		else if ((mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x]
-			== 'O' && (diff_x > 1.2 || diff_y > 1.2)))
+			== 'O' && diff_dist > 1.2 * 1.2))
 			mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x] = 'D';
 		i++;
 	}
