@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
+#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/30 12:56:34 by jodone           ###   ########.fr        #
+#    Updated: 2026/03/30 13:27:46 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SRC_BONUS	= $(DIR_BONUS)main_bonus.c \
 				$(PARSING)parse_element.c \
 				$(PARSING)init_player_pos.c \
 				$(PARSING)color_valid.c \
+				$(BONUS_PARS)init_sprite_struct_bonus.c \
 				$(BONUS_PARS)check_map_bonus.c \
 				$(BONUS_PARS)map_is_valid_bonus.c \
 				$(MOVING)player_rotate.c \

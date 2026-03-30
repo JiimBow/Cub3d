@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/27 16:32:40 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/03/30 11:39:41 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		mlx_destroy_image(mlx->cont, mlx->wall);
 	if (mlx->minimap)
 		mlx_destroy_image(mlx->cont, mlx->minimap);
+	if (mlx->samourai)
+		mlx_destroy_image(mlx->cont, mlx->samourai);
 	if (mlx->win)
 		mlx_destroy_window(mlx->cont, mlx->win);
 	if (mlx->cont)

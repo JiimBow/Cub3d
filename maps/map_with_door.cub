@@ -1,10 +1,10 @@
-NO ./pics/north_texture.png
-SO ./pics/south_texture.png
-WE ./pics/west_texture.png
-EA ./pics/east_texture.png
+NO ./pics/wall.png
+SO ./pics/prison.png
+WE ./pics/war.png
+EA ./pics/wall.png
 
-F 162,162,162
-C 90,150,215
+F 30,15,0
+C 25,40,20
 
 11111111111111111111
 11111111000001111111

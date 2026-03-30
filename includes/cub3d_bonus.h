@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 12:57:28 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 13:28:01 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_sprite
 {
 	double	pos_x;
 	double	pos_y;
+	mlx_color	samourai_stand[10];
 }	t_sprite;
 
 typedef struct s_door
@@ -113,6 +114,7 @@ typedef struct s_mlx
 	mlx_image				background;
 	mlx_image				wall;
 	mlx_image				minimap;
+	mlx_image				samourai;
 	mlx_color				buf_minimap[(SCREEN_H / 10) * (SCREEN_W / 10)];
 	mlx_color				*buf_no;
 	mlx_color				*buf_so;
@@ -184,6 +186,10 @@ void	draw_wall(t_mlx *mlx);
 void	update_frame(void *param);
 void	window_hook(int event, void *par);
 void	set_background(t_mlx *mlx, t_text *text);
+
+// SPRITE
+void	set_sprite_start(t_mlx *mlx);
+void	put_sprite_on_window(t_mlx *mlx);
 
 // MINIMAP
 void	set_minimap(t_mlx *mlx);
