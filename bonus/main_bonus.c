@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 15:48:02 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 16:16:40 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,19 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		mlx_destroy_image(mlx->cont, mlx->wall);
 	if (mlx->minimap)
 		mlx_destroy_image(mlx->cont, mlx->minimap);
-	if (mlx->samourai)
-		mlx_destroy_image(mlx->cont, mlx->samourai);
+	if (mlx->samourai[0])
+		mlx_destroy_image(mlx->cont, mlx->samourai[0]);
+	if (mlx->samourai[1])
+		mlx_destroy_image(mlx->cont, mlx->samourai[1]);
 	if (mlx->win)
 		mlx_destroy_window(mlx->cont, mlx->win);
 	if (mlx->cont)
 		mlx_destroy_context(mlx->cont);
+	if (mlx->spr)
+		free(mlx->spr);
+	if (mlx->s_door)
+		free(mlx->s_door);
 	free_map(map);
-	free(mlx->s_door);
 }
 
 static int	parse_main(char **av, t_mlx *mlx, t_map *map, t_text *text)

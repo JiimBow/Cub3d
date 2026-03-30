@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 16:13:07 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 16:16:46 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ static void	send_ray_until_wall(t_mlx *mlx, t_wall *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
+		// int i = 0;
+		// while (mlx->spr && mlx->spr[i])
+		// {
+		// 	if (ray->map_x == mlx->spr[i]->pos_x && ray->map_y == mlx->spr[i]->pos_y)
+		// 		;
+		// 	i++;
+		// }
 		if (mlx->s_map->map[ray->map_y][ray->map_x] != '0'
 				&& mlx->s_map->map[ray->map_y][ray->map_x] != 'O'
 				&& mlx->s_map->map[ray->map_y][ray->map_x] != '2')
@@ -102,7 +109,10 @@ void	draw_wall(t_mlx *mlx)
 	t_wall	ray;
 	int		x;
 
-	mlx_destroy_image(mlx->cont, mlx->samourai);
+	if (mlx->samourai[0])
+		mlx_destroy_image(mlx->cont, mlx->samourai[0]);
+	if (mlx->samourai[1])
+		mlx_destroy_image(mlx->cont, mlx->samourai[1]);
 	mlx_destroy_image(mlx->cont, mlx->wall);
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});

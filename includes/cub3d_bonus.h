@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 16:08:11 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 16:17:52 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_sprite
 	double	pos_x;
 	double	pos_y;
 	mlx_color	samourai_stand[10][96 * 96];
+	mlx_color	samourai_attack[7][96 * 96];
 }	t_sprite;
 
 typedef struct s_door
@@ -114,7 +115,7 @@ typedef struct s_mlx
 	mlx_image				background;
 	mlx_image				wall;
 	mlx_image				minimap;
-	mlx_image				samourai;
+	mlx_image				samourai[2];
 	mlx_color				buf_minimap[(SCREEN_H / 10) * (SCREEN_W / 10)];
 	mlx_color				*buf_no;
 	mlx_color				*buf_so;
