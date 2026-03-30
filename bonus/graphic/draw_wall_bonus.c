@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 16:16:46 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 18:32:50 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,6 @@ static void	send_ray_until_wall(t_mlx *mlx, t_wall *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		// int i = 0;
-		// while (mlx->spr && mlx->spr[i])
-		// {
-		// 	if (ray->map_x == mlx->spr[i]->pos_x && ray->map_y == mlx->spr[i]->pos_y)
-		// 		;
-		// 	i++;
-		// }
 		if (mlx->s_map->map[ray->map_y][ray->map_x] != '0'
 				&& mlx->s_map->map[ray->map_y][ray->map_x] != 'O'
 				&& mlx->s_map->map[ray->map_y][ray->map_x] != '2')
@@ -125,6 +118,7 @@ void	draw_wall(t_mlx *mlx)
 		calculate_height_wall(&ray);
 		get_textures(mlx, &ray);
 		set_textures(mlx, &ray, x);
+		get_sprites(mlx, &ray);
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);

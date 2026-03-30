@@ -6,12 +6,13 @@
 #    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/30 16:16:00 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/30 18:33:01 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address #-MMD -MP -O3 -march=native -flto -ffast-math
+CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address #-O3 -march=native -flto -ffast-math 
+DEPFLAGS	= -MMD -MP
 
 # COLOR
 GREEN   := \033[1;38;5;46m
@@ -86,7 +87,7 @@ OBJ			= $(SRC:$(DIR)%.c=$(OBJ_DIR)%.o)
 
 OBJ_BONUS	= $(SRC_BONUS:$(DIR_BONUS)%.c=$(OBJ_DIR)%.o)
 
-DEPS		= $(SRC:$(DIR)%.c=$(OBJ_DIR)%.d)
+DEPS		= $(OBJ:.o=.d)
 
 LIBFT		= ./Great_Libft/g_libft.a
 
@@ -108,7 +109,7 @@ COUNT		:= 0
 
 $(OBJ_DIR)%.o: $(DIR)%.c
 			@mkdir -p $(dir $@)
-			@$(CC) -c $(CFLAGS) $(HEADER) $< -o $@
+			@$(CC) -c $(CFLAGS) $(DEPFLAGS) $(HEADER) $< -o $@
 			@$(eval COUNT=$(shell echo $$(($(COUNT)+1))))
 			@PERCENT=$$(($(COUNT)*99/$(TOTAL))) ; \
 			BAR=$$(($(COUNT)*39/$(TOTAL))) ; \
@@ -150,7 +151,7 @@ clean:
 			@if ls $(OBJ) >/dev/null 2>&1; then \
 			echo "${GREEN}====   $(NAME)   ==== : >>>OBJ CLEANED<<<${RESET}"; \
 			fi
-			@rm -f $(OBJ)
+			@rm -f $(OBJ) $(DEPS)
 			@rm -rf $(OBJ_DIR)
 			@$(MAKE) -C Great_Libft clean --no-print-directory
 

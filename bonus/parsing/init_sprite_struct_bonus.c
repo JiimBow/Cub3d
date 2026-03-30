@@ -6,41 +6,43 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 16:17:47 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 18:15:51 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d_bonus.h>
 
-void	set_sprite_start(t_mlx *mlx)
+int	set_sprite_start(t_mlx *mlx)
 {
 	int			w;
 	int			h;
 	int			i;
 	int			x;
-	int			y;
 
-	// mlx->spr = (t_sprite **)malloc(sizeof(t_sprite *) * 1);
-	// mlx->spr[0] = malloc(sizeof(t_sprite));
-	mlx->samourai = mlx_new_image_from_file(mlx->cont, "pics/IDLE.png", &w, &h);
+	mlx->samourai[0] = mlx_new_image_from_file(mlx->cont, "pics/IDLE.png", &w, &h);
+	if (!mlx->samourai[0])
+		return (error_message(2));
 	i = 0;
 	x = 0;
 	while (i < 10)
 	{
-		mlx_get_image_region(mlx->cont, mlx->samourai[0], x, 0, 96, 96, mlx->spr->samourai_stand[i]);
-		x += 96;
+		mlx_get_image_region(mlx->cont, mlx->samourai[0], x, 0, SPR_WIDTH, SPR_HEIGHT, mlx->spr->samourai_stand[i]);
+		x += SPR_WIDTH;
 		i++;
 	}
 	mlx->samourai[1] = mlx_new_image_from_file(mlx->cont, "pics/ATTACK 1.png", &w, &h);
+	if (!mlx->samourai[1])
+		return (error_message(2));
 	i = 0;
 	x = 0;
 	while (i < 7)
 	{
-		mlx_get_image_region(mlx->cont, mlx->samourai[1], x, 0, 96, 96, mlx->spr->samourai_attack[i]);
-		x += 96;
+		mlx_get_image_region(mlx->cont, mlx->samourai[1], x, 0, SPR_WIDTH, SPR_HEIGHT, mlx->spr->samourai_attack[i]);
+		x += SPR_WIDTH;
 		i++;
 	}
 	mlx->frame = 0;
+	return (0);
 }
 
 void	put_sprite_on_window(t_mlx *mlx)
@@ -50,11 +52,38 @@ void	put_sprite_on_window(t_mlx *mlx)
 	mlx->frame++;
 	mlx->frame %= 90;
 	i = mlx->frame / 10;
-	mlx->samourai[0] = mlx_new_image(mlx->cont, 96, 96);
-	mlx_set_image_region(mlx->cont, mlx->samourai[0], 0, 0, 96, 96, mlx->spr->samourai_stand[i]);
+	mlx->samourai[0] = mlx_new_image(mlx->cont, SPR_WIDTH, SPR_HEIGHT);
+	mlx_set_image_region(mlx->cont, mlx->samourai[0], 0, 0, SPR_WIDTH, SPR_HEIGHT, mlx->spr->samourai_stand[i]);
 	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->samourai[0], 100, 100, 4, 4, 0);
 	i = mlx->frame / 15;
-	mlx->samourai[1] = mlx_new_image(mlx->cont, 96, 96);
+	mlx->samourai[1] = mlx_new_image(mlx->cont, SPR_WIDTH, SPR_HEIGHT);
 	mlx_set_image_region(mlx->cont, mlx->samourai[1], 0, 0, 96, 96, mlx->spr->samourai_attack[i]);
 	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->samourai[1], 200, 200, 4, 4, 0);
+}
+
+void	set_sprites(t_mlx *mlx, t_wall *ray)
+{
+	(void)mlx;
+	(void)ray;
+}
+
+void	get_sprites(t_mlx *mlx, t_wall *ray)
+{
+	while (true)
+	{
+		if (mlx->s_map->map[ray->map_y][ray->map_x] == '2')
+			set_sprites(mlx, ray);
+		if (ray->side_dist_x < 0 || ray->side_dist_y < 0)
+			break ;
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x -= ray->delta_dist_x;
+			ray->map_x -= ray->step_x;
+		}
+		else
+		{
+			ray->side_dist_y -= ray->delta_dist_y;
+			ray->map_y -= ray->step_y;
+		}
+	}
 }

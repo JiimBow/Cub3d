@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 16:17:52 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 18:26:55 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 #define SCREEN_H 1080
 #define TEX_HEIGHT 512
 #define TEX_WIDTH 512
+#define SPR_HEIGHT 96
+#define SPR_WIDTH 96
 #define M_PI 3.14159265358979323846
 #define RGB_RED 0xff0000ff
 
@@ -192,8 +194,9 @@ void	window_hook(int event, void *par);
 void	set_background(t_mlx *mlx, t_text *text);
 
 // SPRITE
-void	set_sprite_start(t_mlx *mlx);
+int		set_sprite_start(t_mlx *mlx);
 void	put_sprite_on_window(t_mlx *mlx);
+void	get_sprites(t_mlx *mlx, t_wall *ray);
 
 // MINIMAP
 void	set_minimap(t_mlx *mlx);
