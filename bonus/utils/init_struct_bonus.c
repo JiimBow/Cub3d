@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 14:49:27 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 16:11:32 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,34 +93,47 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 		return (error_message(5));
 	mlx->win = mlx_new_window(mlx->cont, &mlx->info);
 	set_background(mlx, text);
-	set_sprite_start(mlx);
+	if (mlx->sprite_count != 0)
+		set_sprite_start(mlx);
 	return (0);
 }
 
 int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door)
 {
+	t_sprite *sprite;
+
 	ft_bzero(mlx, sizeof(t_mlx));
 	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
 	ft_bzero(mlx->keys, 512);
 	ft_bzero(text, sizeof(t_text));
 	if (set_player_start(mlx, map))
 		return (error_message(7));
-	mlx->door_count = init_door_count(map);
+	mlx->door_count = init_game_count(map, 'D');
 	door = malloc(mlx->door_count * sizeof(t_door));
 	if (!door)
 		return (error_message(8));
+	mlx->sprite_count = init_game_count(map, '2');
+	sprite = malloc((mlx->sprite_count) * sizeof(t_sprite));
+	if (!sprite)
+	{
+		free(door);
+		return (error_message(9));
+	}
 	init_door_pos(map, door);
 	mlx->cont = mlx_init();
 	if (!mlx->cont)
 	{
 		free(door);
+		free(sprite);
 		return (error_message(9));
 	}
+	init_sprite_pos(map, sprite);
 	gettimeofday(&mlx->last_time, NULL);
 	mlx_set_fps_goal(mlx->cont, 90);
 	mlx->s_text = text;
 	mlx->s_map = map;
 	mlx->s_door = door;
+	mlx->spr = sprite;
 	set_mlx_struct(mlx);
 	set_minimap(mlx);
 	return (0);

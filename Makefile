@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/30 13:27:46 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/30 15:49:16 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRC_BONUS	= $(DIR_BONUS)main_bonus.c \
 				$(BONUS_UTILS)init_struct_bonus.c \
 				$(BONUS_UTILS)load_image_bonus.c \
 				$(BONUS_UTILS)set_mlx_struct.c \
+				$(BONUS_UTILS)init_game_elem_pos.c \
 				$(GRAPHIC)set_background.c \
 				$(GRAPHIC)update_frame.c \
 				$(GRAPHIC)minimap.c \

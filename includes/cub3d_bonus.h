@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 14:50:09 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 16:08:11 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,10 +142,11 @@ typedef struct s_mlx
 	int						zoom;
 	int						lock_mouse;
 	int						door_count;
+	int						sprite_count;
 	int						frame;
 	t_map					*s_map;
 	t_text					*s_text;
-	t_sprite				**spr;
+	t_sprite				*spr;
 	t_door					*s_door;
 }	t_mlx;
 
@@ -173,7 +174,8 @@ int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door);
 void	set_mlx_struct(t_mlx *mlx);
 int		load_image(t_mlx *mlx, t_text *text, t_map *map);
 void	init_door_pos(t_map *map, t_door *door);
-int		init_door_count(t_map *map);
+int		init_game_count(t_map *map, char type);
+void	init_sprite_pos(t_map *map, t_sprite *sprite);
 
 // MOVING
 int		set_player_start(t_mlx *mlx, t_map *map);

@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:34:23 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/25 16:26:50 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 15:21:04 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	is_game_char(char c)
 {
 	static int	start_nb = 0;
 
-	if (c == '1' || c == 'D' || c == 'A')
+	if (c == '1' || c == 'D' || c == 'A' || c == '2')
 		return (1);
 	else if ((c == 'N' || c == 'S' || c == 'E' || c == 'W') && start_nb == 0)
 	{

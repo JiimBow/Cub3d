@@ -6,58 +6,11 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 11:05:21 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 13:21:57 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 15:15:03 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
-int	init_door_count(t_map *map)
-{
-	int	x;
-	int	y;
-	int	count;
-
-	y = 0;
-	count = 0;
-	while (map->map && map->map[y])
-	{
-		x = 0;
-		while (map->map[y][x])
-		{
-			if (map->map[y][x] == 'D')
-				count++;
-			x++;
-		}
-		y++;
-	}
-	return (count);
-}
-
-void	init_door_pos(t_map *map, t_door *door)
-{
-	int	x;
-	int	y;
-	int	i;
-
-	y = 0;
-	i = 0;
-	while (map->map[y])
-	{
-		x = 0;
-		while (map->map[y][x])
-		{
-			if (map->map[y][x] == 'D')
-			{
-				door[i].pos_x = x;
-				door[i].pos_y = y;
-				i++;
-			}
-			x++;
-		}
-		y++;
-	}
-}
 
 void	open_door(t_mlx *mlx, double player_x, double player_y)
 {

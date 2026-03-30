@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 11:39:41 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 15:48:02 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 	if (mlx->cont)
 		mlx_destroy_context(mlx->cont);
 	free_map(map);
+	free(mlx->s_door);
 }
 
 static int	parse_main(char **av, t_mlx *mlx, t_map *map, t_text *text)

@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 14:48:46 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 16:13:07 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ static void	send_ray_until_wall(t_mlx *mlx, t_wall *ray)
 			ray->side = 1;
 		}
 		if (mlx->s_map->map[ray->map_y][ray->map_x] != '0'
-				&& mlx->s_map->map[ray->map_y][ray->map_x] != 'O')
+				&& mlx->s_map->map[ray->map_y][ray->map_x] != 'O'
+				&& mlx->s_map->map[ray->map_y][ray->map_x] != '2')
 			break ;
 	}
 }
@@ -117,7 +118,8 @@ void	draw_wall(t_mlx *mlx)
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
-	put_sprite_on_window(mlx);
+	if (mlx->sprite_count != 0)
+		put_sprite_on_window(mlx);
 	put_minimap_on_map(mlx);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
