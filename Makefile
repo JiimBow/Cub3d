@@ -6,12 +6,12 @@
 #    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/30 18:33:01 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/03/30 20:49:53 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g #-fsanitize=address #-O3 -march=native -flto -ffast-math 
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address #-O3 -march=native -flto -ffast-math 
 DEPFLAGS	= -MMD -MP
 
 # COLOR

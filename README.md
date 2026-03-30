@@ -45,3 +45,4 @@ We used the [Lodev](https://lodev.org/cgtutor/raycasting.html)'s website to lear
 
 Some examples of our game:
 
+<video src="images/demo.mp4" autoplay loop muted width="600"></video>

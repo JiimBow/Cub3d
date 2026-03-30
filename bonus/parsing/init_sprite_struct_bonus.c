@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 18:15:51 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 20:43:47 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,12 @@ void	get_sprites(t_mlx *mlx, t_wall *ray)
 			ray->map_y -= ray->step_y;
 		}
 	}
+}
+
+void	set_weapon(t_mlx *mlx)
+{
+	int	w;
+	int	h;
+
+	mlx->weapon = mlx_new_image_from_file(mlx->cont, "pics/axe.png", &w, &h);
 }

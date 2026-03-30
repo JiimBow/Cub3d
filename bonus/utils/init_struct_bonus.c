@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 18:14:01 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 20:53:40 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	if (mlx->sprite_count != 0)
 		if (set_sprite_start(mlx))
 			return (error_message(2));
+	// set_weapon(mlx);
 	return (0);
 }
 
