@@ -3,16 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   door_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 11:05:21 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/28 14:19:14 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/03/30 13:11:41 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	init_door_pos(t_mlx *mlx, t_map *map, t_door *door, int type)
+int	init_door_count(t_map *map)
+{
+	int	x;
+	int	y;
+	int	count;
+
+	y = 0;
+	count = 0;
+	while (map->map && map->map[y])
+	{
+		x = 0;
+		while (map->map[y][x])
+		{
+			if (map->map[y][x] == 'D')
+				count++;
+			x++;
+		}
+		y++;
+	}
+	return (count);
+}
+
+void	init_door_pos(t_map *map, t_door *door)
 {
 	int	x;
 	int	y;
@@ -27,13 +49,8 @@ void	init_door_pos(t_mlx *mlx, t_map *map, t_door *door, int type)
 		{
 			if (map->map[y][x] == 'D')
 			{
-				if (type == 0)
-					mlx->door_count++;
-				else
-				{
-					door[i].pos_x = x;
-					door[i].pos_y = y;
-				}
+				door[i].pos_x = x;
+				door[i].pos_y = y;
 				i++;
 			}
 			x++;
@@ -55,12 +72,11 @@ void	open_door(t_mlx *mlx, double player_x, double player_y)
 		diff_x = fabs(player_x - ((double)mlx->s_door[i].pos_x + 0.5));
 		diff_y = fabs(player_y - ((double)mlx->s_door[i].pos_y + 0.5));
 		diff_dist = diff_x * diff_x + diff_y * diff_y;
-		// printf("%f    %f    %f    %f\n", diff_x, diff_y, player_x, player_y);
 		if (mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x] == 'D'
-			&& diff_dist < 1)
+			&& diff_dist < 1.3)
 			mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x] = 'O';
 		else if ((mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x]
-			== 'O' && diff_dist > 1.2 * 1.2))
+			== 'O' && diff_dist > 1.5 * 1.5))
 			mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x] = 'D';
 		i++;
 	}

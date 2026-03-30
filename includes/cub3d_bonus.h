@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/27 16:52:17 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/03/30 12:57:28 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,10 @@ int		is_element(char *map_line, t_list **elem_lst, t_map *map);
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
 int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door);
+void	set_mlx_struct(t_mlx *mlx);
 int		load_image(t_mlx *mlx, t_text *text, t_map *map);
-void	init_door_pos(t_mlx *mlx, t_map *map, t_door *door, int type);
+void	init_door_pos(t_map *map, t_door *door);
+int		init_door_count(t_map *map);
 
 // MOVING
 int		set_player_start(t_mlx *mlx, t_map *map);
