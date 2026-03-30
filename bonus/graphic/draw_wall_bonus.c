@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 12:07:39 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 13:29:24 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	draw_wall(t_mlx *mlx)
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
-	put_sprite_on_window(mlx);
+	// put_sprite_on_window(mlx);
 	put_minimap_on_map(mlx);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
