@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 13:30:33 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 14:49:27 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 		return (error_message(5));
 	mlx->win = mlx_new_window(mlx->cont, &mlx->info);
 	set_background(mlx, text);
-	// set_sprite_start(mlx);
+	set_sprite_start(mlx);
 	return (0);
 }
 

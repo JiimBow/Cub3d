@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 11:05:21 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 13:11:41 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/30 13:21:57 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	open_door(t_mlx *mlx, double player_x, double player_y)
 		diff_y = fabs(player_y - ((double)mlx->s_door[i].pos_y + 0.5));
 		diff_dist = diff_x * diff_x + diff_y * diff_y;
 		if (mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x] == 'D'
-			&& diff_dist < 1.3)
+			&& diff_dist < 1.3 * 1.3)
 			mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x] = 'O';
 		else if ((mlx->s_map->map[mlx->s_door[i].pos_y][mlx->s_door[i].pos_x]
 			== 'O' && diff_dist > 1.5 * 1.5))

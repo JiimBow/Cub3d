@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 13:29:24 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 14:48:46 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	draw_wall(t_mlx *mlx)
 	t_wall	ray;
 	int		x;
 
+	mlx_destroy_image(mlx->cont, mlx->samourai);
 	mlx_destroy_image(mlx->cont, mlx->wall);
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
@@ -116,7 +117,7 @@ void	draw_wall(t_mlx *mlx)
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
-	// put_sprite_on_window(mlx);
+	put_sprite_on_window(mlx);
 	put_minimap_on_map(mlx);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);

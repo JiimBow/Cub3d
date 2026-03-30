@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 13:28:01 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 14:50:09 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_sprite
 {
 	double	pos_x;
 	double	pos_y;
-	mlx_color	samourai_stand[10];
+	mlx_color	samourai_stand[10][96 * 96];
 }	t_sprite;
 
 typedef struct s_door
@@ -142,6 +142,7 @@ typedef struct s_mlx
 	int						zoom;
 	int						lock_mouse;
 	int						door_count;
+	int						frame;
 	t_map					*s_map;
 	t_text					*s_text;
 	t_sprite				**spr;
