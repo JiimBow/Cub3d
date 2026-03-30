@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 20:43:47 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 22:58:24 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	set_sprite_start(t_mlx *mlx)
 	int			i;
 	int			x;
 
+	mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx->samourai[0] = mlx_new_image_from_file(mlx->cont, "pics/IDLE.png", &w, &h);
 	if (!mlx->samourai[0])
 		return (error_message(2));
@@ -54,25 +55,37 @@ void	put_sprite_on_window(t_mlx *mlx)
 	i = mlx->frame / 10;
 	mlx->samourai[0] = mlx_new_image(mlx->cont, SPR_WIDTH, SPR_HEIGHT);
 	mlx_set_image_region(mlx->cont, mlx->samourai[0], 0, 0, SPR_WIDTH, SPR_HEIGHT, mlx->spr->samourai_stand[i]);
-	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->samourai[0], 100, 100, 4, 4, 0);
+	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->samourai[0], SCREEN_W / 2 + SPR_WIDTH * 2, SCREEN_H / 2 - SPR_HEIGHT * 2, 4, 4, 0);
 	i = mlx->frame / 15;
 	mlx->samourai[1] = mlx_new_image(mlx->cont, SPR_WIDTH, SPR_HEIGHT);
 	mlx_set_image_region(mlx->cont, mlx->samourai[1], 0, 0, 96, 96, mlx->spr->samourai_attack[i]);
-	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->samourai[1], 200, 200, 4, 4, 0);
+	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->samourai[1], SCREEN_W / 4 - SPR_WIDTH * 2, SCREEN_H / 2 - SPR_HEIGHT * 2, 4, 4, 0);
 }
 
-void	set_sprites(t_mlx *mlx, t_wall *ray)
+void	set_sprites(t_mlx *mlx, t_wall *ray, int column)
 {
-	(void)mlx;
-	(void)ray;
+	mlx_color	buf[SCREEN_H];
+	double		step;
+	int			x;
+	int			y;
+
+	x = 0;
+	y = 48;
+	step = 1.0 * SPR_HEIGHT / ray->side_dist_x;
+	while (x < SPR_HEIGHT)
+	{
+		buf[x] = mlx->spr[0].samourai_stand[0][x * SPR_WIDTH + y];
+		x++;
+	}
+	mlx_set_image_region(mlx->cont, mlx->sprite, column, SCREEN_H / 2, 1, SPR_HEIGHT, buf);
 }
 
-void	get_sprites(t_mlx *mlx, t_wall *ray)
+void	get_sprites(t_mlx *mlx, t_wall *ray, int x)
 {
 	while (true)
 	{
 		if (mlx->s_map->map[ray->map_y][ray->map_x] == '2')
-			set_sprites(mlx, ray);
+			set_sprites(mlx, ray, x);
 		if (ray->side_dist_x < 0 || ray->side_dist_y < 0)
 			break ;
 		if (ray->side_dist_x < ray->side_dist_y)
@@ -86,12 +99,4 @@ void	get_sprites(t_mlx *mlx, t_wall *ray)
 			ray->map_y -= ray->step_y;
 		}
 	}
-}
-
-void	set_weapon(t_mlx *mlx)
-{
-	int	w;
-	int	h;
-
-	mlx->weapon = mlx_new_image_from_file(mlx->cont, "pics/axe.png", &w, &h);
 }

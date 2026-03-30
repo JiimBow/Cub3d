@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 20:53:05 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 22:01:26 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ void	draw_wall(t_mlx *mlx)
 	if (mlx->samourai[1])
 		mlx_destroy_image(mlx->cont, mlx->samourai[1]);
 	mlx_destroy_image(mlx->cont, mlx->wall);
-	// mlx_destroy_image(mlx->cont, mlx->weapon);
+	mlx_destroy_image(mlx->cont, mlx->sprite);
+	mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
-	// set_weapon(mlx);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	x = 0;
@@ -120,13 +120,13 @@ void	draw_wall(t_mlx *mlx)
 		calculate_height_wall(&ray);
 		get_textures(mlx, &ray);
 		set_textures(mlx, &ray, x);
-		get_sprites(mlx, &ray);
+		get_sprites(mlx, &ray, x);
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
 	if (mlx->sprite_count != 0)
 		put_sprite_on_window(mlx);
-	// mlx_put_image_to_window(mlx->cont, mlx->win, mlx->weapon, 0, 0);
+	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->sprite, 0, 0);
 	put_minimap_on_map(mlx);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);

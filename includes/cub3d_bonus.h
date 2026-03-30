@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 20:55:03 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/30 22:01:42 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ typedef struct s_mlx
 	mlx_window				win;
 	mlx_window_create_info	info;
 	mlx_image				background;
-	mlx_image				weapon;
 	mlx_image				wall;
+	mlx_image				sprite;
 	mlx_image				minimap;
 	mlx_image				samourai[2];
 	mlx_color				buf_minimap[(SCREEN_H / 10) * (SCREEN_W / 10)];
@@ -195,10 +195,9 @@ void	window_hook(int event, void *par);
 void	set_background(t_mlx *mlx, t_text *text);
 
 // SPRITE
-void	set_weapon(t_mlx *mlx);
 int		set_sprite_start(t_mlx *mlx);
 void	put_sprite_on_window(t_mlx *mlx);
-void	get_sprites(t_mlx *mlx, t_wall *ray);
+void	get_sprites(t_mlx *mlx, t_wall *ray, int x);
 
 // MINIMAP
 void	set_minimap(t_mlx *mlx);
