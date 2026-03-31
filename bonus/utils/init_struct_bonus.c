@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/30 21:59:51 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/31 17:29:22 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door)
 		return (error_message(9));
 	}
 	init_door_pos(map, door);
+	init_sprite_pos(map, sprite);
 	mlx->cont = mlx_init();
 	if (!mlx->cont)
 	{

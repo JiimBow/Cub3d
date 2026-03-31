@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:14:45 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 16:08:04 by jodone           ###   ########.fr       */
+/*   Updated: 2026/03/31 18:25:10 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	init_sprite_pos(t_map *map, t_sprite *sprite)
 		{
 			if (map->map[y][x] == '2')
 			{
-				sprite[i].pos_x = x;
-				sprite[i].pos_y = y;
+				sprite[i].pos_x = x + 0.5;
+				sprite[i].pos_y = y + 0.5;
 				i++;
 			}
 			x++;

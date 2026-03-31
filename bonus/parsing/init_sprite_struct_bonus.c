@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprite_struct_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 22:58:24 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/31 18:50:07 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,41 +62,80 @@ void	put_sprite_on_window(t_mlx *mlx)
 	mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->samourai[1], SCREEN_W / 4 - SPR_WIDTH * 2, SCREEN_H / 2 - SPR_HEIGHT * 2, 4, 4, 0);
 }
 
-void	set_sprites(t_mlx *mlx, t_wall *ray, int column)
+void	draw_sprites(t_mlx *mlx)
 {
-	mlx_color	buf[SCREEN_H];
-	double		step;
+	int			i;
+	double		sx;
+	double		sy;
+	double		inv_det;
+	double		tx;
+	double		ty;
+	int			screen_x;
+	int			size;
+	int			start_x;
+	int			end_x;
+	int			start_y;
+	int			end_y;
 	int			x;
-	int			y;
+	int			tex_x;
+	int			tex_y;
+	// double		step;
+	// double		tex_pos;
+	mlx_color	buf[SCREEN_H];
 
-	x = 0;
-	y = 48;
-	step = 1.0 * SPR_HEIGHT / ray->side_dist_x;
-	while (x < SPR_HEIGHT)
+	i = mlx->sprite_count - 1;
+	while (i >= 0)
 	{
-		buf[x] = mlx->spr[0].samourai_stand[0][x * SPR_WIDTH + y];
-		x++;
-	}
-	mlx_set_image_region(mlx->cont, mlx->sprite, column, SCREEN_H / 2, 1, SPR_HEIGHT, buf);
-}
-
-void	get_sprites(t_mlx *mlx, t_wall *ray, int x)
-{
-	while (true)
-	{
-		if (mlx->s_map->map[ray->map_y][ray->map_x] == '2')
-			set_sprites(mlx, ray, x);
-		if (ray->side_dist_x < 0 || ray->side_dist_y < 0)
-			break ;
-		if (ray->side_dist_x < ray->side_dist_y)
+		sx = mlx->spr[i].pos_x - mlx->pos_x;
+		sy = mlx->spr[i].pos_y - mlx->pos_y;
+		inv_det = 1.0 / (mlx->plane_x * mlx->dir_y - mlx->dir_x * mlx->plane_y);
+		tx = inv_det * (mlx->dir_y * sx - mlx->dir_x * sy);
+		ty = inv_det * (-mlx->plane_y * sx + mlx->plane_x * sy);
+		if (ty <= 0)
 		{
-			ray->side_dist_x -= ray->delta_dist_x;
-			ray->map_x -= ray->step_x;
+			i++;
+			continue;
 		}
-		else
+		screen_x = (int)(SCREEN_W / 2 * (1 + tx / ty));
+		size = abs((int)(SCREEN_H / ty));
+		start_y = -size / 2 + SCREEN_H / 2;
+		if (start_y < 0)
+			start_y = 0;
+		end_y = size / 2 + SCREEN_H / 2;
+		if (end_y >= SCREEN_H)
+			end_y = SCREEN_H - 1;
+		start_x = screen_x - size / 2;
+		if (start_x < 0)
+			start_x = 0;
+		end_x = screen_x + size / 2;
+		if (end_x >= SCREEN_W)
+			end_x = SCREEN_W - 1;
+		x = start_x;
+		while (x < end_x)
 		{
-			ray->side_dist_y -= ray->delta_dist_y;
-			ray->map_y -= ray->step_y;
+				// tex_x = (x - (-size / 2 + screen_x)) * SPR_WIDTH / size;
+				tex_x = (int)(((double)(x - start_x) / size) * SPR_WIDTH);
+				if (tex_x < 0 || tex_x >= SPR_WIDTH)
+				{
+					x++;
+					continue ;
+				}
+				int y = start_y;
+				int k = 0;
+				while (k < SCREEN_H)
+					buf[k++] = (mlx_color){0};
+				while (y < end_y)
+				{
+					int	d = y * 256 - SCREEN_H * 128 + size * 128;
+					tex_y = ((d * SPR_HEIGHT / size) / 256);
+					if (tex_y >= 0 && tex_y < SPR_HEIGHT)
+						buf[y] = mlx->spr[0].samourai_stand[0][tex_y * SPR_WIDTH + tex_x];
+					y++;
+				}
+				mlx_set_image_region(mlx->cont, mlx->sprite,
+					x, 0, 1, SCREEN_H, buf);
+			x++;
 		}
+		i--;
 	}
 }

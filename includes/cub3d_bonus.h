@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 22:01:42 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/03/31 17:35:30 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,8 @@ void	set_background(t_mlx *mlx, t_text *text);
 // SPRITE
 int		set_sprite_start(t_mlx *mlx);
 void	put_sprite_on_window(t_mlx *mlx);
-void	get_sprites(t_mlx *mlx, t_wall *ray, int x);
+// void	get_sprites(t_mlx *mlx, t_wall *ray, int x);
+void	draw_sprites(t_mlx *mlx);
 
 // MINIMAP
 void	set_minimap(t_mlx *mlx);
