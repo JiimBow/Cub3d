@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/01 14:45:33 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/01 17:02:23 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,13 @@ void	draw_wall(t_mlx *mlx)
 	int		x;
 	double	zbuffer[SCREEN_W];
 
+	// mlx->frame++;
+	mlx->s_timer += mlx->delta;
+	if (mlx->s_timer >= 0.00001)
+	{
+		mlx->s_frame++;
+		mlx->s_timer = 0;
+	}
 	mlx_destroy_image(mlx->cont, mlx->wall);
 	if (mlx->sprite)
 		mlx_destroy_image(mlx->cont, mlx->sprite);

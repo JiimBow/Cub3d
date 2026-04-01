@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:41:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/01 16:21:46 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/01 16:48:41 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ static void	put_sprite_pixel(t_mlx *mlx, t_draw *draw, int tex_x, int x)
 	mlx_color	color;
 
 	y = 0;
+	mlx->s_frame %= 60;
+	draw->i = mlx->s_frame / 10;
 	while (y < draw->total)
 	{
 		d = (y + draw->start_y) * 256 - SCREEN_H * 128 + draw->size * 128;
 		tex_y = ((d * SPR_HEIGHT / draw->size) / 256);
-		color = mlx->spr[0].samourai_stand[0][tex_y * SPR_WIDTH + tex_x];
+		color = mlx->spr[0].samourai_stand[draw->i][tex_y * SPR_WIDTH + tex_x];
 		if (color.a != 0)
 			mlx_set_image_pixel(mlx->cont, mlx->sprite, x,
 				y + draw->start_y, color);

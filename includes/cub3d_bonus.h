@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/01 16:02:50 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/01 16:45:58 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_draw
 	int	start_y;
 	int	end_y;
 	int	total;
+	int	i;
 }	t_draw;
 
 typedef struct s_door
@@ -161,6 +162,8 @@ typedef struct s_mlx
 	int						door_count;
 	int						sprite_count;
 	int						frame;
+	double					s_timer;
+	int						s_frame;
 	t_map					*s_map;
 	t_text					*s_text;
 	t_sprite				*spr;
