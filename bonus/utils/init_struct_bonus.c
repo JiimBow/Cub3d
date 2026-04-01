@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/31 17:29:22 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/01 14:43:38 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 
 int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door)
 {
-	t_sprite *sprite;
+	t_sprite	*sprite;
 
 	ft_bzero(mlx, sizeof(t_mlx));
 	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));

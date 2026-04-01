@@ -6,7 +6,7 @@
 #    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/04/01 11:55:09 by jodone           ###   ########.fr        #
+#    Updated: 2026/04/01 15:45:50 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,9 @@ SRC_BONUS	= $(DIR_BONUS)main_bonus.c \
 				$(BONUS_MOV)door_bonus.c \
 				$(BONUS_MOV)direction_bonus.c \
 				$(SPRITE)init_sprite_struct_bonus.c \
-				$(SPRITE)sort_sprite.c
+				$(SPRITE)sort_sprite.c \
+				$(SPRITE)sprite_utils.c \
+				$(SPRITE)draw_sprite.c
 
 OBJ			= $(SRC:$(DIR)%.c=$(OBJ_DIR)%.o)
 

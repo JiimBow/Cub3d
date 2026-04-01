@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/31 20:27:01 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/04/01 14:45:33 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,12 @@ static void	calculate_height_wall(t_wall *ray)
 		ray->draw_end = SCREEN_H - 1;
 }
 
-double		zbuffer[SCREEN_W];
-
 void	draw_wall(t_mlx *mlx)
 {
 	t_wall	ray;
 	int		x;
+	double	zbuffer[SCREEN_W];
 
-	// if (mlx->samourai[0])
-	// 	mlx_destroy_image(mlx->cont, mlx->samourai[0]);
-	// if (mlx->samourai[1])
-	// 	mlx_destroy_image(mlx->cont, mlx->samourai[1]);
 	mlx_destroy_image(mlx->cont, mlx->wall);
 	if (mlx->sprite)
 		mlx_destroy_image(mlx->cont, mlx->sprite);
@@ -124,13 +119,9 @@ void	draw_wall(t_mlx *mlx)
 		zbuffer[x] = ray.perp_wall_dist;
 		get_textures(mlx, &ray);
 		set_textures(mlx, &ray, x);
-		// get_sprites(mlx, &ray, x);
-		// draw_sprites(mlx);
 		x++;
 	}
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
-	// if (mlx->sprite_count != 0)
-	// 	put_sprite_on_window(mlx);
 	draw_sprites(mlx, zbuffer);
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->sprite, 0, 0);
 	put_minimap_on_map(mlx);

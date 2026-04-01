@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/01 14:26:59 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/01 14:41:48 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,81 +44,4 @@ int	set_sprite_start(t_mlx *mlx)
 	}
 	mlx->frame = 0;
 	return (0);
-}
-
-void	draw_sprites(t_mlx *mlx, double *zbuffer)
-{
-	int			i;
-	double		sx;
-	double		sy;
-	double		inv_det;
-	double		tx;
-	double		ty;
-	int			screen_x;
-	int			size;
-	int			start_x;
-	int			end_x;
-	int			start_y;
-	int			end_y;
-	int			x;
-	int			y;
-	int			total;
-	int			d;
-	int			tex_x;
-	int			tex_y;
-	mlx_color	buf[SCREEN_H];
-	mlx_color	color;
-	t_sprite	*sorted_sprites;
-
-	i = 0;
-	sorted_sprites = malloc(mlx->sprite_count * sizeof(t_sprite));
-	sort_sprites(mlx, mlx->spr, sorted_sprites);
-	while (i < mlx->sprite_count)
-	{
-		sx = sorted_sprites[i].pos_x - mlx->pos_x;
-		sy = sorted_sprites[i].pos_y - mlx->pos_y;
-		inv_det = 1.0 / (mlx->plane_x * mlx->dir_y - mlx->dir_x * mlx->plane_y);
-		tx = inv_det * (mlx->dir_y * sx - mlx->dir_x * sy);
-		ty = inv_det * (-mlx->plane_y * sx + mlx->plane_x * sy);
-		if (ty <= 0)
-		{
-			i++;
-			continue;
-		}
-		screen_x = (int)(SCREEN_W / 2 * (1 + tx / ty));
-		size = abs((int)(SCREEN_H / ty));
-		start_y = -size / 2 + SCREEN_H / 2;
-		if (start_y < 0)
-			start_y = 0;
-		end_y = size / 2 + SCREEN_H / 2;
-		if (end_y >= SCREEN_H)
-			end_y = SCREEN_H - 1;
-		start_x = screen_x - size / 2;
-		if (start_x < 0)
-			start_x = 0;
-		end_x = screen_x + size / 2;
-		if (end_x >= SCREEN_W)
-			end_x = SCREEN_W - 1;
-		x = start_x;
-		while (x < end_x)
-		{
-				tex_x = (x - (-size / 2 + screen_x)) * SPR_WIDTH / size;
-				y = 0;
-				total = end_y - start_y;
-				if (ty < zbuffer[x])
-				{
-					while (y < total)
-					{
-						d = (y + start_y) * 256 - SCREEN_H * 128 + size * 128;
-						tex_y = ((d * SPR_HEIGHT / size) / 256);
-						color = mlx->spr[0].samourai_stand[0][tex_y * SPR_WIDTH + tex_x];
-						if (color.a != 0)
-							mlx_set_image_pixel(mlx->cont, mlx->sprite, x, y + start_y, color);
-						y++;
-					}
-				}
-			x++;
-		}
-		i++;
-	}
 }
