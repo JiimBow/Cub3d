@@ -6,7 +6,7 @@
 #    By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/03/31 18:23:55 by jodone           ###   ########.fr        #
+#    Updated: 2026/04/01 11:55:09 by jodone           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ UTILS		= $(DIR)utils/
 PARSING		= $(DIR)parsing/
 MOVING		= $(DIR)moving/
 GRAPHIC		= $(DIR)graphic/
+SPRITE		= $(DIR_BONUS)sprite/
 BONUS_PARS	= $(DIR_BONUS)parsing/
 BONUS_GRAPH	= $(DIR_BONUS)graphic/
 BONUS_MOV	= $(DIR_BONUS)moving/
@@ -75,13 +76,14 @@ SRC_BONUS	= $(DIR_BONUS)main_bonus.c \
 				$(PARSING)parse_element.c \
 				$(PARSING)init_player_pos.c \
 				$(PARSING)color_valid.c \
-				$(BONUS_PARS)init_sprite_struct_bonus.c \
 				$(BONUS_PARS)check_map_bonus.c \
 				$(BONUS_PARS)map_is_valid_bonus.c \
 				$(MOVING)player_rotate.c \
 				$(BONUS_MOV)player_move_bonus.c \
 				$(BONUS_MOV)door_bonus.c \
-				$(BONUS_MOV)direction_bonus.c
+				$(BONUS_MOV)direction_bonus.c \
+				$(SPRITE)init_sprite_struct_bonus.c \
+				$(SPRITE)sort_sprite.c
 
 OBJ			= $(SRC:$(DIR)%.c=$(OBJ_DIR)%.o)
 

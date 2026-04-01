@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/31 20:32:15 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/04/01 11:54:33 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <math.h>
+#include <float.h>
 
 #define W 26
 #define A 4
@@ -99,6 +100,7 @@ typedef struct s_sprite
 {
 	double	pos_x;
 	double	pos_y;
+	double	dist;
 	mlx_color	samourai_stand[10][SPR_HEIGHT * SPR_WIDTH];
 	mlx_color	samourai_attack[7][SPR_HEIGHT * SPR_WIDTH];
 }	t_sprite;
@@ -199,6 +201,7 @@ int		set_sprite_start(t_mlx *mlx);
 void	put_sprite_on_window(t_mlx *mlx);
 // void	get_sprites(t_mlx *mlx, t_wall *ray, int x);
 void	draw_sprites(t_mlx *mlx, double *zbuffer);
+void	sort_sprites(t_mlx *mlx, t_sprite *spr, t_sprite *new_spr);
 
 // MINIMAP
 void	set_minimap(t_mlx *mlx);

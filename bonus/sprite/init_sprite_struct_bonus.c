@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprite_struct_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/31 21:34:36 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/04/01 11:56:00 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,15 @@ void	draw_sprites(t_mlx *mlx, double *zbuffer)
 	int			tex_x;
 	int			tex_y;
 	mlx_color	buf[SCREEN_H];
+	t_sprite	*sorted_sprites;
 
-	// i = mlx->sprite_count - 1;
 	i = 0;
+	sorted_sprites = malloc(mlx->sprite_count * sizeof(t_sprite));
+	sort_sprites(mlx, mlx->spr, sorted_sprites);
 	while (i < mlx->sprite_count)
 	{
-		sx = mlx->spr[i].pos_x - mlx->pos_x;
-		sy = mlx->spr[i].pos_y - mlx->pos_y;
+		sx = sorted_sprites[i].pos_x - mlx->pos_x;
+		sy = sorted_sprites[i].pos_y - mlx->pos_y;
 		inv_det = 1.0 / (mlx->plane_x * mlx->dir_y - mlx->dir_x * mlx->plane_y);
 		tx = inv_det * (mlx->dir_y * sx - mlx->dir_x * sy);
 		ty = inv_det * (-mlx->plane_y * sx + mlx->plane_x * sy);
@@ -116,24 +118,14 @@ void	draw_sprites(t_mlx *mlx, double *zbuffer)
 		while (x < end_x)
 		{
 				tex_x = (x - (-size / 2 + screen_x)) * SPR_WIDTH / size;
-				// tex_x = (int)(((double)(x - start_x) / size) * SPR_WIDTH);
-				// if (tex_x < 0 || tex_x >= SPR_WIDTH)
-				// {
-				// 	x++;
-				// 	continue ;
-				// }
 				int y = 0;
 				int	total = end_y - start_y;
-				// int k = 0;
-				// while (k < SCREEN_H)
-				// 	buf[k++] = (mlx_color){0};
 				if (ty < zbuffer[x])
 				{
 					while (y < total)
 					{
 						int	d = (y + start_y) * 256 - SCREEN_H * 128 + size * 128;
 						tex_y = ((d * SPR_HEIGHT / size) / 256);
-						// if (tex_y >= 0 && tex_y < SPR_HEIGHT)
 						buf[y] = mlx->spr[0].samourai_stand[0][tex_y * SPR_WIDTH + tex_x];
 						y++;
 					}
