@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:41:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/01 16:48:41 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/01 21:48:05 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	draw_sprites(t_mlx *mlx, double *zbuffer)
 			continue ;
 		}
 		draw.screen_x = (int)(SCREEN_W / 2 * (1 + tx / ty));
-		draw.size = abs((int)(SCREEN_H / ty));
+		draw.size = abs((int)(SCREEN_H / ty)) / 0.6;
 		def_start_end_x(&draw);
 		def_start_end_y(&draw);
 		set_pixel_put(mlx, &draw, ty, zbuffer);

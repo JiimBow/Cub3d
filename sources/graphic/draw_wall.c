@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 09:55:46 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 18:11:22 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 		col = mlx->buf_so;
 	else if (ray->step_x < 0 && ray->side == 0)
 		col = mlx->buf_we;
-	else if (ray->step_x > 0 && ray->side == 0)
+	else
 		col = mlx->buf_ea;
 	i = ray->draw_start;
 	while (i < ray->draw_end)

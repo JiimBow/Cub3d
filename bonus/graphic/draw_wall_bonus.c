@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/01 17:02:23 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 23:24:11 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+#include "libft.h"
+#include "mlx.h"
+#include "mlx_extended.h"
+#include <math.h>
+#include <string.h>
 
 static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 {
@@ -28,7 +33,7 @@ static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 		col = mlx->buf_so;
 	else if (ray->step_x < 0 && ray->side == 0)
 		col = mlx->buf_we;
-	else if (ray->step_x > 0 && ray->side == 0)
+	else
 		col = mlx->buf_ea;
 	i = ray->draw_start;
 	while (i < ray->draw_end)
@@ -103,14 +108,17 @@ void	draw_wall(t_mlx *mlx)
 	int		x;
 	double	zbuffer[SCREEN_W];
 
-	// mlx->frame++;
+	mlx->frame++;
+	if (mlx->frame > 100)
+		mlx->frame = 0;
 	mlx->s_timer += mlx->delta;
 	if (mlx->s_timer >= 0.00001)
 	{
 		mlx->s_frame++;
 		mlx->s_timer = 0;
 	}
-	mlx_destroy_image(mlx->cont, mlx->wall);
+	if (mlx->wall)
+		mlx_destroy_image(mlx->cont, mlx->wall);
 	if (mlx->sprite)
 		mlx_destroy_image(mlx->cont, mlx->sprite);
 	mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
@@ -132,6 +140,18 @@ void	draw_wall(t_mlx *mlx)
 	draw_sprites(mlx, zbuffer);
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->sprite, 0, 0);
 	put_minimap_on_map(mlx);
+	if (mlx->life > 5)
+		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart, SCREEN_W - 150, 0, 0.5, 0.5, 0);
+	if (mlx->life == 5)
+		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart_broken, SCREEN_W - 150, 0, 0.5, 0.5, 0);
+	if (mlx->life > 3)
+		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart, SCREEN_W - 300, 0, 0.5, 0.5, 0);
+	if (mlx->life == 3)
+		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart_broken, SCREEN_W - 300, 0, 0.5, 0.5, 0);
+	if (mlx->life > 1)
+		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart, SCREEN_W - 450, 0, 0.5, 0.5, 0);
+	if (mlx->life == 1)
+		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart_broken, SCREEN_W - 450, 0, 0.5, 0.5, 0);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
 	ray.frame_time = (mlx->time - mlx->old_time) * 0.001;
@@ -139,4 +159,6 @@ void	draw_wall(t_mlx *mlx)
 		ray.frame_time = 0.5;
 	player_rotate(mlx, ray.frame_time, ray.frame_time * mlx->sp_rot);
 	player_move(mlx, 0.0, 0.0, ray.frame_time * mlx->sp_move);
+	if (mlx->life <= 0)
+		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->dead, SCREEN_W / 2 - TEX_WIDTH, SCREEN_H / 2 - TEX_HEIGHT, 2, 2, 0);
 }

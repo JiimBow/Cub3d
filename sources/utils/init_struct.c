@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/27 12:14:42 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 18:10:50 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,6 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text)
 	mlx->sp_move = 2.0;
 	mlx->sp_rot = 3.0;
 	mlx->zoom = 4;
-	set_minimap(mlx);
+	set_minimap(mlx, map);
 	return (0);
 }

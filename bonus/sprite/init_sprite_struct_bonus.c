@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprite_struct_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/01 14:41:48 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 22:34:15 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mlx.h"
 #include <cub3d_bonus.h>
 
 int	set_sprite_start(t_mlx *mlx)
@@ -20,7 +21,7 @@ int	set_sprite_start(t_mlx *mlx)
 	int			x;
 
 	mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
-	mlx->samourai[0] = mlx_new_image_from_file(mlx->cont, "pics/IDLE.png", &w, &h);
+	mlx->samourai[0] = mlx_new_image_from_file(mlx->cont, "./pics/IDLE.png", &w, &h);
 	if (!mlx->samourai[0])
 		return (error_message(2));
 	i = 0;
@@ -31,7 +32,7 @@ int	set_sprite_start(t_mlx *mlx)
 		x += SPR_WIDTH;
 		i++;
 	}
-	mlx->samourai[1] = mlx_new_image_from_file(mlx->cont, "pics/ATTACK 1.png", &w, &h);
+	mlx->samourai[1] = mlx_new_image_from_file(mlx->cont, "./pics/ATTACK 1.png", &w, &h);
 	if (!mlx->samourai[1])
 		return (error_message(2));
 	i = 0;

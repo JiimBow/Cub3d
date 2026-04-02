@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/01 14:43:38 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 23:13:49 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+#include "mlx.h"
 
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x)
 {
@@ -62,7 +63,7 @@ static int	put_color_value(mlx_color *color, char *value)
 	return (1);
 }
 
-void	set_all_textures(t_mlx *mlx, mlx_color *buf, mlx_image *img)
+void	set_all_textures(t_mlx *mlx, mlx_color *buf, mlx_image img)
 {
 	int	x;
 	int	y;
@@ -74,7 +75,7 @@ void	set_all_textures(t_mlx *mlx, mlx_color *buf, mlx_image *img)
 	{
 		y = 0;
 		while (y < TEX_HEIGHT)
-			buf[i++] = mlx_get_image_pixel(mlx->cont, *img, x, y++);
+			buf[i++] = mlx_get_image_pixel(mlx->cont, img, x, y++);
 	}
 }
 
@@ -82,11 +83,13 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 {
 	if (load_image(mlx, text, map))
 		return (1);
-	set_all_textures(mlx, mlx->buf_no, &text->no_text);
-	set_all_textures(mlx, mlx->buf_so, &text->so_text);
-	set_all_textures(mlx, mlx->buf_we, &text->we_text);
-	set_all_textures(mlx, mlx->buf_ea, &text->ea_text);
-	set_all_textures(mlx, mlx->buf_do, &text->do_text);
+	set_all_textures(mlx, mlx->buf_no, text->no_text);
+	set_all_textures(mlx, mlx->buf_so, text->so_text);
+	set_all_textures(mlx, mlx->buf_we, text->we_text);
+	set_all_textures(mlx, mlx->buf_ea, text->ea_text);
+	set_all_textures(mlx, mlx->buf_do, text->do_text);
+	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text || !text->do_text)
+		printf("error\n");
 	if (!put_color_value(&text->f_color, map->f_value))
 		return (error_message(5));
 	if (!put_color_value(&text->c_color, map->c_value))
@@ -99,44 +102,39 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	return (0);
 }
 
-int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door)
+int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door **door)
 {
 	t_sprite	*sprite;
 
 	ft_bzero(mlx, sizeof(t_mlx));
+	mlx->cont = mlx_init();
+	if (!mlx->cont)
+		return (error_message(9));
 	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
 	ft_bzero(mlx->keys, 512);
 	ft_bzero(text, sizeof(t_text));
 	if (set_player_start(mlx, map))
 		return (error_message(7));
 	mlx->door_count = init_game_count(map, 'D');
-	door = malloc(mlx->door_count * sizeof(t_door));
-	if (!door)
+	*door = malloc(mlx->door_count * sizeof(t_door));
+	if (!*door)
 		return (error_message(8));
 	mlx->sprite_count = init_game_count(map, '2');
 	sprite = malloc((mlx->sprite_count) * sizeof(t_sprite));
 	if (!sprite)
 	{
-		free(door);
+		free(*door);
 		return (error_message(9));
 	}
-	init_door_pos(map, door);
-	init_sprite_pos(map, sprite);
-	mlx->cont = mlx_init();
-	if (!mlx->cont)
-	{
-		free(door);
-		free(sprite);
-		return (error_message(9));
-	}
+	init_door_pos(map, *door);
 	init_sprite_pos(map, sprite);
 	gettimeofday(&mlx->last_time, NULL);
 	mlx_set_fps_goal(mlx->cont, 90);
 	mlx->s_text = text;
 	mlx->s_map = map;
-	mlx->s_door = door;
+	mlx->s_door = *door;
 	mlx->spr = sprite;
 	set_mlx_struct(mlx);
-	set_minimap(mlx);
+	set_minimap(mlx, map);
 	return (0);
 }

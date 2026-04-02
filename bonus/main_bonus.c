@@ -6,11 +6,13 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 22:31:25 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/02 23:18:02 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mlx.h"
 #include <cub3d_bonus.h>
+#include <unistd.h>
 
 static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 {
@@ -39,6 +41,12 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		mlx_destroy_image(mlx->cont, mlx->samourai[1]);
 	if (mlx->sprite)
 		mlx_destroy_image(mlx->cont, mlx->sprite);
+	if (mlx->heart)
+		mlx_destroy_image(mlx->cont, mlx->heart);
+	if (mlx->heart_broken)
+		mlx_destroy_image(mlx->cont, mlx->heart_broken);
+	if (mlx->dead)
+		mlx_destroy_image(mlx->cont, mlx->dead);
 	if (mlx->win)
 		mlx_destroy_window(mlx->cont, mlx->win);
 	if (mlx->cont)
@@ -57,7 +65,7 @@ static int	parse_main(char **av, t_mlx *mlx, t_map *map, t_text *text)
 	door = NULL;
 	if (map_is_not_valid(av[1], map))
 		return (1);
-	if (init_mlx_struct(mlx, map, text, door))
+	if (init_mlx_struct(mlx, map, text, &door))
 	{
 		free_map(map);
 		return (1);
@@ -68,6 +76,19 @@ static int	parse_main(char **av, t_mlx *mlx, t_map *map, t_text *text)
 		return (1);
 	}
 	return (0);
+}
+
+void	hitting(void *param)
+{
+	t_mlx *mlx = param;
+
+	if (mlx->s_map->map[(int)mlx->pos_y][(int)mlx->pos_x] == '2' && mlx->hit == 0)
+	{
+		mlx->hit = 1;
+		mlx->life--;
+	}
+	if (mlx->s_map->map[(int)mlx->pos_y][(int)mlx->pos_x] == '0' && mlx->hit == 1)
+		mlx->hit = 0;
 }
 
 int	main(int ac, char **av)
@@ -87,6 +108,7 @@ int	main(int ac, char **av)
 	mlx_mouse_move(mlx.cont, mlx.win, SCREEN_W / 2, SCREEN_H / 2);
 	mlx_mouse_hide(mlx.cont);
 	mlx_add_loop_hook(mlx.cont, update_frame, &mlx);
+	mlx_add_loop_hook(mlx.cont, hitting, &mlx);
 	mlx_loop(mlx.cont);
 	destroy_image_window_context(&mlx, &map);
 	return (0);

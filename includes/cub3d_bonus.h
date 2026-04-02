@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/01 16:45:58 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 23:14:04 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ typedef struct s_mlx
 	mlx_image				wall;
 	mlx_image				sprite;
 	mlx_image				minimap;
+	mlx_image				heart;
+	mlx_image				heart_broken;
 	mlx_image				samourai[2];
 	mlx_color				buf_minimap[(SCREEN_H / 10) * (SCREEN_W / 10)];
 	mlx_color				*buf_no;
@@ -164,6 +166,9 @@ typedef struct s_mlx
 	int						frame;
 	double					s_timer;
 	int						s_frame;
+	int						hit;
+	int						life;
+	mlx_image				dead;
 	t_map					*s_map;
 	t_text					*s_text;
 	t_sprite				*spr;
@@ -190,7 +195,7 @@ int		is_element(char *map_line, t_list **elem_lst, t_map *map);
 // INITIALIZE
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
-int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door *door);
+int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door **door);
 void	set_mlx_struct(t_mlx *mlx);
 int		load_image(t_mlx *mlx, t_text *text, t_map *map);
 void	init_door_pos(t_map *map, t_door *door);
@@ -219,7 +224,7 @@ void	def_start_end_x(t_draw *draw);
 void	def_start_end_y(t_draw *draw);
 
 // MINIMAP
-void	set_minimap(t_mlx *mlx);
+void	set_minimap(t_mlx *mlx, t_map *map);
 void	put_minimap_on_map(t_mlx *mlx);
 
 // KEY

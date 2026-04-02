@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   load_image_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 11:49:26 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/27 12:12:41 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 22:54:01 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+#include "mlx.h"
 
 int	load_image(t_mlx *mlx, t_text *text, t_map *map)
 {
@@ -23,6 +24,10 @@ int	load_image(t_mlx *mlx, t_text *text, t_map *map)
 	text->ea_text = mlx_new_image_from_file(mlx->cont, map->ea_path, &w, &h);
 	text->do_text = mlx_new_image_from_file(mlx->cont,
 			"./pics/door.png", &w, &h);
+	mlx->heart = mlx_new_image_from_file(mlx->cont, "pics/heart.png", &w, &h);
+	mlx->heart_broken = mlx_new_image_from_file(mlx->cont,
+			"pics/heart_broken.png", &w, &h);
+	mlx->dead = mlx_new_image_from_file(mlx->cont, "pics/skull.png", &w, &h);
 	if (!text->no_text || !text->so_text || !text->we_text
 		|| !text->ea_text || !text->do_text)
 		return (error_message(2));

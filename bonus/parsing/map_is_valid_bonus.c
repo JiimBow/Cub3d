@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:30:56 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/25 17:25:03 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 17:57:46 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,16 @@ static char	**copy_map(char *map_name)
 	if (map_fd < 0)
 		return (NULL);
 	i = nbline_in_file(map_fd, &max_len);
+	close(map_fd);
 	map_copy = ft_calloc(i + 1, sizeof(char *));
 	if (!map_copy)
 		return (NULL);
-	close(map_fd);
 	map_fd = open(map_name, O_RDONLY);
 	if (map_fd < 0)
+	{
+		free(map_copy);
 		return (NULL);
+	}
 	i = 0;
 	get_map_from_file(map_fd, map_copy, max_len);
 	close(map_fd);

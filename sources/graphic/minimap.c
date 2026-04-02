@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 12:22:36 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 10:55:24 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 17:25:47 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "cub3d.h"
 #endif
 
-void	set_minimap(t_mlx *mlx)
+void	set_minimap(t_mlx *mlx, t_map *map)
 {
 	int	x;
 	int	y;
@@ -25,12 +25,12 @@ void	set_minimap(t_mlx *mlx)
 	mlx->old_pos_y = mlx->pos_y;
 	mlx->minimap = mlx_new_image(mlx->cont, SCREEN_W / 10, SCREEN_H / 10);
 	y = 0;
-	while (mlx->s_map->map[y])
+	while (map->map[y])
 	{
 		x = 0;
-		while (mlx->s_map->map[y][x])
+		while (map->map[y][x])
 		{
-			if (mlx->s_map->map[y][x] == '1')
+			if (map->map[y][x] == '1')
 				mlx_set_image_pixel(mlx->cont, mlx->minimap, x, y,
 					(mlx_color){.rgba = 0x0000001a});
 			x++;

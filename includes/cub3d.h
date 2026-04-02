@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 10:55:59 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/27 12:14:14 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/02 17:25:38 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	window_hook(int event, void *par);
 void	set_background(t_mlx *mlx, t_text *text);
 
 // MINIMAP
-void	set_minimap(t_mlx *mlx);
+void	set_minimap(t_mlx *mlx, t_map *map);
 void	put_minimap_on_map(t_mlx *mlx);
 
 // KEY
