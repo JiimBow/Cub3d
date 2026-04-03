@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 17:30:39 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 23:39:48 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ typedef struct s_mlx
 	int						s_frame;
 	int						hit;
 	int						life;
+	int						tempo;
+	int						i;
 	double					anim_time;
 	mlx_image				dead1;
 	mlx_image				dead2;
@@ -185,34 +187,33 @@ int		error_message(int code);
 // Memory Management
 void	free_map(t_map *map);
 void	free_lst(t_list *lst);
-void	free_double_ptr(char **ptr);
 void	free_color(t_mlx *mlx);
+void	free_double_ptr(char **ptr);
 void	destroy_image_window_context(t_mlx *mlx, t_map *map);
 
 // PARSING
 int		is_space(char c);
-int		color_valid(char *str);
-int		map_is_not_valid(char *file, t_map *map);
 int		check_map(char **map);
+int		color_valid(char *str);
 int		check_element(t_map *map);
+int		map_is_not_valid(char *file, t_map *map);
 int		is_element(char *map_line, t_list **elem_lst, t_map *map);
 
 // INITIALIZE
+void	set_mlx_struct(t_mlx *mlx);
+int		init_game_count(t_map *map, char type);
+void	init_door_pos(t_map *map, t_door *door);
+void	init_sprite_pos(t_map *map, t_sprite *sprite);
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
+int		load_image(t_mlx *mlx, t_text *text, t_map *map);
 int		init_textures(t_mlx *mlx, t_text *text, t_map *map);
 int		init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door **door);
-void	set_mlx_struct(t_mlx *mlx);
-int		load_image(t_mlx *mlx, t_text *text, t_map *map);
-void	init_door_pos(t_map *map, t_door *door);
-int		init_game_count(t_map *map, char type);
-void	init_sprite_pos(t_map *map, t_sprite *sprite);
-
 // MOVING
 int		set_player_start(t_mlx *mlx, t_map *map);
+void	open_door(t_mlx *mlx, double player_x, double player_y);
 void	player_rotate(t_mlx *mlx, double frame_time, double speed);
 int		player_move(t_mlx *mlx, double delx, double dely, double frame_time);
 void	direction_move(t_mlx *mlx, double *delx, double *dely, double frame);
-void	open_door(t_mlx *mlx, double player_x, double player_y);
 
 // GRAPHICS
 void	draw_wall(t_mlx *mlx);
@@ -221,23 +222,23 @@ void	window_hook(int event, void *par);
 void	set_background(t_mlx *mlx, t_text *text);
 
 // RAYCASTING
-void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 void	calculate_height_wall(t_wall *ray);
-void	send_ray_until_wall(t_mlx *mlx, t_wall *ray);
 void	get_textures(t_mlx *mlx, t_wall *ray);
 void	set_textures(t_mlx *mlx, t_wall *ray, int x);
+void	send_ray_until_wall(t_mlx *mlx, t_wall *ray);
+void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 
 // SPRITE
-int		set_sprite_start(t_mlx *mlx, int nb_frame, int spr_x);
-void	draw_sprites(t_mlx *mlx, double *zbuffer);
-void	sort_sprites(t_mlx *mlx, t_sprite *spr, t_sprite *new_spr);
-int		get_trans(t_mlx *mlx, t_sprite spr, double *transx, double *transy);
 void	def_start_end_x(t_draw *draw);
 void	def_start_end_y(t_draw *draw);
+void	draw_sprites(t_mlx *mlx, double *zbuffer);
+int		set_sprite_start(t_mlx *mlx, int nb_frame, int spr_x);
+void	sort_sprites(t_mlx *mlx, t_sprite *spr, t_sprite *new_spr);
+int		get_trans(t_mlx *mlx, t_sprite spr, double *transx, double *transy);
 
 // MINIMAP
-void	set_minimap(t_mlx *mlx, t_map *map);
 void	put_minimap_on_map(t_mlx *mlx);
+void	set_minimap(t_mlx *mlx, t_map *map);
 
 // KEY
 void	key_up(int key, void *param);

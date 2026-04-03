@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 12:07:48 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/03 12:13:50 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 23:08:41 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ void	hitting(void *param)
 	if (mlx->s_map->map[(int)mlx->pos_y][(int)mlx->pos_x] == '2'
 		&& mlx->hit == 0)
 	{
+		mlx->tempo = 1;
 		mlx->hit = 1;
 		mlx->life--;
 	}
-	if (mlx->s_map->map[(int)mlx->pos_y][(int)mlx->pos_x] == '0'
-		&& mlx->hit == 1)
+	if ((mlx->s_map->map[(int)mlx->pos_y][(int)mlx->pos_x] == '0'
+		&& mlx->hit == 1) || mlx->frame > 100)
+	{
+		mlx->tempo = 0;
 		mlx->hit = 0;
+	}
 }
 
 void	check_player_life(t_mlx *mlx)

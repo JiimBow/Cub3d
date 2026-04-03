@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:41:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 09:49:20 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 23:39:32 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,35 @@ static void	put_sprite_pixel(t_mlx *mlx, t_draw *draw, int tex_x, int x)
 	mlx_color	color;
 
 	y = 0;
-	mlx->s_frame %= 60;
-	draw->i = mlx->s_frame / 10;
+	mlx->s_frame %= 90;
+	draw->i = mlx->s_frame / SP1_FRAME;
 	while (y < draw->total)
 	{
 		d = (y + draw->start_y) * 256 - SCREEN_H * 128 + draw->size * 128;
 		tex_y = ((d * SPR_HEIGHT / draw->size) / 256);
 		color = mlx->spr[0].samourai_stand[draw->i][tex_y * SPR_WIDTH + tex_x];
+		if (color.a != 0)
+			mlx_set_image_pixel(mlx->cont, mlx->sprite, x,
+				y + draw->start_y, color);
+		y++;
+	}
+}
+
+static void	put_sprite_pixel2(t_mlx *mlx, t_draw *draw, int tex_x, int x)
+{
+	int			y;
+	int			d;
+	int			tex_y;
+	mlx_color	color;
+
+	y = 0;
+	mlx->s_frame %= 49;
+	draw->i = mlx->s_frame / SP2_FRAME;
+	while (y < draw->total)
+	{
+		d = (y + draw->start_y) * 256 - SCREEN_H * 128 + draw->size * 128;
+		tex_y = ((d * SPR_HEIGHT / draw->size) / 256);
+		color = mlx->spr[0].samourai_attack[draw->i][tex_y * SPR_WIDTH + tex_x];
 		if (color.a != 0)
 			mlx_set_image_pixel(mlx->cont, mlx->sprite, x,
 				y + draw->start_y, color);
@@ -46,27 +68,31 @@ static void	set_pixel_put(t_mlx *mlx, t_draw *draw, double ty, double *zbuffer)
 			* SPR_WIDTH / draw->size;
 		draw->total = draw->end_y - draw->start_y;
 		if (ty < zbuffer[x])
-			put_sprite_pixel(mlx, draw, tex_x, x);
+		{
+			if (mlx->tempo == 1 && mlx->i == mlx->sprite_count - 1)
+				put_sprite_pixel2(mlx, draw, tex_x, x);
+			else
+				put_sprite_pixel(mlx, draw, tex_x, x);
+		}
 		x++;
 	}
 }
 
 void	draw_sprites(t_mlx *mlx, double *zbuffer)
 {
-	int			i;
 	double		tx;
 	double		ty;
 	t_sprite	*sorted_sprites;
 	t_draw		draw;
 
-	i = 0;
+	mlx->i = 0;
 	sorted_sprites = malloc(mlx->sprite_count * sizeof(t_sprite));
 	sort_sprites(mlx, mlx->spr, sorted_sprites);
-	while (i < mlx->sprite_count)
+	while (mlx->i < mlx->sprite_count)
 	{
-		if (get_trans(mlx, sorted_sprites[i], &tx, &ty) == 1)
+		if (get_trans(mlx, sorted_sprites[mlx->i], &tx, &ty) == 1)
 		{
-			i++;
+			mlx->i++;
 			continue ;
 		}
 		draw.screen_x = (int)(SCREEN_W / 2 * (1 + tx / ty));
@@ -74,7 +100,7 @@ void	draw_sprites(t_mlx *mlx, double *zbuffer)
 		def_start_end_x(&draw);
 		def_start_end_y(&draw);
 		set_pixel_put(mlx, &draw, ty, zbuffer);
-		i++;
+		mlx->i++;
 	}
 	free(sorted_sprites);
 }

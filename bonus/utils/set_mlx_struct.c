@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:56:09 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 09:30:14 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 23:01:08 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	set_mlx_struct(t_mlx *mlx)
 	mlx->life = 6;
 	mlx->hit = 0;
 	mlx->anim_time = 0.0;
+	mlx->tempo = 0;
 }
