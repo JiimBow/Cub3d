@@ -6,38 +6,11 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/03 12:22:34 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:17:10 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
-void	init_ray_data(t_mlx *mlx, t_wall *ray, int x)
-{
-	ray->camera_x = 2 * x / (double)SCREEN_W - 1;
-	ray->ray_dir_x = mlx->dir_x + mlx->plane_x * ray->camera_x;
-	ray->ray_dir_y = mlx->dir_y + mlx->plane_y * ray->camera_x;
-	ray->map_x = (int)mlx->pos_x;
-	ray->map_y = (int)mlx->pos_y;
-	if (ray->ray_dir_x == 0)
-		ray->delta_dist_x = 1e30;
-	else
-		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-	if (ray->ray_dir_y == 0)
-		ray->delta_dist_y = 1e30;
-	else
-		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
-	ray->step_x = (ray->ray_dir_x < 0) * -1 + (ray->ray_dir_x >= 0);
-	ray->step_y = (ray->ray_dir_y < 0) * -1 + (ray->ray_dir_y >= 0);
-	if (ray->ray_dir_x < 0)
-		ray->side_dist_x = (mlx->pos_x - ray->map_x) * ray->delta_dist_x;
-	else
-		ray->side_dist_x = (ray->map_x + 1.0 - mlx->pos_x) * ray->delta_dist_x;
-	if (ray->ray_dir_y < 0)
-		ray->side_dist_y = (mlx->pos_y - ray->map_y) * ray->delta_dist_y;
-	else
-		ray->side_dist_y = (ray->map_y + 1.0 - mlx->pos_y) * ray->delta_dist_y;
-}
 
 static int	put_color_value(mlx_color *color, char *value)
 {
@@ -80,6 +53,9 @@ void	set_all_textures(t_mlx *mlx, mlx_color *buf, mlx_image img)
 
 int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 {
+	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
+	if (!mlx->wall)
+		return (1);
 	if (load_image(mlx, text, map))
 		return (1);
 	set_all_textures(mlx, mlx->buf_no, text->no_text);
@@ -97,24 +73,15 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	mlx->win = mlx_new_window(mlx->cont, &mlx->info);
 	set_background(mlx, text);
 	if (mlx->sprite_count != 0)
-		if (set_sprite_start(mlx))
+		if (set_sprite_start(mlx, 0, 0))
 			return (error_message(2));
 	return (0);
 }
 
-int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door **door)
+int	allocation(t_mlx *mlx, t_map *map, t_door **door)
 {
 	t_sprite	*sprite;
 
-	ft_bzero(mlx, sizeof(t_mlx));
-	mlx->cont = mlx_init();
-	if (!mlx->cont)
-		return (error_message(9));
-	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
-	ft_bzero(mlx->keys, 512);
-	ft_bzero(text, sizeof(t_text));
-	if (set_player_start(mlx, map))
-		return (error_message(7));
 	mlx->door_count = init_game_count(map, 'D');
 	*door = malloc(mlx->door_count * sizeof(t_door));
 	if (!*door)
@@ -124,24 +91,40 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door **door)
 	if (!sprite)
 	{
 		free(*door);
-		return (error_message(9));
+		return (error_message(8));
 	}
 	mlx->clear = malloc((SCREEN_H * SCREEN_W) * sizeof(mlx_color));
 	if (!mlx->clear)
 	{
 		free(*door);
 		free(sprite);
-		return (error_message(9));
+		return (error_message(8));
 	}
+	mlx->spr = sprite;
+	return (0);
+}
+
+int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door **door)
+{
+	ft_bzero(mlx, sizeof(t_mlx));
+	mlx->cont = mlx_init();
+	if (!mlx->cont)
+		return (error_message(9));
+	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
+	ft_bzero(mlx->keys, 512);
+	ft_bzero(text, sizeof(t_text));
+	if (set_player_start(mlx, map))
+		return (error_message(7));
+	if (allocation(mlx, map, door))
+		return (error_message(9));
 	ft_bzero(mlx->clear, SCREEN_H * SCREEN_W * sizeof(mlx_color));
 	init_door_pos(map, *door);
-	init_sprite_pos(map, sprite);
+	init_sprite_pos(map, mlx->spr);
 	gettimeofday(&mlx->last_time, NULL);
 	mlx_set_fps_goal(mlx->cont, 90);
 	mlx->s_text = text;
 	mlx->s_map = map;
 	mlx->s_door = *door;
-	mlx->spr = sprite;
 	set_mlx_struct(mlx);
 	set_minimap(mlx, map);
 	return (0);

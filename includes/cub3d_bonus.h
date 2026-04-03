@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 12:11:43 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:30:39 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <math.h>
-#include <float.h>
 
 #define W 26
 #define A 4
@@ -100,9 +99,9 @@ typedef struct s_text
 
 typedef struct s_sprite
 {
-	double	pos_x;
-	double	pos_y;
-	double	dist;
+	double		pos_x;
+	double		pos_y;
+	double		dist;
 	mlx_color	samourai_stand[SP1_FRAME][SPR_HEIGHT * SPR_WIDTH];
 	mlx_color	samourai_attack[SP2_FRAME][SPR_HEIGHT * SPR_WIDTH];
 }	t_sprite;
@@ -172,7 +171,8 @@ typedef struct s_mlx
 	int						hit;
 	int						life;
 	double					anim_time;
-	mlx_image				dead;
+	mlx_image				dead1;
+	mlx_image				dead2;
 	t_map					*s_map;
 	t_text					*s_text;
 	t_sprite				*spr;
@@ -187,6 +187,7 @@ void	free_map(t_map *map);
 void	free_lst(t_list *lst);
 void	free_double_ptr(char **ptr);
 void	free_color(t_mlx *mlx);
+void	destroy_image_window_context(t_mlx *mlx, t_map *map);
 
 // PARSING
 int		is_space(char c);
@@ -219,8 +220,15 @@ void	update_frame(void *param);
 void	window_hook(int event, void *par);
 void	set_background(t_mlx *mlx, t_text *text);
 
+// RAYCASTING
+void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
+void	calculate_height_wall(t_wall *ray);
+void	send_ray_until_wall(t_mlx *mlx, t_wall *ray);
+void	get_textures(t_mlx *mlx, t_wall *ray);
+void	set_textures(t_mlx *mlx, t_wall *ray, int x);
+
 // SPRITE
-int		set_sprite_start(t_mlx *mlx);
+int		set_sprite_start(t_mlx *mlx, int nb_frame, int spr_x);
 void	draw_sprites(t_mlx *mlx, double *zbuffer);
 void	sort_sprites(t_mlx *mlx, t_sprite *spr, t_sprite *new_spr);
 int		get_trans(t_mlx *mlx, t_sprite spr, double *transx, double *transy);

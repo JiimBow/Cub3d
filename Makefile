@@ -6,7 +6,7 @@
 #    By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 15:54:22 by mgarnier          #+#    #+#              #
-#    Updated: 2026/04/03 12:09:51 by mgarnier         ###   ########.fr        #
+#    Updated: 2026/04/03 15:59:04 by mgarnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,9 @@ SRC_BONUS	= $(DIR_BONUS)main_bonus.c \
 				$(UTILS)error_management.c \
 				$(UTILS)free_memory.c \
 				$(UTILS)events.c \
+				$(BONUS_UTILS)raycasting.c \
 				$(BONUS_UTILS)player_life.c \
+				$(BONUS_UTILS)free_management.c \
 				$(BONUS_UTILS)init_struct_bonus.c \
 				$(BONUS_UTILS)load_image_bonus.c \
 				$(BONUS_UTILS)set_mlx_struct.c \
