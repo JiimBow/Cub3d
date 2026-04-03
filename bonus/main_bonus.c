@@ -6,13 +6,11 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/02 23:18:02 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 12:08:14 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include <cub3d_bonus.h>
-#include <unistd.h>
 
 static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 {
@@ -55,6 +53,8 @@ static void	destroy_image_window_context(t_mlx *mlx, t_map *map)
 		free(mlx->spr);
 	if (mlx->s_door)
 		free(mlx->s_door);
+	if (mlx->clear)
+		free(mlx->clear);
 	free_map(map);
 }
 
@@ -76,19 +76,6 @@ static int	parse_main(char **av, t_mlx *mlx, t_map *map, t_text *text)
 		return (1);
 	}
 	return (0);
-}
-
-void	hitting(void *param)
-{
-	t_mlx *mlx = param;
-
-	if (mlx->s_map->map[(int)mlx->pos_y][(int)mlx->pos_x] == '2' && mlx->hit == 0)
-	{
-		mlx->hit = 1;
-		mlx->life--;
-	}
-	if (mlx->s_map->map[(int)mlx->pos_y][(int)mlx->pos_x] == '0' && mlx->hit == 1)
-		mlx->hit = 0;
 }
 
 int	main(int ac, char **av)

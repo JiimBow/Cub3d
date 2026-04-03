@@ -6,12 +6,11 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/02 23:13:49 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 12:22:34 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "mlx.h"
 
 void	init_ray_data(t_mlx *mlx, t_wall *ray, int x)
 {
@@ -88,7 +87,8 @@ int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 	set_all_textures(mlx, mlx->buf_we, text->we_text);
 	set_all_textures(mlx, mlx->buf_ea, text->ea_text);
 	set_all_textures(mlx, mlx->buf_do, text->do_text);
-	if (!text->no_text || !text->so_text || !text->we_text || !text->ea_text || !text->do_text)
+	if (!text->no_text || !text->so_text || !text->we_text
+		|| !text->ea_text || !text->do_text)
 		printf("error\n");
 	if (!put_color_value(&text->f_color, map->f_value))
 		return (error_message(5));
@@ -126,6 +126,14 @@ int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door **door)
 		free(*door);
 		return (error_message(9));
 	}
+	mlx->clear = malloc((SCREEN_H * SCREEN_W) * sizeof(mlx_color));
+	if (!mlx->clear)
+	{
+		free(*door);
+		free(sprite);
+		return (error_message(9));
+	}
+	ft_bzero(mlx->clear, SCREEN_H * SCREEN_W * sizeof(mlx_color));
 	init_door_pos(map, *door);
 	init_sprite_pos(map, sprite);
 	gettimeofday(&mlx->last_time, NULL);

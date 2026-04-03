@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/02 23:14:04 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 12:11:43 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 #define SPR_WIDTH 96
 #define M_PI 3.14159265358979323846
 #define RGB_RED 0xff0000ff
+#define SP1_FRAME 10
+#define SP2_FRAME 7
 
 typedef struct s_wall
 {
@@ -101,8 +103,8 @@ typedef struct s_sprite
 	double	pos_x;
 	double	pos_y;
 	double	dist;
-	mlx_color	samourai_stand[10][SPR_HEIGHT * SPR_WIDTH];
-	mlx_color	samourai_attack[7][SPR_HEIGHT * SPR_WIDTH];
+	mlx_color	samourai_stand[SP1_FRAME][SPR_HEIGHT * SPR_WIDTH];
+	mlx_color	samourai_attack[SP2_FRAME][SPR_HEIGHT * SPR_WIDTH];
 }	t_sprite;
 
 typedef struct s_draw
@@ -136,6 +138,7 @@ typedef struct s_mlx
 	mlx_image				heart_broken;
 	mlx_image				samourai[2];
 	mlx_color				buf_minimap[(SCREEN_H / 10) * (SCREEN_W / 10)];
+	mlx_color				*clear;
 	mlx_color				*buf_no;
 	mlx_color				*buf_so;
 	mlx_color				*buf_we;
@@ -168,6 +171,7 @@ typedef struct s_mlx
 	int						s_frame;
 	int						hit;
 	int						life;
+	double					anim_time;
 	mlx_image				dead;
 	t_map					*s_map;
 	t_text					*s_text;
@@ -233,3 +237,7 @@ void	key_down(int key, void *param);
 
 // TIME
 long	get_delta_time(t_mlx *mlx);
+
+// PLAYER_LIFE
+void	hitting(void *param);
+void	check_player_life(t_mlx *mlx);

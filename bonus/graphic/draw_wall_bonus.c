@@ -6,16 +6,11 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/02 23:24:11 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 12:14:40 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "libft.h"
-#include "mlx.h"
-#include "mlx_extended.h"
-#include <math.h>
-#include <string.h>
 
 static void	set_textures(t_mlx *mlx, t_wall *ray, int x)
 {
@@ -60,7 +55,7 @@ static void	get_textures(t_mlx *mlx, t_wall *ray)
 		|| (ray->side == 1 && ray->ray_dir_y < 0))
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
 	step = 1.0 * TEX_HEIGHT / ray->line_height;
-	ray->tex_pos = (ray->draw_start - SCREEN_H / 2 + ray->line_height / 2);
+	ray->tex_pos = (ray->draw_start - (double)SCREEN_H / 2 + ray->line_height / 2);
 	ray->tex_pos *= step;
 }
 
@@ -117,10 +112,8 @@ void	draw_wall(t_mlx *mlx)
 		mlx->s_frame++;
 		mlx->s_timer = 0;
 	}
-	if (mlx->wall)
-		mlx_destroy_image(mlx->cont, mlx->wall);
-	if (mlx->sprite)
-		mlx_destroy_image(mlx->cont, mlx->sprite);
+	mlx_destroy_image(mlx->cont, mlx->wall);
+	mlx_destroy_image(mlx->cont, mlx->sprite);
 	mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
@@ -140,25 +133,21 @@ void	draw_wall(t_mlx *mlx)
 	draw_sprites(mlx, zbuffer);
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->sprite, 0, 0);
 	put_minimap_on_map(mlx);
-	if (mlx->life > 5)
-		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart, SCREEN_W - 150, 0, 0.5, 0.5, 0);
-	if (mlx->life == 5)
-		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart_broken, SCREEN_W - 150, 0, 0.5, 0.5, 0);
-	if (mlx->life > 3)
-		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart, SCREEN_W - 300, 0, 0.5, 0.5, 0);
-	if (mlx->life == 3)
-		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart_broken, SCREEN_W - 300, 0, 0.5, 0.5, 0);
-	if (mlx->life > 1)
-		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart, SCREEN_W - 450, 0, 0.5, 0.5, 0);
-	if (mlx->life == 1)
-		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->heart_broken, SCREEN_W - 450, 0, 0.5, 0.5, 0);
+	check_player_life(mlx);
 	mlx->old_time = mlx->time;
 	mlx->time = get_delta_time(mlx);
 	ray.frame_time = (mlx->time - mlx->old_time) * 0.001;
 	if (ray.frame_time > 0.5)
 		ray.frame_time = 0.5;
-	player_rotate(mlx, ray.frame_time, ray.frame_time * mlx->sp_rot);
-	player_move(mlx, 0.0, 0.0, ray.frame_time * mlx->sp_move);
-	if (mlx->life <= 0)
+	if (mlx->life > 0)
+		player_move(mlx, 0.0, 0.0, ray.frame_time * mlx->sp_move);
+	else
+	{
 		mlx_put_transformed_image_to_window(mlx->cont, mlx->win, mlx->dead, SCREEN_W / 2 - TEX_WIDTH, SCREEN_H / 2 - TEX_HEIGHT, 2, 2, 0);
+		mlx->keys[RIGHT_KEY] = 1;
+		mlx->keys[LEFT_KEY] = 0;
+		mlx->lock_mouse = 1;
+		mlx_mouse_show(mlx->cont);
+	}
+	player_rotate(mlx, ray.frame_time, ray.frame_time * mlx->sp_rot);
 }

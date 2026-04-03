@@ -6,11 +6,10 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/02 22:34:15 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 15:20:41 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include <cub3d_bonus.h>
 
 int	set_sprite_start(t_mlx *mlx)

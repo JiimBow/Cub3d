@@ -6,12 +6,11 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 11:49:26 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/02 22:54:01 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/03 10:16:15 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-#include "mlx.h"
 
 int	load_image(t_mlx *mlx, t_text *text, t_map *map)
 {
