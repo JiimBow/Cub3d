@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/06 11:11:37 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/04/06 18:07:06 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ static void	raycasting(t_mlx *mlx, t_wall *ray, double *zbuffer)
 {
 	int	x;
 
+	mlx->frame = (mlx->frame + 1) % 100;
+	mlx->s_timer += mlx->delta;
+	if (mlx->s_timer >= 0.00001)
+	{
+		mlx->s_frame++;
+		mlx->s_timer = 0;
+	}
 	x = 0;
 	while (x < SCREEN_W)
 	{
@@ -59,19 +66,9 @@ void	draw_wall(t_mlx *mlx)
 	t_wall	ray;
 	double	zbuffer[SCREEN_W];
 
-	mlx->frame = (mlx->frame + 1) % 100;
-	mlx->s_timer += mlx->delta;
-	if (mlx->s_timer >= 0.00001)
-	{
-		mlx->s_frame++;
-		mlx->s_timer = 0;
-	}
 	mlx_destroy_image(mlx->cont, mlx->wall);
 	if (mlx->sprite_count != 0)
-	{
 		mlx_destroy_image(mlx->cont, mlx->sprite);
-		mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
-	}
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
@@ -79,6 +76,7 @@ void	draw_wall(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
 	if (mlx->sprite_count != 0)
 	{
+		mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 		draw_sprites(mlx, zbuffer);
 		mlx_put_image_to_window(mlx->cont, mlx->win, mlx->sprite, 0, 0);
 	}

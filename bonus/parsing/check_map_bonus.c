@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:34:23 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/06 10:52:12 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/04/06 17:33:40 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,7 @@ static int	check_row(char **map, int line, int col)
 			else
 				return (0);
 		}
-		else if (map[line][col] == '\n'
-			&& map[line][col - 1] == '1')
+		else if (map[line][col] == '\n' && map[line][col - 1] == '1')
 			col++;
 		else
 			return (0);
