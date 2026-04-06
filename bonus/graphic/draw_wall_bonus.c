@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/03 17:31:37 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/06 11:11:37 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,21 @@ void	draw_wall(t_mlx *mlx)
 		mlx->s_timer = 0;
 	}
 	mlx_destroy_image(mlx->cont, mlx->wall);
-	mlx_destroy_image(mlx->cont, mlx->sprite);
-	mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
+	if (mlx->sprite_count != 0)
+	{
+		mlx_destroy_image(mlx->cont, mlx->sprite);
+		mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
+	}
 	mlx->wall = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
 	mlx_clear_window(mlx->cont, mlx->win, (mlx_color){0});
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->background, 0, 0);
 	raycasting(mlx, &ray, zbuffer);
 	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->wall, 0, 0);
-	draw_sprites(mlx, zbuffer);
-	mlx_put_image_to_window(mlx->cont, mlx->win, mlx->sprite, 0, 0);
+	if (mlx->sprite_count != 0)
+	{
+		draw_sprites(mlx, zbuffer);
+		mlx_put_image_to_window(mlx->cont, mlx->win, mlx->sprite, 0, 0);
+	}
 	put_minimap_on_map(mlx);
 	check_player_life(mlx);
 	check_player_movement(mlx, &ray);

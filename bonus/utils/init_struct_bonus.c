@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/03 17:17:10 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/06 11:09:24 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,24 @@ int	allocation(t_mlx *mlx, t_map *map, t_door **door)
 	*door = malloc(mlx->door_count * sizeof(t_door));
 	if (!*door)
 		return (error_message(8));
-	mlx->sprite_count = init_game_count(map, '2');
-	sprite = malloc((mlx->sprite_count) * sizeof(t_sprite));
-	if (!sprite)
-	{
-		free(*door);
-		return (error_message(8));
-	}
 	mlx->clear = malloc((SCREEN_H * SCREEN_W) * sizeof(mlx_color));
 	if (!mlx->clear)
 	{
 		free(*door);
-		free(sprite);
 		return (error_message(8));
 	}
-	mlx->spr = sprite;
+	mlx->sprite_count = init_game_count(map, '2');
+	if (mlx->sprite_count != 0)
+	{
+		sprite = malloc((mlx->sprite_count) * sizeof(t_sprite));
+		if (!sprite)
+		{
+			free(*door);
+			free(mlx->clear);
+			return (error_message(8));
+		}
+		mlx->spr = sprite;
+	}
 	return (0);
 }
 

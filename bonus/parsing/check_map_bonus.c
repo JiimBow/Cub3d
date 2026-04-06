@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:34:23 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/30 15:21:04 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/06 10:52:12 by jimbow           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ static int	check_row(char **map, int line, int col)
 			f_wall = 1;
 		else if ((is_game_char(map[line][col]) && f_wall == 1))
 			col++;
-		else if (map[line][col] == '0' && f_wall == 1)
+		else if ((map[line][col] == '0' || map[line][col] == 'D'
+			|| map[line][col] == '2') && f_wall == 1)
 		{
 			if (zero_check(map, line, col))
 				col++;
