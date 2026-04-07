@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 23:39:48 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:26:44 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ typedef struct s_mlx
 	int						life;
 	int						tempo;
 	int						i;
+	int						signal;
 	double					anim_time;
 	mlx_image				dead1;
 	mlx_image				dead2;
@@ -231,7 +232,7 @@ void	init_ray_data(t_mlx *mlx, t_wall *ray, int x);
 // SPRITE
 void	def_start_end_x(t_draw *draw);
 void	def_start_end_y(t_draw *draw);
-void	draw_sprites(t_mlx *mlx, double *zbuffer);
+int		draw_sprites(t_mlx *mlx, double *zbuffer);
 int		set_sprite_start(t_mlx *mlx, int nb_frame, int spr_x);
 void	sort_sprites(t_mlx *mlx, t_sprite *spr, t_sprite *new_spr);
 int		get_trans(t_mlx *mlx, t_sprite spr, double *transx, double *transy);

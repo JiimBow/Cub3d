@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/07 11:34:27 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/07 17:15:21 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	allocation(t_mlx *mlx, t_map *map, t_door **door)
 		if (!sprite)
 		{
 			free(*door);
-			free(mlx->clear);
 			return (error_message(8));
 		}
 		mlx->spr = sprite;

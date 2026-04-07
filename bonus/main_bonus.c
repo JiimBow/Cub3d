@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/07 11:21:55 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/07 17:28:43 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ int	main(int ac, char **av)
 	mlx_add_loop_hook(mlx.cont, hitting, &mlx);
 	mlx_loop(mlx.cont);
 	destroy_image_window_context(&mlx, &map);
-	return (0);
+	return (mlx.signal);
 }

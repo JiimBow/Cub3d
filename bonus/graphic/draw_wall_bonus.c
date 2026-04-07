@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/06 18:07:06 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:24:37 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	draw_wall(t_mlx *mlx)
 	if (mlx->sprite_count != 0)
 	{
 		mlx->sprite = mlx_new_image(mlx->cont, SCREEN_W, SCREEN_H);
-		draw_sprites(mlx, zbuffer);
+		if (draw_sprites(mlx, zbuffer))
+			mlx_loop_end(mlx->cont);
 		mlx_put_image_to_window(mlx->cont, mlx->win, mlx->sprite, 0, 0);
 	}
 	put_minimap_on_map(mlx);

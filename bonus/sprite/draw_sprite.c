@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:41:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 23:39:32 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:38:22 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,19 @@ static void	set_pixel_put(t_mlx *mlx, t_draw *draw, double ty, double *zbuffer)
 	}
 }
 
-void	draw_sprites(t_mlx *mlx, double *zbuffer)
+static int	init_sort_sprite(t_mlx *mlx, t_sprite **sorted_sprites)
+{
+	*sorted_sprites = malloc(mlx->sprite_count * sizeof(t_sprite));
+	if (!*sorted_sprites)
+	{
+		mlx->signal = 1;
+		return (error_message(8));
+	}
+	sort_sprites(mlx, mlx->spr, *sorted_sprites);
+	return (0);
+}
+
+int	draw_sprites(t_mlx *mlx, double *zbuffer)
 {
 	double		tx;
 	double		ty;
@@ -86,8 +98,8 @@ void	draw_sprites(t_mlx *mlx, double *zbuffer)
 	t_draw		draw;
 
 	mlx->i = 0;
-	sorted_sprites = malloc(mlx->sprite_count * sizeof(t_sprite));
-	sort_sprites(mlx, mlx->spr, sorted_sprites);
+	if (init_sort_sprite(mlx, &sorted_sprites))
+		return (1);
 	while (mlx->i < mlx->sprite_count)
 	{
 		if (get_trans(mlx, sorted_sprites[mlx->i], &tx, &ty) == 1)
@@ -103,4 +115,5 @@ void	draw_sprites(t_mlx *mlx, double *zbuffer)
 		mlx->i++;
 	}
 	free(sorted_sprites);
+	return (0);
 }

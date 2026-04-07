@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_mlx_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 12:56:09 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 23:01:08 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:28:21 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,4 @@ void	set_mlx_struct(t_mlx *mlx)
 	mlx->sp_rot = 3.0;
 	mlx->zoom = 4;
 	mlx->life = 6;
-	mlx->hit = 0;
-	mlx->anim_time = 0.0;
-	mlx->tempo = 0;
 }

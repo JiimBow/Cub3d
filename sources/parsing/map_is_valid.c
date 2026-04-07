@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 10:58:51 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/07 17:06:22 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	get_map_from_file(int map_fd, char **map_copy, int max_len)
 			return (1);
 		}
 		map_copy[i] = malloc((max_len + 1) * sizeof(char));
-		if (!map_copy)
+		if (!map_copy[i])
 			return (1);
 		ft_memset(map_copy[i], ' ', max_len);
 		ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line) + 1);
