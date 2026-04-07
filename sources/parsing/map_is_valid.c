@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/07 17:06:22 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/07 18:14:30 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,28 @@ static int	get_map_from_file(int map_fd, char **map_copy, int max_len)
 {
 	char	*tab_line;
 	int		i;
+	int		signal;
 
+	signal = 0;
 	i = 0;
 	while (true)
 	{
 		tab_line = get_next_line(map_fd);
 		if (!tab_line)
-		{
-			map_copy[i] = NULL;
-			return (1);
-		}
+			break ;
 		map_copy[i] = malloc((max_len + 1) * sizeof(char));
-		if (!map_copy[i])
-			return (1);
-		ft_memset(map_copy[i], ' ', max_len);
-		ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line) + 1);
+		if (map_copy[i])
+		{
+			ft_memset(map_copy[i], ' ', max_len);
+			ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line) + 1);
+			i++;
+		}
+		else
+			signal = 1;
 		free(tab_line);
-		i++;
 	}
-	return (0);
+	map_copy[i] = NULL;
+	return (signal);
 }
 
 static char	**copy_map(char *map_name)
@@ -70,15 +73,18 @@ static char	**copy_map(char *map_name)
 	if (map_fd < 0)
 		return (NULL);
 	i = nbline_in_file(map_fd, &max_len);
-	map_copy = ft_calloc(i + 1, sizeof(char *));
 	close(map_fd);
-	map_fd = open(map_name, O_RDONLY);
-	if (map_fd < 0)
-		return (NULL);
-	i = 0;
-	get_map_from_file(map_fd, map_copy, max_len);
+	map_copy = ft_calloc(i + 1, sizeof(char *));
 	if (!map_copy)
 		return (NULL);
+	map_fd = open(map_name, O_RDONLY);
+	if (map_fd < 0 || get_map_from_file(map_fd, map_copy, max_len))
+	{
+		if (map_fd >= 0)
+			close(map_fd);
+		free_double_ptr(map_copy);
+		return (NULL);
+	}
 	close(map_fd);
 	return (map_copy);
 }
