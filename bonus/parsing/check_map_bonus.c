@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:34:23 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/06 17:33:40 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:19:40 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	is_game_char(char c)
 {
 	static int	start_nb = 0;
 
-	if (c == '1' || c == 'D' || c == 'A' || c == '2')
+	if (c == '1')
 		return (1);
 	else if ((c == 'N' || c == 'S' || c == 'E' || c == 'W') && start_nb == 0)
 	{

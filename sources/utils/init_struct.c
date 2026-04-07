@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/02 18:10:50 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:07:31 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	set_all_textures(t_mlx *mlx, mlx_color *buf, mlx_image *img)
 
 int	init_textures(t_mlx *mlx, t_text *text, t_map *map)
 {
-	load_image(mlx, text, map);
+	if (load_image(mlx, text, map))
+		return (1);
 	set_all_textures(mlx, mlx->buf_no, &text->no_text);
 	set_all_textures(mlx, mlx->buf_so, &text->so_text);
 	set_all_textures(mlx, mlx->buf_we, &text->we_text);
