@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimbow <jimbow@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/06 11:09:24 by jimbow           ###   ########.fr       */
+/*   Updated: 2026/04/07 11:34:27 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,24 +110,24 @@ int	allocation(t_mlx *mlx, t_map *map, t_door **door)
 int	init_mlx_struct(t_mlx *mlx, t_map *map, t_text *text, t_door **door)
 {
 	ft_bzero(mlx, sizeof(t_mlx));
-	mlx->cont = mlx_init();
-	if (!mlx->cont)
-		return (error_message(9));
 	ft_bzero(&mlx->info, sizeof(mlx_window_create_info));
 	ft_bzero(mlx->keys, 512);
 	ft_bzero(text, sizeof(t_text));
-	if (set_player_start(mlx, map))
-		return (error_message(7));
+	mlx->s_text = text;
+	mlx->s_map = map;
 	if (allocation(mlx, map, door))
-		return (error_message(9));
+		return (1);
+	mlx->s_door = *door;
 	ft_bzero(mlx->clear, SCREEN_H * SCREEN_W * sizeof(mlx_color));
 	init_door_pos(map, *door);
 	init_sprite_pos(map, mlx->spr);
 	gettimeofday(&mlx->last_time, NULL);
+	if (set_player_start(mlx, map))
+		return (error_message(7));
+	mlx->cont = mlx_init();
+	if (!mlx->cont)
+		return (error_message(9));
 	mlx_set_fps_goal(mlx->cont, 90);
-	mlx->s_text = text;
-	mlx->s_map = map;
-	mlx->s_door = *door;
 	set_mlx_struct(mlx);
 	set_minimap(mlx, map);
 	return (0);

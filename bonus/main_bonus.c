@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:09:40 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 17:13:59 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 11:21:55 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	parse_main(char **av, t_mlx *mlx, t_map *map, t_text *text)
 		return (1);
 	if (init_mlx_struct(mlx, map, text, &door))
 	{
-		free_map(map);
+		destroy_image_window_context(mlx, map);
 		return (1);
 	}
 	if (init_textures(mlx, text, map))
