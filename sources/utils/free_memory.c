@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:05:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 11:06:47 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/07 17:53:27 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	free_double_ptr(char **ptr)
 		i++;
 	}
 	free(ptr);
+	ptr = NULL;
 }
 
 void	free_map(t_map *map)

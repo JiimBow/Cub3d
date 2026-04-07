@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:30:56 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/02 17:57:46 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:03:40 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,32 @@ static int	nbline_in_file(int fd, int *max_len)
 	return (result);
 }
 
-static void	get_map_from_file(int map_fd, char **map_copy, int max_len)
+static int	get_map_from_file(int map_fd, char **map_copy, int max_len)
 {
 	char	*tab_line;
 	int		i;
+	int		signal;
 
+	signal = 0;
 	i = 0;
 	while (true)
 	{
 		tab_line = get_next_line(map_fd);
 		if (!tab_line)
-		{
-			map_copy[i] = NULL;
-			return ;
-		}
+			break ;
 		map_copy[i] = malloc((max_len + 1) * sizeof(char));
-		if (!map_copy)
-			return ;
-		ft_memset(map_copy[i], ' ', max_len);
-		ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line) + 1);
+		if (map_copy[i])
+		{
+			ft_memset(map_copy[i], ' ', max_len);
+			ft_strlcpy(map_copy[i], tab_line, ft_strlen(tab_line) + 1);
+			i++;
+		}
+		else
+			signal = 1;
 		free(tab_line);
-		i++;
 	}
+	map_copy[i] = NULL;
+	return (signal);
 }
 
 static char	**copy_map(char *map_name)
@@ -74,13 +78,13 @@ static char	**copy_map(char *map_name)
 	if (!map_copy)
 		return (NULL);
 	map_fd = open(map_name, O_RDONLY);
-	if (map_fd < 0)
+	if (map_fd < 0 || get_map_from_file(map_fd, map_copy, max_len))
 	{
-		free(map_copy);
+		if (map_fd >= 0)
+			close(map_fd);
+		free_double_ptr(map_copy);
 		return (NULL);
 	}
-	i = 0;
-	get_map_from_file(map_fd, map_copy, max_len);
 	close(map_fd);
 	return (map_copy);
 }

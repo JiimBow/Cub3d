@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:41:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 23:39:32 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:11:22 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	draw_sprites(t_mlx *mlx, double *zbuffer)
 			continue ;
 		}
 		draw.screen_x = (int)(SCREEN_W / 2 * (1 + tx / ty));
-		draw.size = abs((int)(SCREEN_H / ty)) / 0.6;
+		draw.size = abs((int)(SCREEN_H / ty)) / 0.7;
 		def_start_end_x(&draw);
 		def_start_end_y(&draw);
 		set_pixel_put(mlx, &draw, ty, zbuffer);
