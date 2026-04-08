@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 09:21:57 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/07 17:24:37 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 18:58:36 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+void	mouse_rotate(t_mlx *mlx, double old_dir_x, double old_plane_x)
+{
+	int		x_mouse;
+	int		y_mouse;
+	int		delta_x;
+	double	rot;
+
+	mlx_mouse_get_pos(mlx->cont, &x_mouse, &y_mouse);
+	delta_x = x_mouse - (SCREEN_W / 2);
+	if (delta_x > -2 && delta_x < 2)
+		return ;
+	if (delta_x != 0)
+	{
+		rot = delta_x * 0.002;
+		mlx->dir_x = mlx->dir_x * cos(rot) - mlx->dir_y * sin(rot);
+		mlx->dir_y = old_dir_x * sin(rot) + mlx->dir_y * cos(rot);
+		mlx->plane_x = mlx->plane_x * cos(rot) - mlx->plane_y * sin(rot);
+		mlx->plane_y = old_plane_x * sin(rot) + mlx->plane_y * cos(rot);
+	}
+	mlx_mouse_move(mlx->cont, mlx->win, SCREEN_W / 2, SCREEN_H / 2);
+}
 
 static void	check_player_movement(t_mlx *mlx, t_wall *ray)
 {
@@ -34,7 +56,10 @@ static void	check_player_movement(t_mlx *mlx, t_wall *ray)
 		mlx->lock_mouse = 1;
 		mlx_mouse_show(mlx->cont);
 	}
-	player_rotate(mlx, ray->frame_time, ray->frame_time * mlx->sp_rot);
+	if (mlx->lock_mouse == 1)
+		player_rotate(mlx, ray->frame_time, ray->frame_time * mlx->sp_rot);
+	else
+		mouse_rotate(mlx, mlx->dir_x, mlx->plane_x);
 }
 
 static void	raycasting(t_mlx *mlx, t_wall *ray, double *zbuffer)
