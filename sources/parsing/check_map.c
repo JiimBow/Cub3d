@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:09:29 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/08 11:30:50 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 12:18:18 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,15 @@ static int	check_row(char **map, int line, int col)
 			f_wall = 1;
 		else if ((map[line][col] == '1' && f_wall == 1))
 			col++;
-		else if ((map[line][col] == '0' || is_game_char(map[line][col])) && f_wall == 1)
+		else if ((map[line][col] == '0'
+			|| is_game_char(map[line][col])) && f_wall == 1)
 		{
 			if (zero_check(map, line, col))
 				col++;
 			else
 				return (0);
 		}
-		else if (map[line][col] == '\n'
-			&& map[line][col - 1] == '1')
+		else if (map[line][col] == '\n' && map[line][col - 1] == '1')
 			col++;
 		else
 			return (0);

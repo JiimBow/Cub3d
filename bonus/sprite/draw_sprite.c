@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:41:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/07 18:07:04 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/08 12:16:47 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,31 +78,30 @@ static void	set_pixel_put(t_mlx *mlx, t_draw *draw, double ty, double *zbuffer)
 	}
 }
 
-static int	init_sort_sprite(t_mlx *mlx, t_sprite **sorted_sprites)
+static void	set_sort_sprites(t_mlx *mlx)
 {
-	*sorted_sprites = malloc(mlx->sprite_count * sizeof(t_sprite));
-	if (!*sorted_sprites)
+	static double	px = 0.0;
+	static double	py = 0.0;
+
+	if (px != mlx->pos_x || py != mlx->pos_y)
 	{
-		mlx->signal = 1;
-		return (error_message(8));
+		px = mlx->pos_x;
+		py = mlx->pos_y;
+		sort_sprites(mlx, mlx->spr);
 	}
-	sort_sprites(mlx, mlx->spr, *sorted_sprites);
-	return (0);
 }
 
 int	draw_sprites(t_mlx *mlx, double *zbuffer)
 {
-	double		tx;
-	double		ty;
-	t_sprite	*sorted_sprites;
-	t_draw		draw;
+	double			tx;
+	double			ty;
+	t_draw			draw;
 
 	mlx->i = 0;
-	if (init_sort_sprite(mlx, &sorted_sprites))
-		return (1);
+	set_sort_sprites(mlx);
 	while (mlx->i < mlx->sprite_count)
 	{
-		if (get_trans(mlx, sorted_sprites[mlx->i], &tx, &ty) == 1)
+		if (get_trans(mlx, mlx->spr[mlx->i], &tx, &ty) == 1)
 		{
 			mlx->i++;
 			continue ;
@@ -114,6 +113,5 @@ int	draw_sprites(t_mlx *mlx, double *zbuffer)
 		set_pixel_put(mlx, &draw, ty, zbuffer);
 		mlx->i++;
 	}
-	free(sorted_sprites);
 	return (0);
 }

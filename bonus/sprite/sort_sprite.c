@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 10:04:58 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/01 11:45:12 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 12:10:51 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static double	distance_calcul(t_mlx *mlx, t_sprite sprite)
 	return (dist_diff);
 }
 
-void	sort_sprites(t_mlx *mlx, t_sprite *spr, t_sprite *new_spr)
+void	sort_sprites(t_mlx *mlx, t_sprite *spr)
 {
 	int			i;
 	t_sprite	tmp;
@@ -32,18 +32,17 @@ void	sort_sprites(t_mlx *mlx, t_sprite *spr, t_sprite *new_spr)
 	i = 0;
 	while (i < mlx->sprite_count)
 	{
-		new_spr[i] = spr[i];
-		new_spr[i].dist = distance_calcul(mlx, spr[i]);
+		spr[i].dist = distance_calcul(mlx, spr[i]);
 		i++;
 	}
 	i = 0;
 	while (i < mlx->sprite_count - 1)
 	{
-		if (new_spr[i].dist < new_spr[i + 1].dist)
+		if (spr[i].dist < spr[i + 1].dist)
 		{
-			tmp = new_spr[i];
-			new_spr[i] = new_spr[i + 1];
-			new_spr[i + 1] = tmp;
+			tmp = spr[i];
+			spr[i] = spr[i + 1];
+			spr[i + 1] = tmp;
 			i = -1;
 		}
 		i++;
