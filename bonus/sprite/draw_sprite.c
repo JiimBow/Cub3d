@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:41:01 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/08 12:16:47 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 14:03:29 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	put_sprite_pixel(t_mlx *mlx, t_draw *draw, int tex_x, int x)
 	{
 		d = (y + draw->start_y) * 256 - SCREEN_H * 128 + draw->size * 128;
 		tex_y = ((d * SPR_HEIGHT / draw->size) / 256);
-		color = mlx->spr[0].samourai_stand[draw->i][tex_y * SPR_WIDTH + tex_x];
-		if (color.a != 0)
+		color = mlx->samourai_stand[draw->i][tex_y * SPR_WIDTH + tex_x];
+		if (color.a >= 128)
 			mlx_set_image_pixel(mlx->cont, mlx->sprite, x,
 				y + draw->start_y, color);
 		y++;
@@ -48,8 +48,8 @@ static void	put_sprite_pixel2(t_mlx *mlx, t_draw *draw, int tex_x, int x)
 	{
 		d = (y + draw->start_y) * 256 - SCREEN_H * 128 + draw->size * 128;
 		tex_y = ((d * SPR_HEIGHT / draw->size) / 256);
-		color = mlx->spr[0].samourai_attack[draw->i][tex_y * SPR_WIDTH + tex_x];
-		if (color.a != 0)
+		color = mlx->samourai_attack[draw->i][tex_y * SPR_WIDTH + tex_x];
+		if (color.a >= 128)
 			mlx_set_image_pixel(mlx->cont, mlx->sprite, x,
 				y + draw->start_y, color);
 		y++;

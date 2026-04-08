@@ -6,7 +6,7 @@
 /*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:35:33 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/03 16:55:30 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/08 13:57:05 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	set_sprite_start(t_mlx *mlx, int nb_frame, int spr_x)
 	{
 		if (nb_frame < SP1_FRAME)
 			mlx_get_image_region(mlx->cont, mlx->samourai[0], spr_x, 0,
-				SPR_WIDTH, SPR_HEIGHT, mlx->spr->samourai_stand[nb_frame]);
+				SPR_WIDTH, SPR_HEIGHT, mlx->samourai_stand[nb_frame]);
 		if (nb_frame < SP2_FRAME)
 			mlx_get_image_region(mlx->cont, mlx->samourai[1], spr_x, 0,
-				SPR_WIDTH, SPR_HEIGHT, mlx->spr->samourai_attack[nb_frame]);
+				SPR_WIDTH, SPR_HEIGHT, mlx->samourai_attack[nb_frame]);
 		spr_x += SPR_WIDTH;
 		nb_frame++;
 	}

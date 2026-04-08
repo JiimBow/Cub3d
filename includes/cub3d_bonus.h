@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:04:54 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/08 12:11:17 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 13:56:23 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ typedef struct s_sprite
 	double		pos_x;
 	double		pos_y;
 	double		dist;
-	mlx_color	samourai_stand[SP1_FRAME][SPR_HEIGHT * SPR_WIDTH];
-	mlx_color	samourai_attack[SP2_FRAME][SPR_HEIGHT * SPR_WIDTH];
 }	t_sprite;
 
 typedef struct s_draw
@@ -137,6 +135,8 @@ typedef struct s_mlx
 	mlx_image				heart_broken;
 	mlx_image				samourai[2];
 	mlx_color				buf_minimap[(SCREEN_H / 10) * (SCREEN_W / 10)];
+	mlx_color				samourai_stand[SP1_FRAME][SPR_HEIGHT * SPR_WIDTH];
+	mlx_color				samourai_attack[SP2_FRAME][SPR_HEIGHT * SPR_WIDTH];
 	mlx_color				*clear;
 	mlx_color				*buf_no;
 	mlx_color				*buf_so;
