@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:15:34 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/07 12:07:31 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 18:50:35 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	put_color_value(mlx_color *color, char *value)
 	char	**rgb;
 
 	rgb = ft_split(value, ',');
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
 	{
 		free_double_ptr(rgb);
 		return (0);
