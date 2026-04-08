@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:09:29 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/24 12:26:23 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 11:30:50 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ static int	is_game_char(char c)
 {
 	static int	start_nb = 0;
 
-	if (c == '1')
-		return (1);
-	else if ((c == 'N' || c == 'S' || c == 'E' || c == 'W') && start_nb == 0)
+	if ((c == 'N' || c == 'S' || c == 'E' || c == 'W') && start_nb == 0)
 	{
 		start_nb++;
 		return (1);
@@ -92,9 +90,9 @@ static int	check_row(char **map, int line, int col)
 			col++;
 		else if (map[line][col] == '1' && f_wall == 0)
 			f_wall = 1;
-		else if ((is_game_char(map[line][col]) && f_wall == 1))
+		else if ((map[line][col] == '1' && f_wall == 1))
 			col++;
-		else if (map[line][col] == '0' && f_wall == 1)
+		else if ((map[line][col] == '0' || is_game_char(map[line][col])) && f_wall == 1)
 		{
 			if (zero_check(map, line, col))
 				col++;
