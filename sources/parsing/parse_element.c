@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 11:23:16 by jodone            #+#    #+#             */
-/*   Updated: 2026/03/26 11:04:20 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 18:40:43 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,20 @@
 static int	skip_to_path(char *map_line, char *tmp_path, int *i)
 {
 	if (!ft_strncmp(map_line, "F", 1) || !ft_strncmp(map_line, "C", 1))
+	{
 		while (tmp_path[(*i)] && !ft_isdigit(tmp_path[(*i)]))
+		{
+			if (tmp_path[(*i)] != ' ')
+				return (0);
 			(*i)++;
+		}
+	}
 	else
-		while (tmp_path[(*i)] && tmp_path[(*i)] != '.')
+	{
+		(*i)++;
+		while (tmp_path[(*i)] && is_space(tmp_path[(*i)]))
 			(*i)++;
+	}
 	if (tmp_path[(*i)] == '\0')
 	{
 		free(tmp_path);

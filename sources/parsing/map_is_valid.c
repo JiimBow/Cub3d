@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:09:59 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/08 11:38:32 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 18:23:40 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ static int	check_filename(char *file, char *ext)
 		if (file[i] == ext[0])
 		{
 			j = 0;
-			while (file[i] && file[i] == ext[j])
+			while (ext[j] && file[i] == ext[j])
 			{
 				i++;
 				j++;
 			}
-			if (file[i] == '\0')
+			if (file[i] == '\0' && ext[j] == '\0')
 				return (0);
 		}
 		i++;
