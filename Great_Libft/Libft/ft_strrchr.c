@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:59:30 by jodone            #+#    #+#             */
-/*   Updated: 2025/10/22 11:05:57 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 09:52:38 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -16,7 +18,7 @@ char	*ft_strrchr(const char *s, int c)
 	char	*result;
 
 	i = 0;
-	result = 0;
+	result = NULL;
 	while (s[i])
 	{
 		if (s[i] == (char)c)

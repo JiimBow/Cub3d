@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:30:56 by jodone            #+#    #+#             */
-/*   Updated: 2026/04/07 18:03:40 by mgarnier         ###   ########.fr       */
+/*   Updated: 2026/04/08 10:10:35 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ static int	check_filename(char *file, char *ext)
 
 	i = 0;
 	len = ft_strlen(file);
-	if (len < 5)
-		return (error_message(4));
-	while (file && file[i] && file[0] != '.')
+	while (file && file[i])
 	{
 		if (file[i] == ext[0])
 		{
@@ -122,8 +120,10 @@ int	map_is_not_valid(char *file, t_map *map)
 	char	*copy_name;
 
 	ft_bzero(map, sizeof(t_map));
-	copy_name = ft_strrchr(file, '/') + 1;
-	if (check_filename(copy_name, ".cub"))
+	copy_name = ft_strrchr(file, '/');
+	if (!copy_name)
+		return (error_message(4));
+	if (check_filename(copy_name + 1, ".cub"))
 		return (1);
 	map->old_map = copy_map(file);
 	if (!map->old_map)
