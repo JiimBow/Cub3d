@@ -6,7 +6,7 @@
 /*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 15:06:03 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/04/07 11:54:56 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 10:17:25 by jodone           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	key_down(int key, void *param)
 		mlx->sp_move *= 1.5;
 	if (key == DOWN_KEY && mlx->fps > 30)
 		mlx->sp_move /= 1.5;
-	if (mlx->sp_move < 1.0 || mlx->sp_move > 30.0)
+	if (mlx->sp_move < 1.0 || mlx->sp_move > 10.0)
 		mlx->sp_move = (mlx->sp_move < 1.0) * 1.0
-			+ (mlx->sp_move > 30.0) * 30.0;
+			+ (mlx->sp_move > 10.0) * 10.0;
 	if (key == E)
 		mlx->zoom += 1;
 	if (key == R)
