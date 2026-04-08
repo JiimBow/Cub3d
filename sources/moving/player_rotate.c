@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_rotate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodone <jodone@student.42angouleme.fr>     +#+  +:+       +#+        */
+/*   By: mgarnier <mgarnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 22:03:15 by mgarnier          #+#    #+#             */
-/*   Updated: 2026/03/26 10:55:34 by jodone           ###   ########.fr       */
+/*   Updated: 2026/04/08 18:35:32 by mgarnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	player_rotate(t_mlx *mlx, double frame_time, double speed)
 		mlx->plane_x = mlx->plane_x * cos(speed) - mlx->plane_y * sin(speed);
 		mlx->plane_y = old_plane_x * sin(speed) + mlx->plane_y * cos(speed);
 	}
-	if (mlx->lock_mouse == 0)
+	if (mlx->lock_mouse == 0 && mlx->keys[RIGHT_KEY] == 0
+		&& mlx->keys[LEFT_KEY] == 0)
 		mouse_rotate(mlx, old_dir_x, old_plane_x);
 }
